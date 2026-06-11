@@ -25,7 +25,13 @@ const KEY="coding101-progress-v1";
 function loadProgress(){
   try{
     const raw=localStorage.getItem(KEY);
-    if(raw){done=new Set(JSON.parse(raw));}
+    if(raw){
+      // progress is stored as day numbers (1–252) so it survives a future
+      // "shift my start date" feature. Early saves used dates like
+      // "2026-06-15" — convert those to day numbers on the way in.
+      const entries=JSON.parse(raw).map(e=>typeof e==="string"&&DAYMAP[e]?DAYMAP[e].dayN:e);
+      done=new Set(entries.filter(n=>Number.isInteger(n)&&n>=1&&n<=TOTAL_DAYS));
+    }
   }catch(e){ memoryOnly=true; /* private mode or storage blocked */ }
   render();
 }
@@ -55,7 +61,7 @@ function render(){
     const dt=new Date(y,m,d), key=iso(dt), info=DAYMAP[key];
     const c=document.createElement("div");
     if(!info){c.className="cell out";c.innerHTML='<span class="dnum">'+d+"</span>";grid.appendChild(c);continue;}
-    c.className="cell p"+info.phase+(info.rest?" rest":"")+(done.has(key)?" done":"")+(key===tISO?" today":"");
+    c.className="cell p"+info.phase+(info.rest?" rest":"")+(done.has(info.dayN)?" done":"")+(key===tISO?" today":"");
     c.innerHTML='<span class="dnum">'+d+'<span class="daycount">d'+info.dayN+"</span></span>"
       +'<span class="ttl">'+esc(info.t)+"</span>"
       +'<span class="preview">'+esc(info.d[0])+"</span>"
@@ -98,12 +104,13 @@ function openDay(key){
 }
 function updateDoneBtn(){
   const b=document.getElementById("doneBtn");
-  if(done.has(openKey)){b.textContent="✓ Done — tap to undo";b.classList.add("is-done");}
+  if(done.has(DAYMAP[openKey].dayN)){b.textContent="✓ Done — tap to undo";b.classList.add("is-done");}
   else{b.textContent="Mark day complete";b.classList.remove("is-done");}
 }
 document.getElementById("doneBtn").addEventListener("click",()=>{
   if(!openKey)return;
-  if(done.has(openKey))done.delete(openKey);else done.add(openKey);
+  const n=DAYMAP[openKey].dayN;
+  if(done.has(n))done.delete(n);else done.add(n);
   saveProgress();updateDoneBtn();render();
 });
 document.getElementById("closeBtn").addEventListener("click",closePanel);
