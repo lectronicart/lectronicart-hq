@@ -6,13 +6,25 @@ const { WEEKS } = new Function(src + "; return {WEEKS};")();
 let ok = true;
 const fail = (m) => { console.error("FAIL:", m); ok = false; };
 
+// every tag used in data.js must have a matching .chip style in styles.css
+const KNOWN_TAGS = ["CS50", "ODIN", "FSO", "BUILD", "SHIP", "SETUP", "CLAUDE", "AGENTS", "REST"];
+
 if (WEEKS.length !== 36) fail(`expected 36 weeks, got ${WEEKS.length}`);
 WEEKS.forEach((w, i) => {
   if (w.days.length !== 7) fail(`week ${i + 1} has ${w.days.length} days (need 7)`);
   if (![1, 2, 3, 4].includes(w.p)) fail(`week ${i + 1} has invalid phase ${w.p}`);
   w.days.forEach((d, j) => {
     if (!d.t || !d.d || !d.g || !d.h) fail(`week ${i + 1} day ${j + 1} missing fields`);
+    d.g.forEach(tag => {
+      if (!KNOWN_TAGS.includes(tag)) fail(`week ${i + 1} day ${j + 1} has unknown tag "${tag}" (no chip style for it)`);
+    });
+    (d.l || []).forEach(link => {
+      if (!Array.isArray(link) || link.length !== 2 || typeof link[0] !== "string" || typeof link[1] !== "string")
+        fail(`week ${i + 1} day ${j + 1} has a malformed link (need ["label","url"])`);
+    });
   });
+  // day 7 is always a Sunday — it must be a rest day
+  if (!w.days[6].rest) fail(`week ${i + 1} day 7 (Sunday) is not marked as a rest day`);
 });
 const counts = [1, 2, 3, 4].map(p => WEEKS.filter(w => w.p === p).length);
 if (counts.join(",") !== "6,6,12,12") fail(`phase week counts are ${counts} (expected 6,6,12,12)`);
