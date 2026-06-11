@@ -114,6 +114,7 @@ h1 .accent{color:var(--p1)}
 .chip.SHIP{background:#FCE7F3;color:#BE185D}
 .chip.SETUP{background:#EDE9FE;color:#6D28D9}
 .chip.CLAUDE{background:#FEF3C7;color:#92400E}
+.chip.AGENTS{background:#E0E7FF;color:#4338CA}
 .chip.REST{background:#F1F3F0;color:#737D75}
 .cell.p1{box-shadow:inset 3px 0 0 var(--p1)}
 .cell.p2{box-shadow:inset 3px 0 0 var(--p2)}

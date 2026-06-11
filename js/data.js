@@ -256,8 +256,8 @@ const WEEKS=[
  REST()
 ]},
 {p:4,theme:"Agents I — holiday week, lighter load",days:[
- {t:"Agent fundamentals",d:["Hugging Face Agents Course: unit 1 — what agents are, the think-act-observe loop, when agents beat simple prompts."],g:["FSO"],h:"2 hrs",l:[["HF Agents Course","https://huggingface.co/learn/agents-course"]]},
- {t:"Frameworks tour",d:["HF course: framework units — see how agent frameworks structure the loop you already understand from tool use.","You've RUN multi-agent systems (Hermes + Atlas). Now you're learning to BUILD them."],g:["FSO"],h:"2 hrs"},
+ {t:"Agent fundamentals",d:["Hugging Face Agents Course: unit 1 — what agents are, the think-act-observe loop, when agents beat simple prompts."],g:["AGENTS"],h:"2 hrs",l:[["HF Agents Course","https://huggingface.co/learn/agents-course"]]},
+ {t:"Frameworks tour",d:["HF course: framework units — see how agent frameworks structure the loop you already understand from tool use.","You've RUN multi-agent systems (Hermes + Atlas). Now you're learning to BUILD them."],g:["AGENTS"],h:"2 hrs"},
  {t:"Build: idea-research agent",d:["Build a simple research agent: give it a content topic → it searches, gathers, and returns an angle brief with sources."],g:["BUILD"],h:"2.5 hrs"},
  {t:"Claude Code subagents",d:["Anthropic Academy: Introduction to Subagents.","Design (on paper) a content-pipeline subagent team: researcher, writer, editor, formatter. You'll build it next week."],g:["CLAUDE"],h:"2 hrs"},
  {t:"Holiday 🎄",d:["Rest. Be with people you love. The machine can wait."],g:["REST"],h:"0 hrs",rest:true},
@@ -265,7 +265,7 @@ const WEEKS=[
  REST()
 ]},
 {p:4,theme:"Agents II — content engine v1 + the 2027 plan",days:[
- {t:"Agent memory & tools",d:["HF Agents Course: tools and memory units — give agents persistent context (you literally built an Obsidian memory vault for this; connect the concept)."],g:["FSO"],h:"2.5 hrs"},
+ {t:"Agent memory & tools",d:["HF Agents Course: tools and memory units — give agents persistent context (you literally built an Obsidian memory vault for this; connect the concept)."],g:["AGENTS"],h:"2.5 hrs"},
  {t:"Build: content engine agent v1",d:["Build the repurposer: one long-form input (script/post/transcript) → thread, 3 short posts, newsletter section, 5 hooks.","Use your subagent design from last week."],g:["BUILD"],h:"3 hrs"},
  {t:"Add a critic",d:["Add a quality-check step: a second agent pass that critiques and revises the output against your voice guidelines. Compare with/without — save examples (future teaching material)."],g:["BUILD","CLAUDE"],h:"2.5 hrs"},
  {t:"2026 retro → 2027 thesis",d:["Write your year retro: June you vs December you.","Draft the LectronicArt 2027 thesis: who it serves, what transformation it sells, why you. One page."],g:["SHIP"],h:"2 hrs"},
