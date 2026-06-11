@@ -62,11 +62,19 @@ function render(){
     const c=document.createElement("div");
     if(!info){c.className="cell out";c.innerHTML='<span class="dnum">'+d+"</span>";grid.appendChild(c);continue;}
     c.className="cell p"+info.phase+(info.rest?" rest":"")+(done.has(info.dayN)?" done":"")+(key===tISO?" today":"");
+    // make the cell reachable and pressable with a keyboard, like a real button
+    c.tabIndex=0;
+    c.dataset.key=key;
+    c.setAttribute("role","button");
+    c.setAttribute("aria-label","Day "+info.dayN+": "+info.t);
     c.innerHTML='<span class="dnum">'+d+'<span class="daycount">d'+info.dayN+"</span></span>"
       +'<span class="ttl">'+esc(info.t)+"</span>"
       +'<span class="preview">'+esc(info.d[0])+"</span>"
       +'<span class="chips">'+info.g.map(t=>'<span class="chip '+t+'">'+t+"</span>").join("")+"</span>";
     c.addEventListener("click",()=>openDay(key));
+    c.addEventListener("keydown",e=>{
+      if(e.key==="Enter"||e.key===" "){e.preventDefault();openDay(key);}
+    });
     grid.appendChild(c);
   }
   const wb=document.getElementById("weekBanner");
@@ -116,7 +124,15 @@ document.getElementById("doneBtn").addEventListener("click",()=>{
 document.getElementById("closeBtn").addEventListener("click",closePanel);
 document.getElementById("overlay").addEventListener("click",e=>{if(e.target.id==="overlay")closePanel();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePanel();});
-function closePanel(){document.getElementById("overlay").classList.remove("open");openKey=null;}
+function closePanel(){
+  document.getElementById("overlay").classList.remove("open");
+  // hand keyboard focus back to the day cell the panel was showing
+  if(openKey){
+    const cell=document.querySelector('.cell[data-key="'+openKey+'"]');
+    if(cell)cell.focus();
+  }
+  openKey=null;
+}
 function shiftDay(n){
   if(!openKey)return;
   const d=new Date(DAYMAP[openKey].date);d.setDate(d.getDate()+n);

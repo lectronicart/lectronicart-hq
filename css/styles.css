@@ -127,6 +127,7 @@ h1 .accent{color:var(--p1)}
 .cell.done.p4{background:var(--p4-soft)}
 .cell.done .dnum::after{content:" ✓";color:var(--p3);font-weight:700}
 .cell.today{outline:2.5px solid var(--today);outline-offset:-2.5px;background:var(--today-soft)}
+.cell:focus-visible{outline:2.5px solid var(--ink);outline-offset:-2.5px}
 .cell.today .dnum{color:var(--today)}
 .overlay{
   position:fixed;inset:0;background:rgba(26,31,28,.45);display:none;
