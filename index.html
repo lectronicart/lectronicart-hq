@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coding 101 — Derrick's 252-Day Builder Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<body>
+<div class="wrap">
+<header>
+  <div class="terminal" id="termline">
+    <span class="prompt">derrick@build</span>:~$ progress <span class="bar" id="termbar"></span> <span class="pct" id="termpct"></span>
+  </div>
+  <h1>Coding 101: <span class="accent">The 252-Day Builder Calendar</span></h1>
+  <p class="sub">June 15, 2026 – February 21, 2027 · <strong>~15 hrs/week</strong> · Six study days, Sundays off. Every day below maps to a specific CS50 lecture, Odin lesson, Full Stack Open part, Anthropic Academy module, or build sprint. Click any day to see the full task list and mark it done. <strong>The rule that makes this work: AI explains, you write (weeks 1–6) → you design, AI drafts, you review (7–12) → you orchestrate, AI executes (13–24) → you teach what you built (25–36).</strong></p>
+</header>
+
+<div class="phases">
+  <div class="phase p1" data-goto="2026-06-15">
+    <h3>Phase 1 · Fundamentals</h3>
+    <p>Weeks 1–6 · Jun 15–Jul 26 · CS50 + Odin · no AI-generated code</p>
+  </div>
+  <div class="phase p2" data-goto="2026-07-27">
+    <h3>Phase 2 · Real Projects</h3>
+    <p>Weeks 7–12 · Jul 27–Sep 6 · Full Stack Open + Plan Mode</p>
+  </div>
+  <div class="phase p3" data-goto="2026-09-07">
+    <h3>Phase 3 · Ship Your Product</h3>
+    <p>Weeks 13–24 · Sep 7–Nov 29 · build, launch, first 10 users</p>
+  </div>
+  <div class="phase p4" data-goto="2026-11-30">
+    <h3>Phase 4 · AI Engineer Track</h3>
+    <p>Weeks 25–36 · Nov 30–Feb 21 · API, MCP, agents, creative pipelines → LectronicArt launch</p>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="month-nav">
+    <button id="prevM" aria-label="Previous month">←</button>
+    <div id="monthLabel"></div>
+    <button id="nextM" aria-label="Next month">→</button>
+  </div>
+  <div class="right-controls">
+    <button class="btn-today" id="todayBtn">Jump to today</button>
+  </div>
+</div>
+<div class="week-banner" id="weekBanner"></div>
+
+<div class="cal">
+  <div class="dow"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun · rest</div></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<p class="footnote"><b>How to use this:</b> sit down at the same time daily, open today's card, do the tasks in order, then write 2–3 sentences in your <span style="font-family:var(--mono);font-size:13px">notes.md</span> journal. If a day takes longer, finish it before opening the next one — Sundays exist to absorb overflow. Falling a few days behind is normal; shift the whole calendar in your head and protect the streak instead of the dates. Progress saves automatically on this device.</p>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="panel" id="panel">
+    <button class="close" id="closeBtn" aria-label="Close">×</button>
+    <div class="meta" id="pMeta"></div>
+    <h2 id="pTitle"></h2>
+    <div class="weektheme" id="pWeek"></div>
+    <div class="hrs" id="pHrs"></div>
+    <ul id="pTasks"></ul>
+    <div class="links" id="pLinks"></div>
+    <div class="donewrap"><button class="donebtn" id="doneBtn"></button></div>
+    <div class="nav-days"><button id="prevD">← previous day</button><button id="nextD">next day →</button></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
