@@ -108,6 +108,7 @@ h1 .accent{color:var(--p1)}
   letter-spacing:.04em;
 }
 .chip.CS50{background:#FDEAEA;color:#B91C1C}
+.chip.CS50P{background:#FFF6D6;color:#2B5B84}
 .chip.ODIN{background:#FFF4E0;color:#B45309}
 .chip.FSO{background:#E0F2FE;color:#0369A1}
 .chip.BUILD{background:#ECFDF3;color:#047857}

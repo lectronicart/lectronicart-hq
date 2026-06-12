@@ -7,7 +7,7 @@ let ok = true;
 const fail = (m) => { console.error("FAIL:", m); ok = false; };
 
 // every tag used in data.js must have a matching .chip style in styles.css
-const KNOWN_TAGS = ["CS50", "ODIN", "FSO", "BUILD", "SHIP", "SETUP", "CLAUDE", "AGENTS", "REST"];
+const KNOWN_TAGS = ["CS50", "CS50P", "ODIN", "FSO", "BUILD", "SHIP", "SETUP", "CLAUDE", "AGENTS", "REST"];
 
 if (WEEKS.length !== 36) fail(`expected 36 weeks, got ${WEEKS.length}`);
 WEEKS.forEach((w, i) => {
