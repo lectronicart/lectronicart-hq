@@ -97,7 +97,7 @@ The calendar executes this thesis in four phases. The operating principle shifts
 
 **Phase 2 — Real Projects (Weeks 7–12, Jul 27–Sep 6).** *You design, AI drafts, you review.* Full Stack Open parts 0–3, Plan Mode as a habit, the explain-then-rebuild loop, three shipped apps.
 
-**Phase 3 — Ship Your Product (Weeks 13–24, Sep 7–Nov 29).** *You orchestrate, AI executes.* Problem discovery → MVP → real users → Stripe → public launch → first 10 users. Pick the product inside the creative-automation niche so these users seed the community.
+**Phase 3 — Ship Your Product (Weeks 13–24, Sep 7–Nov 29).** *You orchestrate, AI executes.* Problem discovery → MVP → real users → Stripe → public launch → first 10 users. Pick the product inside the creative-automation niche so these users seed the community. A weekly Python day runs alongside the build (CS50P, one unit per week, Weeks 13–22) so Python is fluent before Phase 4 needs it.
 
 **Phase 4 — AI Engineer Track (Weeks 25–36, Nov 30–Feb 21).** *You teach what you built.* Claude API → prompt systems → MCP → agents → art workflows → video pipelines → content engine → templates and the Creator OS → Skool foundations → founding cohort launch, Week 36. Day 252 ends with LectronicArt live.
 

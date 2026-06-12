@@ -18,10 +18,10 @@ The calendar runs 36 weeks across four phases:
 
 | Phase | Weeks | Focus |
 |-------|-------|-------|
-| **Foundation** | 1–6 | CS50x — how computers actually work; Python, C, and the web |
-| **Web Craft** | 7–18 | The Odin Project + Full Stack Open — HTML, CSS, JavaScript, React, Node, databases |
-| **Build & Ship** | 19–30 | Real projects, the Claude API, MCP servers, AI agents, ComfyUI, video pipelines |
-| **Launch** | 31–36 | LectronicArt founding cohort — productize what you built, find your first customers |
+| **Fundamentals** | 1–6 | CS50x + Odin Foundations — how computers actually work; C, HTML/CSS, JavaScript. No AI-written code |
+| **Real Projects** | 7–12 | Full Stack Open — React, Node, Express, databases; three shipped apps |
+| **Ship Your Product** | 13–24 | Find a real problem, build the MVP, launch publicly, get 10 users — with a weekly Python day (CS50P) running alongside |
+| **AI Engineer Track** | 25–36 | Claude API, MCP servers, agents, ComfyUI, video pipelines → LectronicArt founding cohort launch |
 
 Every week is exactly seven days (Monday through Sunday). Every day has a task list.
 Every task is written in plain language — no assumed knowledge.
