@@ -84,6 +84,7 @@ function render(){
     wb.innerHTML="<b>This month:</b> "+themes.join(" · ");
   }else wb.textContent="";
   renderTerm();
+  if(typeof Game!=="undefined")Game.refresh(done); // game layer recomputes from the done-set
 }
 function renderTerm(){
   const n=done.size, pct=Math.round(n/TOTAL_DAYS*100);
@@ -118,7 +119,13 @@ function updateDoneBtn(){
 document.getElementById("doneBtn").addEventListener("click",()=>{
   if(!openKey)return;
   const n=DAYMAP[openKey].dayN;
-  if(done.has(n))done.delete(n);else done.add(n);
+  if(done.has(n)){
+    done.delete(n);
+    if(typeof Game!=="undefined")Game.recordActivity(n,false);
+  }else{
+    done.add(n);
+    if(typeof Game!=="undefined"){Game.recordActivity(n,true);Game.xpFlash(n);}
+  }
   saveProgress();updateDoneBtn();render();
 });
 document.getElementById("closeBtn").addEventListener("click",closePanel);

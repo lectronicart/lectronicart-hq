@@ -15,8 +15,8 @@ const swap = (marker, replacement) => {
 };
 swap('<link rel="stylesheet" href="css/styles.css">',
   "<style>\n" + read("css/styles.css") + "</style>");
-swap('<script src="js/data.js"></script>\n<script src="js/app.js"></script>',
-  "<script>\n" + read("js/data.js") + "\n" + read("js/app.js") + "</script>");
+swap('<script src="js/data.js"></script>\n<script src="js/game-data.js"></script>\n<script src="js/game.js"></script>\n<script src="js/app.js"></script>',
+  "<script>\n" + read("js/data.js") + "\n" + read("js/game-data.js") + "\n" + read("js/game.js") + "\n" + read("js/app.js") + "</script>");
 fs.mkdirSync(path.join(root, "dist"), { recursive: true });
 fs.writeFileSync(path.join(root, "dist", "builder-calendar.html"), html);
 console.log("built dist/builder-calendar.html (" + html.length + " bytes)");

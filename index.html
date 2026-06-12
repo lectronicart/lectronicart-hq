@@ -14,7 +14,7 @@
 <div class="wrap">
 <header>
   <div class="terminal" id="termline">
-    <span class="prompt">derrick@build</span>:~$ progress <span class="bar" id="termbar"></span> <span class="pct" id="termpct"></span>
+    <span class="prompt">derrick@build</span>:~$ progress <span class="bar" id="termbar"></span> <span class="pct" id="termpct"></span><span class="game" id="termgame"></span>
   </div>
   <h1>Coding 101: <span class="accent">The 252-Day Builder Calendar</span></h1>
   <p class="sub">June 15, 2026 – February 21, 2027 · <strong>~15 hrs/week</strong> · Six study days, Sundays off. Every day below maps to a specific CS50 lecture, Odin lesson, Full Stack Open part, CS50P Python unit, Anthropic Academy module, or build sprint. Click any day to see the full task list and mark it done. <strong>The rule that makes this work: AI explains, you write (weeks 1–6) → you design, AI drafts, you review (7–12) → you orchestrate, AI executes (13–24) → you teach what you built (25–36).</strong></p>
@@ -46,6 +46,7 @@
     <button id="nextM" aria-label="Next month">→</button>
   </div>
   <div class="right-controls">
+    <button class="btn-trophy" id="trophyBtn" aria-label="Open trophy case">🏆 <span id="trophyLvl">lvl 1</span></button>
     <button class="btn-today" id="todayBtn">Jump to today</button>
   </div>
 </div>
@@ -57,6 +58,22 @@
 </div>
 
 <p class="footnote"><b>How to use this:</b> sit down at the same time daily, open today's card, do the tasks in order, then write 2–3 sentences in your <span style="font-family:var(--mono);font-size:13px">notes.md</span> journal. If a day takes longer, finish it before opening the next one — Sundays exist to absorb overflow. Falling a few days behind is normal; shift the whole calendar in your head and protect the streak instead of the dates. Progress saves automatically on this device.</p>
+</div>
+
+<div id="toasts" aria-live="polite"></div>
+
+<div class="overlay" id="trophyOverlay">
+  <div class="panel trophy" id="trophyPanel">
+    <button class="close" id="trophyClose" aria-label="Close">×</button>
+    <div class="meta">trophy case</div>
+    <h2 id="tLevel"></h2>
+    <div class="weektheme" id="tBlurb"></div>
+    <div class="tStats" id="tStats"></div>
+    <h3>Badges</h3>
+    <div class="badge-grid" id="tBadges"></div>
+    <h3>The Ladder</h3>
+    <ol class="ladder" id="tLadder"></ol>
+  </div>
 </div>
 
 <div class="overlay" id="overlay">
@@ -74,6 +91,8 @@
 </div>
 
 <script src="js/data.js"></script>
+<script src="js/game-data.js"></script>
+<script src="js/game.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
