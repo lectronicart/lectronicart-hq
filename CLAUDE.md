@@ -29,6 +29,10 @@ Match assistance to his current phase:
    Styling lives in `css/styles.css`.
 3. **localStorage key is `coding101-progress-v1`.** Never change it without a
    migration — users would lose their streaks, and streaks are the product.
+   The game layer adds `coding101-activity-v1` (when days were marked) and
+   `coding101-game-v1` (best streak, shield spends, seen-state). XP, levels,
+   and badges are always COMPUTED from the done-set — never store a computed
+   value; it can only drift.
 4. **Dates are load-bearing.** Day 1 = Monday June 15, 2026. Every week is exactly
    7 days [Mon..Sun]. 36 weeks = 252 days. If you touch data.js, re-verify:
    `node tools/verify.js` must pass before any commit.
@@ -46,7 +50,9 @@ Match assistance to his current phase:
 index.html            page skeleton (header, phase cards, grid, day panel)
 css/styles.css        design system (graph-paper aesthetic, phase colors)
 js/data.js            THE CURRICULUM — 36-week WEEKS array (content only)
+js/game-data.js       game content — level ladder + badge definitions
 js/app.js             engine: calendar render, day panel, progress, nav
+js/game.js            game engine — XP, levels, streaks, badges (derived from done-set)
 tools/verify.js       integrity check for data.js (run after every content edit)
 tools/build-single-file.js   bundles everything into dist/builder-calendar.html (lead-magnet build)
 docs/framework.md     the LectronicArt foundation & framework (the "why")

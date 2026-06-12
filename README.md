@@ -6,6 +6,11 @@ This is an interactive learning calendar that maps out a full year of deliberate
 starting June 15, 2026. Each of the 252 days has a specific task. Click a day, mark it done,
 and your progress saves automatically in your browser. No account required.
 
+Progress is a game: finishing days earns XP, levels you up through 20 ranks
+(Spark → Founder), builds a streak that Sundays never break, and unlocks badges
+in the trophy case. The game measures consistency — showing up daily is the
+hard part of a 252-day journey, so that's what gets rewarded.
+
 Built for artists, video makers, and one-person digital builders who want to stop being
 intimidated by code and start using AI to automate the creative work they already do.
 Part of **[LectronicArt](https://lectronicart.com)** — AI creative automation for independent creators.

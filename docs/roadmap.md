@@ -14,9 +14,18 @@ Each of these is a good 1–2 evening project. In rough priority order:
 - **"Shift my start date"** — recompute all dates from a user-chosen Day 1
   (needed before strangers use it; not everyone starts June 15)
 - **Per-day notes field** (stored alongside progress — journal lite)
-- **Streak counter + share card** (canvas-generated image: "Day 47/252 🔥")
+- **Share card** (canvas-generated image: "Day 47/252 🔥 lvl 7" — pulls level/XP/streak from the game layer)
 - **Dark mode** (CSS variables are already set up for it)
 - **ICS export** so days appear in Google/Apple Calendar
+
+## v1.5 — the game layer (built on branch test-new-idea)
+The calendar becomes a game, boot.dev-style but honest about what it measures
+(consistency, not mastery — completion is self-reported): XP per day, 20 levels
+from Spark to Founder, forgiving streaks (Sundays never break the chain; shields
+earned from perfect weeks absorb missed days), 18 badges, and a trophy case.
+Everything is computed from the done-set — nothing stored that can drift.
+Level/badge content lives in `js/game-data.js`; rules in `js/game.js`.
+The social half (cohort streaks, leaderboards) waits for the community edition below.
 
 ## v2.0 — Phase 2 exercise (the React rebuild)
 Rebuild the UI in React + TypeScript as a Full Stack Open capstone. Same data.js.
