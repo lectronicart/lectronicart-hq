@@ -4,6 +4,7 @@ const CS50="https://cs50.harvard.edu/x/";
 const ODIN="https://www.theodinproject.com/paths/foundations/courses/foundations";
 const FSO="https://fullstackopen.com/en/";
 const Z2C="https://zero2claude.dev/";
+const PYL="https://cs50.harvard.edu/python/";
 
 const REST=(note)=>({t:"Rest day",d:[note||"No new material. If you're behind, use today to catch up — otherwise genuinely rest. Streaks are built on recovery."],g:["REST"],h:"0–1 hr",rest:true});
 
@@ -119,11 +120,11 @@ const WEEKS=[
  REST("Phase 2 complete. Tomorrow you stop building practice projects. Founder mode begins.")
 ]},
 // ---------- PHASE 3 ----------
-{p:3,theme:"Find the Pain — problem discovery week",days:[
+{p:3,theme:"Find the Pain — problem discovery · Python begins",days:[
  {t:"List 10 real problems",d:["Write 10 problems you, your girlfriend, friends, or your communities actually have. Your community-helping business idea lives somewhere in this list.","No solutions yet. Just pain."],g:["SHIP"],h:"2 hrs"},
  {t:"Talk to 3 humans",d:["Interview 3 potential users about their version of these problems. Only listen and take notes — don't pitch anything."],g:["SHIP"],h:"2 hrs"},
- {t:"Score the ideas",d:["Score each idea: Do I personally feel this pain? MVP buildable in 4–6 weeks? No heavy infra (no realtime video/blockchain/heavy ML)? Can I imagine 100 users?"],g:["SHIP"],h:"2 hrs"},
- {t:"Commit to ONE",d:["Pick the winner. Write a one-page problem statement: who has the pain, how bad it is, what they do about it today."],g:["SHIP"],h:"2 hrs"},
+ {t:"Score & commit",d:["Score each idea: Do I personally feel this pain? MVP buildable in 4–6 weeks? No heavy infra (no realtime video/blockchain/heavy ML)? Can I imagine 100 users?","Pick the winner. Write a one-page problem statement: who has the pain, how bad it is, what they do about it today."],g:["SHIP"],h:"2.5 hrs"},
+ {t:"Python begins — CS50P 0+1",d:["New weekly thread: one CS50P unit per week from now through week 22, so Python is fluent before the AI Engineer track needs it.","Install Python. Watch Lectures 0 (Functions, Variables) and 1 (Conditionals) at speed — you know these ideas from C and JS; focus on what's different: indentation instead of braces, input(), f-strings.","Do the 2–3 most interesting problems from each problem set."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  {t:"Sketch the MVP",d:["Sketch every screen on paper. Then cut features until it hurts. The MVP is what's left."],g:["SHIP"],h:"2 hrs"},
  {t:"Define done",d:["Write a maximum of 3 user stories in your repo README. That's the whole MVP. Anything else goes in a 'later.md' file."],g:["SHIP"],h:"2 hrs"},
  REST()
@@ -132,17 +133,17 @@ const WEEKS=[
  {t:"Scaffold the stack",d:["Create the repo: Next.js + TypeScript + Tailwind. Push to GitHub; connect Vercel so every push auto-deploys."],g:["BUILD"],h:"2.5 hrs"},
  {t:"Supabase: data model",d:["Plan Mode first: design your database tables with Claude, argue about the schema, then create them in Supabase."],g:["BUILD","CLAUDE"],h:"2.5 hrs"},
  {t:"Supabase: auth",d:["Wire up email login end-to-end: sign up, log in, log out, protected pages."],g:["BUILD"],h:"2.5 hrs"},
- {t:"App shell",d:["Build the layout: navigation, page structure, and honest empty states ('No projects yet — create your first one')."],g:["BUILD"],h:"2.5 hrs"},
- {t:"Core screen (static)",d:["Build the most important screen with fake hardcoded data. Get the shape right before the plumbing."],g:["BUILD"],h:"2.5 hrs"},
+ {t:"App shell + core screen (static)",d:["Build the layout: navigation, page structure, and honest empty states ('No projects yet — create your first one').","Then build the most important screen with fake hardcoded data. Get the shape right before the plumbing."],g:["BUILD"],h:"3 hrs"},
  {t:"Core screen (live)",d:["Wire it to real Supabase data. Demo it to one person tonight, even half-broken."],g:["BUILD"],h:"2.5 hrs"},
+ {t:"Python: CS50P 2 — Loops",d:["Watch Lecture 2. Lists, dicts, and comprehensions are Python's superpower over C-style loops — this is where Python starts feeling like Python.","ps2: pick 2–3 problems and solve them."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  REST()
 ]},
 {p:3,theme:"Build Sprint 1 — core feature #1",days:[
  {t:"Plan Mode: spec feature #1",d:["Spec the single most important feature with Claude in Plan Mode. Stay in Plan Mode all sprint for anything touching 3+ files."],g:["BUILD","CLAUDE"],h:"2 hrs"},
  {t:"Build",d:["Implement the happy path of feature #1."],g:["BUILD"],h:"2.5 hrs"},
  {t:"Build + edge cases",d:["Handle the unhappy paths: bad input, missing data, double-clicks, slow network."],g:["BUILD"],h:"2.5 hrs"},
- {t:"Manual test + fix",d:["Use the feature like a hostile stranger would. Fix what breaks."],g:["BUILD"],h:"2.5 hrs"},
- {t:"Explain-then-rebuild",d:["Take the trickiest function Claude drafted this week. Delete it. Rebuild it yourself from scratch."],g:["BUILD","CLAUDE"],h:"2 hrs"},
+ {t:"Manual test + explain-then-rebuild",d:["Use the feature like a hostile stranger would. Fix what breaks.","Then take the trickiest function Claude drafted this week, delete it, and rebuild it yourself from scratch."],g:["BUILD","CLAUDE"],h:"2.5 hrs"},
+ {t:"Python: CS50P 3 — Exceptions",d:["Watch Lecture 3. try/except/raise — the same edge-case muscle you used on your product this week, different language.","ps3: 2–3 problems."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  {t:"Demo + journal",d:["Demo the feature to someone. Journal what you learned and what scared you."],g:["SHIP"],h:"1.5 hrs"},
  REST()
 ]},
@@ -150,17 +151,17 @@ const WEEKS=[
  {t:"Plan Mode: spec feature #2",d:["Spec the second core feature (or the data flows connecting feature #1 to the rest of the app)."],g:["BUILD","CLAUDE"],h:"2 hrs"},
  {t:"Build",d:["Implement the happy path."],g:["BUILD"],h:"2.5 hrs"},
  {t:"Build + edge cases",d:["Unhappy paths again. They're 60% of real software."],g:["BUILD"],h:"2.5 hrs"},
- {t:"Connect the pieces",d:["Make features #1 and #2 work together. Trace one full user journey end to end."],g:["BUILD"],h:"2.5 hrs"},
- {t:"Test + fix",d:["Hostile-stranger testing round 2."],g:["BUILD"],h:"2.5 hrs"},
+ {t:"Connect + test the journey",d:["Make features #1 and #2 work together. Trace one full user journey end to end.","Hostile-stranger testing round 2, on the full journey. Fix what breaks."],g:["BUILD"],h:"3 hrs"},
+ {t:"Python: CS50P 4 — Libraries",d:["Watch Lecture 4. Modules, pip, random/statistics — and requests: you've called APIs from JavaScript; now do it in Python.","ps4: 2–3 problems."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  {t:"Demo + journal",d:["Demo to a different person this time. Their confusion is your roadmap."],g:["SHIP"],h:"1.5 hrs"},
  REST()
 ]},
 {p:3,theme:"Build Sprint 3 — onboarding & UX",days:[
  {t:"The first-minute experience",d:["Plan Mode: design what a brand-new user sees in their first 60 seconds. That minute decides everything."],g:["BUILD","CLAUDE"],h:"2 hrs"},
  {t:"Build onboarding",d:["Implement the signup → first-success flow. A new user must reach value without your help."],g:["BUILD"],h:"2.5 hrs"},
- {t:"UX polish pass",d:["Fix the rough edges: confusing labels, missing feedback, dead ends."],g:["BUILD"],h:"2.5 hrs"},
+ {t:"UX + copy polish",d:["Fix the rough edges: confusing labels, missing feedback, dead ends.","Rewrite every button, error, and empty state in plain human language. Words are UI."],g:["BUILD"],h:"3 hrs"},
  {t:"Mobile pass",d:["Use the entire app on your phone. Fix everything that's broken or cramped."],g:["BUILD"],h:"2.5 hrs"},
- {t:"Copy pass",d:["Rewrite every button, error, and empty state in plain human language. Words are UI."],g:["BUILD"],h:"2 hrs"},
+ {t:"Python: CS50P 5 — Unit Tests",d:["Watch Lecture 5. pytest and assert — proof beats hope.","Port two small functions from your product's logic to Python and write tests for them."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  {t:"Self-serve test",d:["Hand your phone to someone with zero context. Can they sign up and succeed alone? Note every stumble."],g:["SHIP"],h:"2 hrs"},
  REST()
 ]},
@@ -169,8 +170,8 @@ const WEEKS=[
  {t:"Data integrity",d:["Check Supabase row-level security rules: can user A see user B's data? Fix anything scary (Plan Mode — security deserves it)."],g:["BUILD","CLAUDE"],h:"2.5 hrs"},
  {t:"Performance pass",d:["Find the slowest screen and make it fast. Ask Claude to explain what was slow and why the fix works."],g:["BUILD","CLAUDE"],h:"2.5 hrs"},
  {t:"Seed data + demo account",d:["Create realistic seed data and a demo flow so the app never looks empty to a new visitor."],g:["BUILD"],h:"2 hrs"},
- {t:"Bug sweep",d:["Work through your bug list top to bottom."],g:["BUILD"],h:"2.5 hrs"},
- {t:"FEATURE FREEZE",d:["No new features after today until launch. Write it somewhere visible.","Journal: the MVP exists. Four weeks ago it was a paper sketch."],g:["SHIP"],h:"1.5 hrs"},
+ {t:"Bug sweep + FEATURE FREEZE",d:["Work through your bug list top to bottom.","Then: no new features until launch. Write it somewhere visible.","Journal: the MVP exists. Four weeks ago it was a paper sketch."],g:["BUILD","SHIP"],h:"2.5 hrs"},
+ {t:"Python: CS50P 6 — File I/O",d:["Watch Lecture 6. with open(), CSV files, images with PIL.","Bonus rep: regenerate this week's seed data with a Python script instead of by hand."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  REST()
 ]},
 {p:3,theme:"Real Humans — watch them use it",days:[
@@ -178,32 +179,32 @@ const WEEKS=[
  {t:"Friend test #1",d:["Watch friend #1 use it. Say NOTHING. Every time you want to help, write down what confused them instead."],g:["SHIP"],h:"2 hrs"},
  {t:"Fix round 1",d:["Fix the top 3 confusions from yesterday. Nothing else."],g:["BUILD"],h:"2.5 hrs"},
  {t:"Friend test #2",d:["Watch friend #2 (your girlfriend is a great candidate — she'll be honest). Same rule: silence + notes."],g:["SHIP"],h:"2 hrs"},
- {t:"Fix round 2",d:["Fix the new top 3."],g:["BUILD"],h:"2.5 hrs"},
- {t:"Friend test #3 + fix",d:["Test with friend #3, fix the worst of it same-day. Three real users have now used your product."],g:["SHIP","BUILD"],h:"2.5 hrs"},
+ {t:"Fix round 2 + friend test #3",d:["Morning: fix the new top 3 from yesterday's test.","Then test with friend #3 and fix the worst of it same-day. Three real users have now used your product."],g:["BUILD","SHIP"],h:"2.5 hrs"},
+ {t:"Python: CS50P 7 — Regular Expressions",d:["Watch Lecture 7. The re module — the email validation your signup form does; now you know how it actually works.","ps7: 2–3 problems."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  REST()
 ]},
 {p:3,theme:"Polish & Tell the Story",days:[
  {t:"Landing page: the headline",d:["Write the landing page headline. It names the PAIN, not the tech. 'Stop losing recipes in your camera roll' beats 'AI-powered recipe management'."],g:["SHIP"],h:"2 hrs"},
- {t:"Landing page: build it",d:["Build the page: headline, 3 benefits, screenshots, one clear call to action."],g:["BUILD","SHIP"],h:"2.5 hrs"},
- {t:"Demo GIF + feedback channel",d:["Record a 30–60s demo GIF/video.","Add a simple feedback widget or a visible contact link."],g:["SHIP"],h:"2 hrs"},
+ {t:"Landing page: build it + demo GIF",d:["Build the page: headline, 3 benefits, screenshots, one clear call to action.","Record a 30–60s demo GIF/video for it, and add a simple feedback widget or visible contact link."],g:["BUILD","SHIP"],h:"3 hrs"},
  {t:"Friend-test cleanup",d:["Clear the remaining issues from last week's tests."],g:["BUILD"],h:"2.5 hrs"},
  {t:"Lighthouse + accessibility",d:["Run Lighthouse. Fix the cheap wins: image sizes, contrast, alt text, focus states."],g:["BUILD"],h:"2 hrs"},
+ {t:"Python: CS50P 8 — Object-Oriented Programming",d:["Watch Lecture 8. Classes, properties, methods.","For reps: model your product's core objects (User, Project, whatever yours are) as Python classes."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  {t:"Soft launch",d:["Share it in ONE community you're already a trusted member of. Ask for feedback, not applause."],g:["SHIP"],h:"1.5 hrs"},
  REST()
 ]},
 {p:3,theme:"Money & Measurement",days:[
- {t:"Pricing decision",d:["Decide: charge now, or free with a waitlist for a paid tier? Write down WHY. (Charging earlier than feels comfortable is usually right.)"],g:["SHIP"],h:"1.5 hrs"},
- {t:"Stripe: test mode",d:["Plan Mode — payments deserve maximum care. Wire Stripe Checkout in test mode."],g:["BUILD","CLAUDE"],h:"2.5 hrs"},
+ {t:"Pricing + Stripe test mode",d:["Decide: charge now, or free with a waitlist for a paid tier? Write down WHY. (Charging earlier than feels comfortable is usually right.)","Then, Plan Mode — payments deserve maximum care. Wire Stripe Checkout in test mode."],g:["SHIP","BUILD","CLAUDE"],h:"3 hrs"},
  {t:"Stripe: live + webhooks",d:["Go live. Handle the webhook events that actually matter (checkout completed, subscription canceled)."],g:["BUILD"],h:"2.5 hrs"},
  {t:"Analytics",d:["Add PostHog or Plausible. Define the 3 events that tell you if the product works (signup, first success action, return visit)."],g:["BUILD"],h:"2 hrs"},
  {t:"Email capture",d:["Add email capture + one simple welcome email."],g:["BUILD"],h:"2 hrs"},
+ {t:"Python: CS50P 9 — Et Cetera + wrap",d:["Watch Lecture 9: sets, type hints, docstrings, unpacking — the Pythonic finishing touches.","Then ask Claude: 'Quiz me across all of CS50P. Grade me hard.' Anything shaky goes on a Sunday review slot."],g:["CS50P","CLAUDE"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  {t:"Full dry run",d:["Run the whole journey yourself: land → sign up → succeed → pay. Fix every snag. This exact path is what strangers will walk next week."],g:["SHIP"],h:"2.5 hrs"},
  REST()
 ]},
 {p:3,theme:"Launch Prep",days:[
- {t:"Write the launch posts",d:["Draft your X/Twitter thread, Product Hunt listing, and Indie Hackers post. Lead with the pain and the story, not the feature list."],g:["SHIP"],h:"2.5 hrs"},
+ {t:"Write the launch posts + recruit day-one users",d:["Draft your X/Twitter thread, Product Hunt listing, and Indie Hackers post. Lead with the pain and the story, not the feature list.","Line up 5 people who'll try it on launch day and say something publicly."],g:["SHIP"],h:"3 hrs"},
  {t:"Demo video",d:["Record a tight 60-second demo. Imperfect and shipped beats polished and pending."],g:["SHIP"],h:"2 hrs"},
- {t:"Recruit day-one users",d:["Line up 5 people who'll try it on launch day and say something publicly."],g:["SHIP"],h:"1.5 hrs"},
+ {t:"Python ship: CS50P capstone",d:["Final Python day: build a small automation for YOUR launch — a script that pulls signups into a launch-day dashboard, or generates social post variants from your launch copy.","Your first genuinely useful Python program. If you want the CS50P certificate, this can grow into the final project.","The AI Engineer track starts in 3 weeks — you now speak its language."],g:["CS50P","BUILD"],h:"2.5 hrs",l:[["CS50P",PYL]]},
  {t:"Bug bash",d:["Spend 2 hours actively trying to break your own app. Weird inputs, fast clicking, back-button abuse. Fix the worst finds."],g:["BUILD"],h:"2.5 hrs"},
  {t:"Final checks",d:["Final fixes. Verify error monitoring/alerts work so you'll know if launch day breaks something."],g:["BUILD"],h:"2 hrs"},
  {t:"Schedule it",d:["Pick your launch day/time for next week. Prep everything in drafts. Then close the laptop and breathe."],g:["SHIP"],h:"1.5 hrs"},
