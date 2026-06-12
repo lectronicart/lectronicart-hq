@@ -31,7 +31,7 @@ When LectronicArt launches, the calendar grows into the community companion:
 - Embed/companion mode for Skool
 
 ## Naming
-- **Product name (public):** The Builder Calendar / The 252-Day Builder Calendar
+- **Product name (public):** The LectronicArt Creative Engine Roadmap 
 - **What it is (technically):** a static single-page web app
 - **What to call it in marketing:** "free interactive roadmap" or "tracker" — concrete and self-explanatory
-- **Repo:** builder-calendar
+- **Repo:** lectronicart-hq 
