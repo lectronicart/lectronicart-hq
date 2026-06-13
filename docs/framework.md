@@ -99,7 +99,7 @@ The calendar executes this thesis in four phases. The operating principle shifts
 
 **Phase 3 — Ship Your Product (Weeks 13–24, Sep 7–Nov 29).** *You orchestrate, AI executes.* Problem discovery → MVP → real users → Stripe → public launch → first 10 users. Pick the product inside the creative-automation niche so these users seed the community. A weekly Python day runs alongside the build (CS50P, one unit per week, Weeks 13–22) so Python is fluent before Phase 4 needs it.
 
-**Phase 4 — AI Engineer Track (Weeks 25–36, Nov 30–Feb 21).** *You teach what you built.* Claude API → prompt systems → MCP → agents → art workflows → video pipelines → content engine → templates and the Creator OS → Skool foundations → founding cohort launch, Week 36. Day 252 ends with LectronicArt live.
+**Phase 4 — AI Engineer Track (Weeks 25–36, Nov 30–Feb 21).** *You teach what you built.* OpenAI APIs → prompt systems → MCP/connectors → agents → art workflows → video pipelines → content engine → templates and the Creator OS → Skool foundations → founding cohort launch, Week 36. Day 252 ends with LectronicArt live.
 
 Supplementary material that floats alongside Phase 4 rather than occupying calendar days: CS50 AI for conceptual depth when you want it, the Hugging Face Agents Course (scheduled in Weeks 28–29), and *AI Engineering* by Chip Huyen as evening reading once the API work makes it land.
 
