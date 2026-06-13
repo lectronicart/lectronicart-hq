@@ -17,7 +17,7 @@
     <span class="prompt">derrick@build</span>:~$ progress <span class="bar" id="termbar"></span> <span class="pct" id="termpct"></span><span class="game" id="termgame"></span>
   </div>
   <h1>Coding 101: <span class="accent">The 252-Day Builder Calendar</span></h1>
-  <p class="sub">June 15, 2026 – February 21, 2027 · <strong>~15 hrs/week</strong> · Six study days, Sundays off. Every day below maps to a specific CS50 lecture, Odin lesson, Full Stack Open part, CS50P Python unit, OpenAI/Codex module, or build sprint. Click any day to see the full task list and mark it done. <strong>The rule that makes this work: AI explains, you write (weeks 1–6) → you design, AI drafts, you review (7–12) → you orchestrate, AI executes (13–24) → you teach what you built (25–36).</strong></p>
+  <p class="sub">June 15, 2026 – February 21, 2027 · <strong>~15 hrs/week</strong> · Six study days, Sundays off. Every day below maps to a specific CS50 lecture, Odin lesson, Full Stack Open part, CS50P Python unit, OpenAI/Codex module, or build sprint. Click any day to open the mini-guide and mark it done. <strong>The rule that makes this work: AI explains, you write (weeks 1–6) → you design, AI drafts, you review (7–12) → you orchestrate, AI executes (13–24) → you teach what you built (25–36).</strong></p>
 </header>
 
 <div class="phases">
@@ -83,6 +83,16 @@
     <h2 id="pTitle"></h2>
     <div class="weektheme" id="pWeek"></div>
     <div class="hrs" id="pHrs"></div>
+    <div class="guide-tabs" id="pTabs" role="tablist" aria-label="Day guide sections">
+      <button id="tabOverview" type="button" role="tab" aria-controls="panelOverview" aria-selected="true" data-tab="overview">Overview</button>
+      <button id="tabSteps" type="button" role="tab" aria-controls="panelSteps" aria-selected="false" data-tab="steps">Steps</button>
+      <button id="tabFinish" type="button" role="tab" aria-controls="panelFinish" aria-selected="false" data-tab="finish">Finish</button>
+    </div>
+    <div class="guide-panels" id="pGuide">
+      <section class="guide-panel active" id="panelOverview" role="tabpanel" aria-labelledby="tabOverview"></section>
+      <section class="guide-panel" id="panelSteps" role="tabpanel" aria-labelledby="tabSteps" hidden></section>
+      <section class="guide-panel" id="panelFinish" role="tabpanel" aria-labelledby="tabFinish" hidden></section>
+    </div>
     <ul id="pTasks"></ul>
     <div class="links" id="pLinks"></div>
     <div class="donewrap"><button class="donebtn" id="doneBtn"></button></div>

@@ -92,12 +92,17 @@ function renderTerm(){
   document.getElementById("termbar").textContent="▓".repeat(filled)+"░".repeat(24-filled);
   document.getElementById("termpct").textContent=" "+n+"/"+TOTAL_DAYS+" days ("+pct+"%)"+(memoryOnly?" · saving off — progress won't persist":"");
 }
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function escAttr(s){return esc(s).replace(/"/g,"&quot;");}
 
 let openKey=null;
+let activeGuideTab="overview";
+const GUIDE_TABS=["overview","steps","finish"];
+
 function openDay(key){
   const info=DAYMAP[key]; if(!info)return;
   openKey=key;
+  activeGuideTab="overview";
   const p=document.getElementById("panel");
   p.className="panel p"+info.phase;
   const dstr=info.date.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
@@ -105,17 +110,93 @@ function openDay(key){
   document.getElementById("pTitle").textContent=info.t;
   document.getElementById("pWeek").innerHTML="<b>Week "+info.week+"</b> — "+esc(info.theme);
   document.getElementById("pHrs").textContent="⏱ Planned: "+info.h;
-  document.getElementById("pTasks").innerHTML=info.d.map(t=>"<li>"+esc(t)+"</li>").join("");
-  const links=document.getElementById("pLinks");
-  links.innerHTML=(info.l||[]).map(a=>'<a href="'+a[1]+'" target="_blank" rel="noopener">'+esc(a[0])+" ↗</a>").join("");
+  renderGuide(info);
   updateDoneBtn();
   document.getElementById("overlay").classList.add("open");
+}
+function linkListHtml(links){
+  return (links||[]).map(a=>'<a href="'+escAttr(a[1])+'" target="_blank" rel="noopener">'+esc(a[0])+" ↗</a>").join("");
+}
+function guideSection(title, body){
+  return '<div class="guide-section"><h3>'+esc(title)+'</h3><p>'+esc(body)+'</p></div>';
+}
+function renderGuide(info){
+  const tabs=document.getElementById("pTabs");
+  const guideWrap=document.getElementById("pGuide");
+  const tasks=document.getElementById("pTasks");
+  const legacyLinks=document.getElementById("pLinks");
+  const guide=info.guide;
+  if(!guide){
+    tabs.hidden=true;
+    guideWrap.hidden=true;
+    tasks.hidden=false;
+    legacyLinks.hidden=false;
+    tasks.innerHTML=info.d.map(t=>"<li>"+esc(t)+"</li>").join("");
+    legacyLinks.innerHTML=linkListHtml(info.l);
+    return;
+  }
+  tabs.hidden=false;
+  guideWrap.hidden=false;
+  tasks.hidden=true;
+  tasks.innerHTML="";
+  legacyLinks.hidden=true;
+  legacyLinks.innerHTML="";
+
+  const chips=info.g.map(t=>'<span class="chip '+t+'">'+t+"</span>").join("");
+  const sources=linkListHtml(info.l);
+  document.getElementById("panelOverview").innerHTML=
+    guideSection("Goal", guide.goal)
+    +guideSection("Why It Matters", guide.why)
+    +'<div class="guide-section guide-facts"><h3>Session</h3>'
+    +'<div class="fact-row"><span>Planned</span><b>'+esc(info.h)+'</b></div>'
+    +'<div class="fact-row"><span>Tags</span><span class="guide-chips">'+chips+'</span></div>'
+    +(sources?'<div class="links guide-links">'+sources+'</div>':'')
+    +'</div>'
+    +guideSection("AI Rule", guide.rule);
+  document.getElementById("panelSteps").innerHTML=
+    '<ol class="guide-steps">'+guide.steps.map((step,i)=>
+      '<li><span class="step-num">'+(i+1)+'</span><p>'+esc(step)+'</p></li>'
+    ).join("")+'</ol>';
+  document.getElementById("panelFinish").innerHTML=
+    guideSection("Done Means", guide.done)
+    +guideSection("Coach Prompt", guide.coach)
+    +guideSection("Reflect", guide.reflect);
+  setGuideTab(activeGuideTab);
+}
+function setGuideTab(tab){
+  if(!GUIDE_TABS.includes(tab))tab="overview";
+  activeGuideTab=tab;
+  GUIDE_TABS.forEach(name=>{
+    const selected=name===tab;
+    const btn=document.getElementById("tab"+name[0].toUpperCase()+name.slice(1));
+    const panel=document.getElementById("panel"+name[0].toUpperCase()+name.slice(1));
+    btn.setAttribute("aria-selected",selected?"true":"false");
+    btn.tabIndex=selected?0:-1;
+    panel.hidden=!selected;
+    panel.classList.toggle("active",selected);
+  });
 }
 function updateDoneBtn(){
   const b=document.getElementById("doneBtn");
   if(done.has(DAYMAP[openKey].dayN)){b.textContent="✓ Done — tap to undo";b.classList.add("is-done");}
   else{b.textContent="Mark day complete";b.classList.remove("is-done");}
 }
+document.getElementById("pTabs").addEventListener("click",e=>{
+  const btn=e.target.closest("button[data-tab]");
+  if(btn)setGuideTab(btn.dataset.tab);
+});
+document.getElementById("pTabs").addEventListener("keydown",e=>{
+  if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;
+  e.preventDefault();
+  const cur=GUIDE_TABS.indexOf(activeGuideTab);
+  let next=cur;
+  if(e.key==="ArrowLeft")next=(cur+GUIDE_TABS.length-1)%GUIDE_TABS.length;
+  if(e.key==="ArrowRight")next=(cur+1)%GUIDE_TABS.length;
+  if(e.key==="Home")next=0;
+  if(e.key==="End")next=GUIDE_TABS.length-1;
+  setGuideTab(GUIDE_TABS[next]);
+  document.querySelector('#pTabs button[data-tab="'+GUIDE_TABS[next]+'"]').focus();
+});
 document.getElementById("doneBtn").addEventListener("click",()=>{
   if(!openKey)return;
   const n=DAYMAP[openKey].dayN;

@@ -347,3 +347,161 @@ const WEEKS=[
  REST("252 days. From 'what's a stack?' to running an AI education business. LectronicArt is live.")
 ]}
 ];
+
+function sourceTrack(day){
+  if(day.g.includes("CS50"))return "CS50x";
+  if(day.g.includes("CS50P"))return "CS50P";
+  if(day.g.includes("ODIN"))return "Odin Foundations";
+  if(day.g.includes("FSO"))return "Full Stack Open";
+  if(day.g.includes("CODEX"))return "Codex/OpenAI";
+  if(day.g.includes("AGENTS"))return "agent systems";
+  if(day.g.includes("SHIP"))return "shipping";
+  if(day.g.includes("BUILD"))return "building";
+  return "the roadmap";
+}
+
+function phaseRule(phase){
+  if(phase===1)return "Use ChatGPT only as a tutor: ask for explanations, analogies, and quizzes, but write the code yourself.";
+  if(phase===2)return "Use Codex for planning and review, then read every line and rebuild anything you cannot explain.";
+  if(phase===3)return "Use Codex like a senior pair: ask for plans, risk checks, and code review around real product work.";
+  return "Use OpenAI and Codex as the engineering stack: build small, test the loop, document the system, then teach it.";
+}
+
+function outcomeFor(day, week, phase){
+  const title=day.t.toLowerCase();
+  if(day.rest)return "protect recovery and keep the calendar sustainable";
+  if(title.includes("lecture")||title.includes("fso ")||title.includes("odin:")||title.includes("academy")||title.includes("docs"))
+    return "turn the assigned material into notes, working examples, and questions you can answer without rereading";
+  if(title.includes("pset")||title.includes("problem set")||title.includes("exercises"))
+    return "make real progress on the assignment by reading the spec, writing code, testing, and explaining the result";
+  if(title.includes("plan")||title.includes("design")||title.includes("spec")||title.includes("define"))
+    return "leave with a clear written plan that is small enough to execute in the next build block";
+  if(day.g.includes("SHIP"))
+    return "put something in front of another person, a public channel, or your future audience";
+  if(day.g.includes("BUILD"))
+    return "produce a working artifact, not just notes about an artifact";
+  if(day.g.includes("SETUP"))
+    return "finish the setup once so tomorrow starts with learning instead of friction";
+  return "move the week forward with one focused, visible piece of progress";
+}
+
+function watchFor(day){
+  const title=day.t.toLowerCase();
+  if(day.g.includes("CS50")&&title.includes("pset"))return "Do not ask for a finished solution. If you are stuck, ask for a hint, a failing-test idea, or an explanation of one error message.";
+  if(day.g.includes("CS50"))return "Pause when the lecture introduces a new mental model. Rephrase it in your own words before continuing.";
+  if(day.g.includes("ODIN"))return "Do not skim the setup lessons. The boring terminal, Git, and browser habits are what make later projects feel calm.";
+  if(day.g.includes("FSO"))return "Do the exercises in your editor, not in your head. React and full-stack concepts stick when state changes on the screen.";
+  if(day.g.includes("CS50P"))return "Notice where Python feels easier than C or JavaScript, then write down the tradeoff instead of just enjoying the shortcut.";
+  if(day.g.includes("CODEX"))return "Keep the steering wheel. Codex can draft, but you decide the shape, review the diff, and explain the result.";
+  if(day.g.includes("SHIP"))return "Shipping does not mean perfect. It means another human can see it, try it, or respond to it.";
+  if(day.g.includes("BUILD"))return "Favor the smallest working version. A tiny finished loop teaches more than a large half-built idea.";
+  return "Keep the session concrete. Write down the next action before opening another tab.";
+}
+
+function coachFor(day, phase){
+  const title=day.t.replace(/"/g,"'");
+  if(day.rest)return "ChatGPT, help me choose a humane catch-up plan for this rest day. Ask what is unfinished, pick the smallest useful recovery block, and protect real rest.";
+  if(phase===1)return "ChatGPT, tutor me through today's task: '"+title+"'. Explain concepts with beginner-friendly analogies, quiz me, and do not write the solution code for me.";
+  if(phase===2)return "Codex, help me plan and review today's task: '"+title+"'. Keep the plan small, explain tradeoffs, and make me read every changed line.";
+  if(phase===3)return "Codex, act as my product-building reviewer for '"+title+"'. Identify risks, edge cases, and the smallest shippable next step before drafting anything.";
+  return "Codex, help me build today's AI-engineering artifact: '"+title+"'. Keep the system testable, explain the loop, and turn the work into teaching notes.";
+}
+
+function reflectFor(day, phase){
+  if(day.rest)return "What did I recover, clarify, or consciously postpone today?";
+  if(phase===1)return "What concept can I explain more clearly now than I could this morning?";
+  if(phase===2)return "Which line, component, or data flow did I understand only after rebuilding or explaining it?";
+  if(phase===3)return "What did a real user, test, metric, or product constraint teach me today?";
+  return "What part of today's system could become a lesson, template, or public proof-of-work later?";
+}
+
+function taskStep(text){
+  const clean=String(text||"today's main assignment").trim();
+  if(clean.length<35)return "Work through this task carefully: "+clean+" Confirm the exact result before moving on.";
+  return "Work through: "+clean;
+}
+
+function buildSteps(day, ctx){
+  const title=day.t.toLowerCase();
+  const base=day.d.map(taskStep);
+  const steps=[];
+  if(day.rest){
+    return [
+      "Start with a 5-minute status check: what is done, what is unfinished, and what can safely wait?",
+      "If you are caught up, take real rest. Close the editor and let the work consolidate.",
+      "If you are behind, choose exactly one small catch-up target and stop when it is complete.",
+      "End with a short note for tomorrow so the next study block has a clear first move."
+    ];
+  }
+  if(day.g.includes("CS50")&&title.includes("lecture")){
+    steps.push(base[0]||"Watch the assigned CS50 lecture section with notes open.");
+    steps.push("Pause after each major idea and write a one-sentence plain-language explanation before moving on.");
+    steps.push("Retype or recreate at least one example so the concept moves from watching to doing.");
+    steps.push("List the two shakiest concepts and ask ChatGPT for a quiz or analogy, not a shortcut.");
+  }else if(day.g.includes("CS50")&&(title.includes("pset")||title.includes("problem set"))){
+    steps.push(base[0]||"Read the problem specification slowly before writing code.");
+    steps.push("Write down the input, output, and two test cases in your own words.");
+    steps.push("Implement one small piece at a time, run it, then fix the first concrete failure you see.");
+    steps.push("After 15 honest minutes stuck, ask ChatGPT for a hint about the bug or concept, not a completed solution.");
+  }else if(day.g.includes("ODIN")){
+    steps.push(base[0]||"Work through the assigned Odin lesson or project section.");
+    steps.push("Type the commands or examples yourself and commit meaningful checkpoints as you go.");
+    steps.push(base[1]||"Turn the lesson into a tiny visible artifact, note, or habit you can reuse tomorrow.");
+    steps.push("Write one sentence naming the tool, browser behavior, or coding habit this lesson is trying to install.");
+  }else if(day.g.includes("FSO")){
+    steps.push(base[0]||"Work through the assigned Full Stack Open section in your editor.");
+    steps.push("Do the exercises immediately after the relevant reading, while the concept is still fresh.");
+    steps.push("Trace the data flow out loud: what changes, where state lives, and what triggers a render or request.");
+    steps.push("Capture one confusion for ChatGPT or Codex, then resolve it before adding more features.");
+  }else if(day.g.includes("CS50P")){
+    steps.push(base[0]||"Watch or read the assigned CS50P unit with a fresh Python file open.");
+    steps.push("Rebuild two examples from memory, then change one detail to prove you understand it.");
+    steps.push(base[1]||"Pick a few problem-set reps that exercise the new Python idea directly.");
+    steps.push("Compare the Python version to how you would solve it in JavaScript or C.");
+  }else if(day.g.includes("SHIP")){
+    steps.push(base[0]||"Define the audience-facing outcome before you open the tools.");
+    steps.push("Create the smallest version another person can read, click, watch, or respond to.");
+    steps.push(base[1]||"Put the work somewhere visible: a demo, post, link, message, or launch draft.");
+    steps.push("Record what happened: feedback, silence, questions, numbers, or what you would change next.");
+  }else if(day.g.includes("BUILD")){
+    steps.push(base[0]||"Name the smallest working version of today's build before writing code.");
+    steps.push("Sketch the data, screen, or pipeline path so you know what connects to what.");
+    steps.push(base[1]||"Build the happy path first, then test one realistic edge case.");
+    steps.push("Leave the code cleaner than a demo: clear names, obvious states, and a note for the next session.");
+  }else{
+    steps.push(...base.slice(0,2));
+    steps.push("Turn the instruction into one concrete artifact: a note, sketch, checklist, commit, or decision.");
+    steps.push("End by writing the next move so tomorrow starts quickly.");
+  }
+  while(steps.length<4)steps.push("Write a short note about what changed in your understanding and what you will do next.");
+  return steps.slice(0,5);
+}
+
+function buildGuide(day, ctx){
+  const track=sourceTrack(day);
+  const outcome=outcomeFor(day, ctx.week, ctx.phase);
+  const summary=day.d[0]||day.t;
+  return {
+    goal:"By the end of this block, "+outcome+".",
+    why:day.rest
+      ? "Rest days are part of the system. They protect consistency, absorb overflow, and keep the streak from becoming a grind."
+      : "This day sits inside "+ctx.theme+" and connects "+track+" to the larger builder arc. "+watchFor(day),
+    steps:buildSteps(day, ctx),
+    done:day.rest
+      ? "Done means you either truly rested or cleared one deliberately chosen catch-up item without turning Sunday into another full workday."
+      : "Done means the main instruction is complete, you can explain what you did in plain language, and you have saved the artifact, notes, commit, or next-step decision somewhere you can find it.",
+    coach:coachFor(day, ctx.phase),
+    reflect:reflectFor(day, ctx.phase),
+    summary:summary,
+    rule:phaseRule(ctx.phase)
+  };
+}
+
+function attachGuides(weeks){
+  weeks.forEach((week, wi)=>{
+    week.days.forEach((day, di)=>{
+      if(!day.guide)day.guide=buildGuide(day,{week:wi+1,day:di+1,phase:week.p,theme:week.theme});
+    });
+  });
+}
+attachGuides(WEEKS);
