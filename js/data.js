@@ -361,9 +361,10 @@ function sourceTrack(day){
 }
 
 function phaseRule(phase){
-  if(phase===1)return "Use ChatGPT only as a tutor: ask for explanations, analogies, and quizzes, but write the code yourself.";
-  if(phase===2)return "Use Codex for planning and review, then read every line and rebuild anything you cannot explain.";
-  if(phase===3)return "Use Codex like a senior pair: ask for plans, risk checks, and code review around real product work.";
+  if(phase===1)return "In Phase 1, ChatGPT is a tutor, not a co-author: ask for plain-language explanations, analogies, quizzes, and hints, but write and debug the code yourself.";
+  if(phase===2)return "In Phase 2, you design first and Codex assists second: plan small, approve intentionally, read every changed line, and rebuild anything you cannot explain.";
+  if(phase===3)return "In Phase 3, Codex is a senior pair on real product work: you choose the user problem, define done, test with humans, and use AI to surface risks.";
+  if(phase===4)return "In Phase 4, build AI systems, package reusable creative automation, document the work, and teach each artifact as LectronicArt proof-of-work.";
   return "Use OpenAI and Codex as the engineering stack: build small, test the loop, document the system, then teach it.";
 }
 
@@ -374,6 +375,8 @@ function outcomeFor(day, week, phase){
     return "turn the assigned material into notes, working examples, and questions you can answer without rereading";
   if(title.includes("pset")||title.includes("problem set")||title.includes("exercises"))
     return "make real progress on the assignment by reading the spec, writing code, testing, and explaining the result";
+  if(phase===3&&isProblemDiscoveryTitle(title))
+    return "turn a fuzzy product idea into written evidence, sharper scope, and the next user-learning question";
   if(title.includes("plan")||title.includes("design")||title.includes("spec")||title.includes("define"))
     return "leave with a clear written plan that is small enough to execute in the next build block";
   if(day.g.includes("SHIP"))
@@ -385,8 +388,83 @@ function outcomeFor(day, week, phase){
   return "move the week forward with one focused, visible piece of progress";
 }
 
-function watchFor(day){
+function isUserLearningTitle(title){
+  return title.includes("interview")
+    || title.includes("humans")
+    || title.includes("friend")
+    || title.includes("user")
+    || title.includes("onboard every signup")
+    || title.includes("self-serve test");
+}
+
+function isProblemDiscoveryTitle(title){
+  return title.includes("problems")
+    || title.includes("score")
+    || title.includes("mvp")
+    || title.includes("define done");
+}
+
+function phase4Track(day, ctx){
   const title=day.t.toLowerCase();
+  const theme=ctx.theme.toLowerCase();
+  if(title.includes("retro")||title.includes("thesis")||title.includes("day 252"))return "reflection and proof";
+  if(theme.includes("launch lectronicart")||title.includes("doors open")||title.includes("public launch")||title.includes("white-glove")||title.includes("workshop")||title.includes("founding offer")||title.includes("dry run")||title.includes("launch assets"))return "founding launch";
+  if(theme.includes("skool")||theme.includes("cohort")||title.includes("community")||title.includes("accountability")||title.includes("founding")||title.includes("module"))return "community product";
+  if(theme.includes("templates")||theme.includes("creator os")||title.includes("template")||title.includes("starter kit")||title.includes("kit")||title.includes("package")||title.includes("productize"))return "productized templates";
+  if(title.startsWith("ship")||title.includes("give it away")||title.includes("teach it")||title.includes("meta-video")||title.includes("queue a full week"))return "public proof";
+  if(theme.includes("art workflows")||theme.includes("video workflows")||theme.includes("content engine")||title.includes("comfy")||title.includes("ffmpeg")||title.includes("pipeline")||title.includes("content os"))return "creative automation";
+  if(theme.includes("openai")||theme.includes("prompt")||theme.includes("mcp")||theme.includes("agents")||day.g.includes("AGENTS")||title.includes("agent")||title.includes("api")||title.includes("prompt"))return "AI engineering";
+  if(day.g.includes("SHIP"))return "public proof";
+  if(day.g.includes("BUILD"))return "system building";
+  return "LectronicArt teaching";
+}
+
+function phase4Kind(day, ctx){
+  const track=phase4Track(day, ctx);
+  if(track==="reflection and proof")return "retro";
+  if(track==="founding launch")return "launch";
+  if(track==="community product")return "community";
+  if(track==="productized templates")return "template";
+  if(track==="creative automation")return "creative";
+  if(track==="AI engineering")return "ai";
+  if(track==="public proof")return "ship";
+  return "build";
+}
+
+function watchFor(day, phase, ctx){
+  const title=day.t.toLowerCase();
+  const details=day.d.join(" ").toLowerCase();
+  const isPlanMode=day.g.includes("CODEX")&&(title.includes("plan")||title.includes("design")||title.includes("spec")||details.includes("plan mode"));
+  const isUserTest=isUserLearningTitle(title);
+  const p4=phase===4?phase4Kind(day,ctx||{theme:"",phase:4}):"";
+  if(phase===1&&day.g.includes("CS50")&&title.includes("pset"))return "Protect the learning reps: read the spec slowly, draw the input and output, and ask for hints only after you can describe the exact stuck point.";
+  if(phase===1&&day.g.includes("CS50"))return "You do not need to memorize every symbol or term today. Capture the idea in your own words, then retype enough examples that your hands meet the concept.";
+  if(phase===1&&day.g.includes("ODIN"))return "Treat the setup, terminal, Git, and browser lessons like studio fundamentals. They feel small now because they are becoming reflexes.";
+  if(phase===1&&day.g.includes("BUILD"))return "Before asking for help, write what you expected to happen and what actually happened. That sentence is the start of debugging.";
+  if(phase===1&&day.g.includes("CODEX"))return "Set the tutor boundary early: explanations, questions, and tiny hints are welcome; finished code is not.";
+  if(phase===2&&title.includes("retro"))return "The retro is a handoff into Phase 3. Turn weak spots into review slots, and turn wins into proof that the design-review-rebuild loop is working.";
+  if(phase===2&&day.g.includes("ODIN"))return "This is the last solo stretch before regular AI drafting. Use Codex for questions or review, but keep the project logic in your hands.";
+  if(phase===2&&isPlanMode)return "Treat Plan Mode as a design review, not a permission slip. Tighten the plan until the next change is small enough to inspect line by line.";
+  if(phase===2&&day.g.includes("SHIP"))return "A Phase 2 ship should prove the loop works: narrow core, visible states, deployment notes, and one sentence explaining where the data lives.";
+  if(phase===2&&day.g.includes("FSO"))return "React and backend lessons count when data moves on screen. Trace props, state, effects, and requests out loud before accepting a tidy explanation.";
+  if(phase===2&&day.g.includes("BUILD"))return "Before Codex drafts, draw the data shape and component boundary yourself. After it drafts, explain the diff like you are teaching future-you.";
+  if(phase===2&&day.g.includes("CODEX"))return "Keep a reviewer mindset: ask for tradeoffs, reject vague plans, and turn every accepted suggestion into something you understand.";
+  if(phase===3&&(title.includes("retro")||title.includes("next chapter")))return "This is evidence-based strategy work. Let shipped code, user conversations, and real numbers decide what the next chapter deserves.";
+  if(phase===3&&title.includes("launch"))return "Launch days are response days. Publish, reply, measure, and keep notes while the market is still talking back.";
+  if(phase===3&&isUserTest)return "Do not explain the product while someone uses it. Watch the stumble, write the exact words, then fix the pattern, not your feelings.";
+  if(phase===3&&day.g.includes("CS50P"))return "Python is no longer separate homework. Tie each unit to automation, testing, data cleanup, or launch leverage you can reuse.";
+  if(phase===3&&isPlanMode)return "Plan Mode now protects real users and real data. Ask Codex to challenge scope, failure modes, privacy, and what evidence would prove the plan worked.";
+  if(phase===3&&isProblemDiscoveryTitle(title))return "Stay with the problem longer than feels comfortable. Founder clarity comes from pain, current workarounds, and tight scope.";
+  if(phase===3&&day.g.includes("SHIP"))return "Shipping now means evidence: a person saw it, a metric moved, a message went out, or a decision got clearer.";
+  if(phase===3&&day.g.includes("BUILD"))return "Build against one named user journey. The product improves when a real person can complete one important path with less friction.";
+  if(phase===4&&p4==="retro")return "Count receipts before making claims. The final lesson should come from artifacts, members, systems, and shipped proof.";
+  if(phase===4&&p4==="launch")return "Community launch work is product work. Personal replies, onboarding friction, and first wins matter more than polished announcements.";
+  if(phase===4&&p4==="community")return "Design the member journey, not just the content. A strong community turns a newcomer into someone with a first win quickly.";
+  if(phase===4&&p4==="template")return "A template is only real when another creator can install it, understand it, and get a visible result without you in the room.";
+  if(phase===4&&p4==="creative")return "Creative automation must be reproducible. Save inputs, outputs, settings, timing, and the plain-language explanation a creator would need.";
+  if(phase===4&&p4==="ai")return "Do not stop at reading docs. Build the smallest testable loop, name the system boundary, and save the example as teaching material.";
+  if(phase===4&&day.g.includes("SHIP"))return "Public proof beats private polish. Ship the artifact with enough context that another creator understands why it matters.";
+  if(phase===4&&day.g.includes("BUILD"))return "Build for reuse. Clear inputs, outputs, setup steps, and failure notes turn a one-off script into LectronicArt curriculum.";
   if(day.g.includes("CS50")&&title.includes("pset"))return "Do not ask for a finished solution. If you are stuck, ask for a hint, a failing-test idea, or an explanation of one error message.";
   if(day.g.includes("CS50"))return "Pause when the lecture introduces a new mental model. Rephrase it in your own words before continuing.";
   if(day.g.includes("ODIN"))return "Do not skim the setup lessons. The boring terminal, Git, and browser habits are what make later projects feel calm.";
@@ -398,20 +476,37 @@ function watchFor(day){
   return "Keep the session concrete. Write down the next action before opening another tab.";
 }
 
-function coachFor(day, phase){
+function coachFor(day, phase, ctx){
   const title=day.t.replace(/"/g,"'");
+  const plainTitle=title.toLowerCase();
+  const p4=phase===4?phase4Kind(day,ctx||{theme:"",phase:4}):"";
   if(day.rest)return "ChatGPT, help me choose a humane catch-up plan for this rest day. Ask what is unfinished, pick the smallest useful recovery block, and protect real rest.";
-  if(phase===1)return "ChatGPT, tutor me through today's task: '"+title+"'. Explain concepts with beginner-friendly analogies, quiz me, and do not write the solution code for me.";
-  if(phase===2)return "Codex, help me plan and review today's task: '"+title+"'. Keep the plan small, explain tradeoffs, and make me read every changed line.";
-  if(phase===3)return "Codex, act as my product-building reviewer for '"+title+"'. Identify risks, edge cases, and the smallest shippable next step before drafting anything.";
+  if(phase===1)return "ChatGPT, be my beginner tutor for today's task: '"+title+"'. Ask what I tried first, explain one idea at a time, quiz me, and do not write the final code.";
+  if(phase===2&&(plainTitle.includes("odin")||plainTitle.includes("calculator")))return "Codex, act as a reviewer only for today's final solo task: '"+title+"'. Ask questions, point out risks, and do not draft the project code for me.";
+  if(phase===2&&plainTitle.includes("retro"))return "Codex, help me run today's Phase 2 retro: quiz me hard, identify weak spots, turn them into review blocks, and name what I am ready to build next.";
+  if(phase===2)return "Codex, help me plan and review today's task: '"+title+"'. Ask for my approach first, keep the scope small, explain tradeoffs, and make me inspect every changed line before accepting.";
+  if(phase===3&&day.g.includes("CS50P"))return "Codex, help me connect today's Python work to my product or launch. Quiz me, suggest one useful automation angle, and keep the code explainable.";
+  if(phase===3&&isUserLearningTitle(plainTitle))return "Codex, help me prepare for today's user-learning task: '"+title+"'. Give me observation prompts, bias checks, and a tight way to turn notes into fixes.";
+  if(phase===3&&(plainTitle.includes("launch")||plainTitle.includes("post")||plainTitle.includes("product hunt")||plainTitle.includes("show hn")))return "Codex, help me run today's launch task: '"+title+"'. Sharpen the message, list risks, and help me respond to real feedback without overreacting.";
+  if(phase===3&&(plainTitle.includes("retro")||plainTitle.includes("next chapter")))return "Codex, help me turn today's reflection into a decision. Use shipped work, user evidence, and weak spots to name the next honest move.";
+  if(phase===3)return "Codex, act as my senior product-building pair for '"+title+"'. Challenge assumptions, identify risks, and keep the next step small enough to test with real people.";
+  if(phase===4&&p4==="retro")return "Codex, help me turn today's proof into LectronicArt strategy. Count the receipts, extract teachable lessons, and name the next honest offer or cohort move.";
+  if(phase===4&&p4==="launch")return "Codex, help me run today's founding launch task: '"+title+"'. Sharpen the message, protect personal outreach, and turn replies into onboarding fixes.";
+  if(phase===4&&p4==="community")return "Codex, help me design today's community asset: '"+title+"'. Focus on the member journey, first win, accountability loop, and what must be reusable later.";
+  if(phase===4&&p4==="template")return "Codex, help me package today's template or kit: '"+title+"'. Check setup steps, demo proof, plain-language docs, and what a creator needs to succeed alone.";
+  if(phase===4&&p4==="creative")return "Codex, help me make today's creative workflow reproducible: '"+title+"'. Identify inputs, outputs, failure points, quality checks, and the teaching notes to save.";
+  if(phase===4&&p4==="ai")return "Codex, help me build today's AI-engineering loop: '"+title+"'. Keep it testable, name the interfaces, cover failures, and turn the example into teaching material.";
+  if(phase===4&&p4==="ship")return "Codex, help me publish today's public proof: '"+title+"'. Make the context clear, name the audience, and turn any response into the next teaching or product note.";
+  if(phase===4)return "Codex, help me turn today's LectronicArt work into a system, proof artifact, and teaching note. Keep it reusable, testable, and clear for future members.";
   return "Codex, help me build today's AI-engineering artifact: '"+title+"'. Keep the system testable, explain the loop, and turn the work into teaching notes.";
 }
 
 function reflectFor(day, phase){
   if(day.rest)return "What did I recover, clarify, or consciously postpone today?";
-  if(phase===1)return "What concept can I explain more clearly now than I could this morning?";
-  if(phase===2)return "Which line, component, or data flow did I understand only after rebuilding or explaining it?";
-  if(phase===3)return "What did a real user, test, metric, or product constraint teach me today?";
+  if(phase===1)return "What can I explain in plain English now, and where did I still need a hint?";
+  if(phase===2)return "What did I design myself, what did Codex help with, and which line or data flow can I explain better now?";
+  if(phase===3)return "What evidence changed my next product decision: a user quote, test result, metric, bug, or constraint?";
+  if(phase===4)return "What system, proof artifact, or teaching asset did I create today, and what would a future member need next?";
   return "What part of today's system could become a lesson, template, or public proof-of-work later?";
 }
 
@@ -424,6 +519,14 @@ function taskStep(text){
 function buildSteps(day, ctx){
   const title=day.t.toLowerCase();
   const base=day.d.map(taskStep);
+  const details=day.d.join(" ").toLowerCase();
+  const phase2Plan=ctx.phase===2&&day.g.includes("CODEX")&&(title.includes("plan")||title.includes("design")||title.includes("spec")||details.includes("plan mode"));
+  const phase3Plan=ctx.phase===3&&day.g.includes("CODEX")&&(title.includes("plan")||title.includes("design")||title.includes("spec")||details.includes("plan mode"));
+  const phase3UserTest=ctx.phase===3&&isUserLearningTitle(title);
+  const phase3Launch=ctx.phase===3&&(title.includes("launch")||title.includes("product hunt")||title.includes("show hn"));
+  const phase3Retro=ctx.phase===3&&(title.includes("retro")||title.includes("next chapter"));
+  const phase3Discovery=ctx.phase===3&&(ctx.theme.toLowerCase().includes("find the pain")||isProblemDiscoveryTitle(title));
+  const phase4=ctx.phase===4?phase4Kind(day, ctx):"";
   const steps=[];
   if(day.rest){
     return [
@@ -433,7 +536,180 @@ function buildSteps(day, ctx){
       "End with a short note for tomorrow so the next study block has a clear first move."
     ];
   }
-  if(day.g.includes("CS50")&&title.includes("lecture")){
+  if(ctx.phase===1&&day.g.includes("SETUP")){
+    steps.push(base[0]||"Create the folder, account, or file today's setup asks for.");
+    steps.push(base[1]||"Open each new tool once so you know it is ready before the first lesson starts.");
+    steps.push(base[2]||"Write the first journal note in plain language: why this learning block matters.");
+    steps.push("End by naming tomorrow's first click so the next session starts without friction.");
+  }else if(ctx.phase===1&&day.g.includes("CS50")&&title.includes("lecture")){
+    steps.push(base[0]||"Watch the assigned CS50 lecture section with notes open.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Keep a tiny glossary: new word, plain-English meaning, one example.");
+    steps.push("Retype or recreate at least one example so your hands connect the idea to code.");
+    steps.push("Ask ChatGPT for a quiz on the two blurriest ideas, then answer before reading feedback.");
+  }else if(ctx.phase===1&&day.g.includes("CS50")&&(title.includes("pset")||title.includes("problem set"))){
+    steps.push(base[0]||"Read the problem specification slowly before writing code.");
+    steps.push("Before coding, write the input, output, and two tiny test cases in your own words.");
+    steps.push("Build one small piece, run it, and write down the first error or wrong result exactly.");
+    if(base[1])steps.push(base[1]);
+    steps.push("After 15 honest minutes stuck, ask ChatGPT for one hint or explanation, not finished code.");
+  }else if(ctx.phase===1&&day.g.includes("ODIN")){
+    steps.push(base[0]||"Work through the assigned Odin lesson or project section.");
+    steps.push("Type every command or example yourself; these are muscle-memory reps.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Commit one meaningful checkpoint or write one note naming the habit this lesson installs.");
+  }else if(ctx.phase===1&&day.g.includes("BUILD")){
+    steps.push(base[0]||"Name the smallest working version of today's build before writing code.");
+    steps.push("Write the smallest version in plain English before code: input, action, output.");
+    if(base[1])steps.push(base[1]);
+    if(base[2])steps.push(base[2]);
+    steps.push("When it works, explain every line you changed and save the artifact, note, or commit.");
+  }else if(ctx.phase===2&&title.includes("retro")){
+    steps.push(base[0]||"Quiz yourself across the Phase 2 material and name the weakest topics.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Turn the two weakest topics into named review blocks: concept, exercise, and question.");
+    steps.push("Write a before/after note: what you can build now, what still feels brittle, and what Phase 3 should protect.");
+    steps.push("Choose the first founder-mode move for tomorrow so the transition is concrete.");
+  }else if(ctx.phase===2&&day.g.includes("ODIN")){
+    steps.push(base[0]||"Work through the assigned Odin lesson or project section.");
+    steps.push("Finish the solo attempt before asking Codex to review; this protects the final Foundations reps.");
+    if(base[1])steps.push(base[1]);
+    steps.push("After it works, ask Codex for review questions, then fix only the changes you understand.");
+  }else if(phase2Plan){
+    steps.push(base[0]||"Write your own first-pass plan or sketch before asking Codex for help.");
+    steps.push("Sketch the data, component, screen, or request path in your own words first.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Ask Codex to critique scope and tradeoffs, then cut the next step until it is inspectable.");
+    steps.push("Turn the approved plan into a checklist, and review any diff line by line before accepting it.");
+  }else if(ctx.phase===2&&day.g.includes("SHIP")){
+    steps.push(base[0]||"Prepare the smallest deployable version of today's project.");
+    steps.push("Run it like a new user: empty state, happy path, and one bad input or error path.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Update the README, screenshots, or deployment note so future-you can understand what changed.");
+    steps.push("Write one paragraph naming what Codex helped with and what you can now explain yourself.");
+  }else if(ctx.phase===2&&day.g.includes("FSO")){
+    steps.push(base[0]||"Work through the assigned Full Stack Open section in your editor.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Run the exercise code locally and make one tiny change to prove you know where the behavior lives.");
+    steps.push("Trace one data path out loud: props, state, effect, request, response, or render.");
+    steps.push("Ask for a quiz on the blurriest concept, then write the answer in your notes before moving on.");
+  }else if(ctx.phase===2&&day.g.includes("BUILD")){
+    steps.push(base[0]||"Name the smallest working version of today's build before writing code.");
+    steps.push("Sketch the component, data, or request path before letting Codex suggest code.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Use Codex for one small draft or review pass, then read the diff line by line.");
+    steps.push("Rebuild or rewrite any part you cannot explain without looking at the answer.");
+  }else if(ctx.phase===2&&day.g.includes("CODEX")){
+    steps.push(base[0]||"Open the Codex or OpenAI guide for today's workflow.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Write the rule, prompt, checklist, or review habit this session is supposed to install.");
+    steps.push("Test the habit on one tiny example before using it on a bigger project.");
+    steps.push("Save the takeaway somewhere you will see it before the next Plan Mode session.");
+  }else if(phase3Retro){
+    steps.push(base[0]||"Write the honest retro or next-chapter decision.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Pull evidence from shipped work: users, numbers, bugs, conversations, and moments of real confidence.");
+    steps.push("Name the lesson that should become LectronicArt teaching material later.");
+    steps.push("Choose the next bet or review block, and write why it earned attention.");
+  }else if(phase3Launch){
+    steps.push(base[0]||"Publish the prepared launch asset or message.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Stay present for replies, questions, objections, and broken-path reports.");
+    steps.push("Record the useful signal: signups, comments, confusion, objections, or requests.");
+    steps.push("End with one same-day follow-up: reply, fix, note, or draft for tomorrow.");
+  }else if(phase3UserTest){
+    steps.push(base[0]||"Prepare the user-learning session before touching code.");
+    steps.push("Write the one behavior you are trying to observe, then stay quiet while the person tries it.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Capture exact words, stuck points, and workarounds instead of summarizing too early.");
+    steps.push("Pick the top pattern and turn it into one concrete fix, question, or product decision.");
+  }else if(ctx.phase===3&&day.g.includes("CS50P")){
+    steps.push(base[0]||"Work through the assigned CS50P unit with a fresh Python file open.");
+    steps.push("Run the code locally, then change one example so you know which part controls the behavior.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Connect the Python idea to your product: automation, validation, data cleanup, testing, or launch ops.");
+    steps.push("Save one reusable snippet, note, or script idea for the AI Engineer track.");
+  }else if(phase3Plan){
+    steps.push(base[0]||"Write the product outcome and the user problem before asking Codex for a plan.");
+    steps.push("Ask Codex to challenge scope, data shape, edge cases, privacy, and failure modes.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Cut the plan to the smallest testable change and define how you will know it worked.");
+    steps.push("Save the approved checklist before editing files, especially if the work touches 3+ files.");
+  }else if(ctx.phase===3&&day.g.includes("BUILD")&&day.g.includes("SHIP")){
+    steps.push(base[0]||"Pick the smallest user-facing improvement that can ship today.");
+    steps.push("Trace the affected path before editing: entry point, data, success state, and failure state.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Ship it, then tell the person or channel connected to the request.");
+    steps.push("Record what changed in the product and what evidence you expect to see next.");
+  }else if(ctx.phase===3&&day.g.includes("SHIP")){
+    if(phase3Discovery){
+      steps.push(base[0]||"Write the product-discovery note this block needs.");
+      steps.push("Stay with the pain before solutions: who has it, how often, what they do today, and why it matters.");
+      if(base[1])steps.push(base[1]);
+      steps.push("Turn the work into evidence: problem, current workaround, severity, uncertainty, and what still needs a real human check.");
+      steps.push("Write the next product move or user-learning question this evidence supports.");
+    }else{
+      steps.push(base[0]||"Define the audience-facing outcome before opening the tools.");
+      steps.push("Put the work where another human can see it, use it, answer it, or react to it.");
+      if(base[1])steps.push(base[1]);
+      steps.push("Capture the response as evidence: quote, metric, silence, objection, request, or decision.");
+      steps.push("Write the next product move that this evidence supports.");
+    }
+  }else if(ctx.phase===3&&day.g.includes("BUILD")){
+    steps.push(base[0]||"Name the user journey this build block improves.");
+    steps.push("Sketch the screen, data, or request path before writing code.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Build the happy path, then test one realistic failure path a user might hit.");
+    steps.push("Leave a product note: what changed, how you tested it, and what a real user should notice.");
+  }else if(phase4==="retro"){
+    steps.push(base[0]||"Write the honest proof-of-work retro or next LectronicArt decision.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Count receipts: systems built, templates shipped, lessons recorded, users helped, members reached, and questions answered.");
+    steps.push("Extract the lesson that belongs in the future curriculum or offer page.");
+    steps.push("Choose the next LectronicArt move and write why the evidence supports it.");
+  }else if(phase4==="launch"){
+    steps.push(base[0]||"Publish, open, or send the audience-facing launch action.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Stay present for replies, questions, objections, member needs, and broken onboarding paths.");
+    steps.push("Turn one signal into a same-day fix, follow-up, or classroom note.");
+    steps.push("Record the launch proof: names, numbers, quotes, questions, wins, and what happens next.");
+  }else if(phase4==="community"){
+    steps.push(base[0]||"Define the member action this community asset should create.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Map the member path: first click, first win, likely stuck point, and next prompt.");
+    steps.push("Create the reusable asset: checklist, lesson, script, classroom outline, onboarding step, or outreach list.");
+    steps.push("Test it by reading it as a new member and note one friction point to fix.");
+  }else if(phase4==="template"){
+    steps.push(base[0]||"Choose the template, kit, or workflow piece to productize today.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Package it with clear inputs, outputs, setup steps, naming, and a plain-language README or guide.");
+    steps.push("Run the setup or import path from a cold-start mindset and fix the first confusing step.");
+    steps.push("Save a demo artifact so the value is visible before anyone reads the docs.");
+  }else if(phase4==="creative"){
+    steps.push(base[0]||"Build the smallest reproducible version of today's creative workflow.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Document inputs, outputs, settings, timing, file paths, and the quality bar for a good result.");
+    steps.push("Capture before/after proof or a finished asset that shows why the automation matters.");
+    steps.push("Write the creator-facing note: what this saves, where it breaks, and how to run it again.");
+  }else if(phase4==="ai"){
+    steps.push(base[0]||"Read the assigned docs with one minimal working loop in mind.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Build or run the smallest example that proves the core loop works.");
+    steps.push("Name the system boundary: inputs, outputs, model/tool calls, state, errors, and ownership.");
+    steps.push("Save a teaching note or code comment explaining the loop in plain language.");
+  }else if(ctx.phase===4&&day.g.includes("SHIP")){
+    steps.push(base[0]||"Define the public proof this block should create.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Put the artifact where a creator, tester, or future member can see it and understand the value.");
+    steps.push("Capture the response: downloads, replies, questions, objections, saves, or member interest.");
+    steps.push("Write the next improvement or lesson this proof unlocks.");
+  }else if(ctx.phase===4&&day.g.includes("BUILD")){
+    steps.push(base[0]||"Name the reusable system this build block should leave behind.");
+    steps.push("Sketch inputs, outputs, happy path, failure path, and what a creator would configure.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Run the loop once end to end, then capture the evidence that it worked.");
+    steps.push("Save the implementation note that turns the build into future teaching material.");
+  }else if(day.g.includes("CS50")&&title.includes("lecture")){
     steps.push(base[0]||"Watch the assigned CS50 lecture section with notes open.");
     steps.push("Pause after each major idea and write a one-sentence plain-language explanation before moving on.");
     steps.push("Retype or recreate at least one example so the concept moves from watching to doing.");
@@ -477,20 +753,59 @@ function buildSteps(day, ctx){
   return steps.slice(0,5);
 }
 
+function whyFor(day, ctx, track){
+  if(day.rest)return "Rest days are part of the system. They protect consistency, absorb overflow, and keep the streak from becoming a grind.";
+  const title=day.t.toLowerCase();
+  if(ctx.phase===1){
+    const phaseTrack=day.g.includes("BUILD")?"building":track;
+    return "Phase 1 is about earning the mental map, not rushing. Inside "+ctx.theme+", "+phaseTrack+" gives you one controlled rep in reading instructions, naming errors, and explaining each step before AI helps. "+watchFor(day, ctx.phase);
+  }
+  if(ctx.phase===2){
+    const phaseTrack=title.includes("retro")?"reflection":day.g.includes("FSO")?"Full Stack Open":day.g.includes("ODIN")?"Odin Foundations":day.g.includes("SHIP")?"shipping":day.g.includes("BUILD")?"building":track;
+    return "Phase 2 is the apprenticeship layer: you still own the design, but Codex can now help plan, draft, and review small changes. Inside "+ctx.theme+", "+phaseTrack+" should leave behind something you can explain back: a solo build, diff, component, request, deployment, or decision. "+watchFor(day, ctx.phase);
+  }
+  if(ctx.phase===3){
+    const phaseTrack=day.g.includes("CS50P")?"Python leverage":ctx.theme.toLowerCase().includes("find the pain")||isProblemDiscoveryTitle(title)?"problem discovery":title.includes("pricing")||title.includes("stripe")||title.includes("analytics")||title.includes("email")?"money and measurement":title.includes("launch")?"launch execution":title.includes("retro")||title.includes("next chapter")?"reflection":isUserLearningTitle(title)?"user evidence":day.g.includes("SHIP")&&day.g.includes("BUILD")?"shipping a product fix":day.g.includes("SHIP")?"market evidence":day.g.includes("BUILD")?"product building":track;
+    return "Phase 3 is founder mode: every block should move a real product, real user conversation, or real launch decision forward. Inside "+ctx.theme+", the focus is "+phaseTrack+": turning learning into evidence Derrick can build from later. "+watchFor(day, ctx.phase, ctx);
+  }
+  if(ctx.phase===4){
+    const phaseTrack=phase4Track(day, ctx);
+    return "Phase 4 is LectronicArt production mode: each block should turn a system into proof, a workflow into a reusable asset, or a launch action into member signal. Inside "+ctx.theme+", the focus is "+phaseTrack+". "+watchFor(day, ctx.phase, ctx);
+  }
+  return "This day sits inside "+ctx.theme+" and connects "+track+" to the larger builder arc. "+watchFor(day, ctx.phase, ctx);
+}
+
+function doneFor(day, ctx){
+  if(day.rest)return "Done means you either truly rested or cleared one deliberately chosen catch-up item without turning Sunday into another full workday.";
+  if(ctx.phase===1)return "Done means the main instruction is complete, you can explain the important code or tool steps in plain language, and you saved the note, artifact, or commit where future-you can find it.";
+  if(ctx.phase===2&&day.g.includes("ODIN"))return "Done means the final solo task is complete, no AI-written project code was accepted, and you saved the working artifact, commit, or note that proves you understand it.";
+  if(ctx.phase===2)return "Done means the main task is complete, any Codex-assisted plan or diff has been read line by line, and you saved the artifact, commit, deployment note, or learning note that proves you understood it.";
+  if(ctx.phase===3&&day.g.includes("CS50P"))return "Done means the Python work runs, you can explain the useful idea in plain language, and you saved a note, snippet, or automation angle that connects back to the product.";
+  if(ctx.phase===3)return "Done means the product or launch moved in a visible way, the evidence is saved somewhere durable, and the next decision is clearer than it was at the start of the block.";
+  if(ctx.phase===4){
+    const kind=phase4Kind(day, ctx);
+    if(kind==="retro")return "Done means the receipts are counted, the lesson is written clearly, and the next LectronicArt decision is based on proof instead of vibes.";
+    if(kind==="launch")return "Done means a real audience or member action happened, the signal is saved, and one onboarding, offer, or classroom improvement is clear.";
+    if(kind==="community")return "Done means the member-facing asset or path is clearer, the first-win friction is named, and the reusable community note is saved.";
+    if(kind==="template")return "Done means the template or kit is packaged, the setup path has been checked, and a demo artifact proves another creator can understand the value.";
+    if(kind==="creative")return "Done means the workflow runs reproducibly, inputs and outputs are documented, and a finished asset shows what the automation makes possible.";
+    if(kind==="ai")return "Done means the AI loop runs, the interfaces and failure points are named, and the example is saved as future LectronicArt teaching material.";
+    if(kind==="ship")return "Done means the proof artifact is public or ready to share, the context is clear, and the response or next teaching note is saved.";
+    return "Done means the system, proof artifact, or teaching note is saved somewhere durable and the next reuse, lesson, or launch move is clear.";
+  }
+  return "Done means the main instruction is complete, you can explain what you did in plain language, and you have saved the artifact, notes, commit, or next-step decision somewhere you can find it.";
+}
+
 function buildGuide(day, ctx){
   const track=sourceTrack(day);
   const outcome=outcomeFor(day, ctx.week, ctx.phase);
   const summary=day.d[0]||day.t;
   return {
     goal:"By the end of this block, "+outcome+".",
-    why:day.rest
-      ? "Rest days are part of the system. They protect consistency, absorb overflow, and keep the streak from becoming a grind."
-      : "This day sits inside "+ctx.theme+" and connects "+track+" to the larger builder arc. "+watchFor(day),
+    why:whyFor(day, ctx, track),
     steps:buildSteps(day, ctx),
-    done:day.rest
-      ? "Done means you either truly rested or cleared one deliberately chosen catch-up item without turning Sunday into another full workday."
-      : "Done means the main instruction is complete, you can explain what you did in plain language, and you have saved the artifact, notes, commit, or next-step decision somewhere you can find it.",
-    coach:coachFor(day, ctx.phase),
+    done:doneFor(day, ctx),
+    coach:coachFor(day, ctx.phase, ctx),
     reflect:reflectFor(day, ctx.phase),
     summary:summary,
     rule:phaseRule(ctx.phase)
