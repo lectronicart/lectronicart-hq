@@ -14,26 +14,41 @@
 <div class="wrap">
 <header>
   <div class="terminal" id="termline">
-    <span class="prompt">derrick@build</span>:~$ progress <span class="bar" id="termbar"></span> <span class="pct" id="termpct"></span><span class="game" id="termgame"></span>
+    <span class="prompt">252-builder.os</span>
+    <span class="terminal-copy">progress <span class="bar" id="termbar"></span> <span class="pct" id="termpct"></span><span class="game" id="termgame"></span></span>
+    <span class="save-state">local save active</span>
   </div>
-  <h1>Coding 101: <span class="accent">The 252-Day Builder Calendar</span></h1>
-  <p class="sub">June 15, 2026 – February 21, 2027 · <strong>~15 hrs/week</strong> · Six study days, Sundays off. Every day below maps to a specific CS50 lecture, Odin lesson, Full Stack Open part, CS50P Python unit, OpenAI/Codex module, or build sprint. Click any day to open the mini-guide and mark it done. <strong>The rule that makes this work: AI explains, you write (weeks 1–6) → you design, AI drafts, you review (7–12) → you orchestrate, AI executes (13–24) → you teach what you built (25–36).</strong></p>
+  <div class="hero-line">
+    <div>
+      <h1>The 252-Day Builder Calendar</h1>
+      <p class="sub">June 15, 2026 – February 21, 2027 · <strong>~15 hrs/week</strong> · Six study days, Sundays off. Every day maps to a CS50 lecture, Odin lesson, Full Stack Open part, CS50P Python unit, OpenAI/Codex module, or build sprint. Click a day to open the mini-guide and mark it done.</p>
+    </div>
+    <div class="date-stamp" aria-label="Day 1 start date">
+      <span>Day 1 is</span>
+      <strong>Monday<br>June 15, 2026</strong>
+    </div>
+  </div>
+  <p class="rule-strip"><strong>The rule:</strong> AI explains, you write (weeks 1–6) → you design, AI drafts, you review (7–12) → you orchestrate, AI executes (13–24) → you teach what you built (25–36).</p>
 </header>
 
 <div class="phases">
   <div class="phase p1" data-goto="2026-06-15">
+    <span class="phase-range">Days 1–42</span>
     <h3>Phase 1 · Fundamentals</h3>
     <p>Weeks 1–6 · Jun 15–Jul 26 · CS50 + Odin · no AI-generated code</p>
   </div>
   <div class="phase p2" data-goto="2026-07-27">
+    <span class="phase-range">Days 43–84</span>
     <h3>Phase 2 · Real Projects</h3>
     <p>Weeks 7–12 · Jul 27–Sep 6 · Full Stack Open + Plan Mode</p>
   </div>
   <div class="phase p3" data-goto="2026-09-07">
+    <span class="phase-range">Days 85–168</span>
     <h3>Phase 3 · Ship Your Product</h3>
     <p>Weeks 13–24 · Sep 7–Nov 29 · build, launch, first 10 users · Python thread</p>
   </div>
   <div class="phase p4" data-goto="2026-11-30">
+    <span class="phase-range">Days 169–252</span>
     <h3>Phase 4 · AI Engineer Track</h3>
     <p>Weeks 25–36 · Nov 30–Feb 21 · API, MCP, agents, creative pipelines → LectronicArt launch</p>
   </div>
@@ -57,7 +72,7 @@
   <div class="grid" id="grid"></div>
 </div>
 
-<p class="footnote"><b>How to use this:</b> sit down at the same time daily, open today's card, do the tasks in order, then write 2–3 sentences in your <span style="font-family:var(--mono);font-size:13px">notes.md</span> journal. If a day takes longer, finish it before opening the next one — Sundays exist to absorb overflow. Falling a few days behind is normal; shift the whole calendar in your head and protect the streak instead of the dates. Progress saves automatically on this device.</p>
+<p class="footnote"><b>How to use this:</b> sit down at the same time daily, open today's card, do the tasks in order, then write 2–3 sentences in your <span class="journal-file">notes.md</span> journal. If a day takes longer, finish it before opening the next one — Sundays exist to absorb overflow. Falling a few days behind is normal; shift the whole calendar in your head and protect the streak instead of the dates. Progress saves automatically on this device.</p>
 </div>
 
 <div id="toasts" aria-live="polite"></div>
