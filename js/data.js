@@ -773,7 +773,7 @@ function lessonProfile(day, ctx){
       "Write down the boundary between app code, secret configuration, and model output."
     ]
   };
-  if(tags.includes("SETUP"))return {
+  if(tags.includes("SETUP")&&ctx.phase!==4)return {
     essence:"setting up the learning environment, tutor boundaries, accounts, and the notes habit",
     bullets:[
       "Install the core tools and create the folder where learning projects will live.",
@@ -845,6 +845,14 @@ function lessonProfile(day, ctx){
       "Connect structure to product thinking: the shape of stored data affects what the app can do easily."
     ]
   };
+  if(tags.includes("CS50")&&title.includes("problem set 0"))return {
+    essence:"building a first Scratch project that proves loops, events, conditions, variables, and sprites can become an interactive idea",
+    bullets:[
+      "Turn the lecture concepts into a small game, animation, or interactive toy.",
+      "Use events, loops, conditions, and variables in a project you can actually show someone.",
+      "Notice that programming is already a creative process: rules, feedback, timing, and interaction."
+    ]
+  };
   if(tags.includes("CS50")&&title.includes("mario"))return {
     essence:"using loops and conditionals to turn numeric input into a precise text pattern",
     bullets:[
@@ -907,6 +915,126 @@ function lessonProfile(day, ctx){
       "Choose a hash function and store dictionary words for fast lookup.",
       "Use linked lists or buckets to handle collisions when words land in the same place.",
       "Balance correctness, speed, and memory cleanup in one larger C program."
+    ]
+  };
+  if(tags.includes("BUILD")&&title.includes("cli calculator"))return {
+    essence:"turning basic variables, input, conditionals, arithmetic, and a loop into the first self-written command-line tool",
+    bullets:[
+      "Ask for user input, choose an operation, calculate a result, and print clear feedback.",
+      "Use a looped menu so the program can keep running until the user chooses to stop.",
+      "Practice the Phase 1 rule: AI may explain syntax and errors, but the code comes from Derrick."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("git basics + html"))return {
+    essence:"Git history, GitHub pushes, HTML/CSS introduction, elements, tags, and boilerplate structure",
+    bullets:[
+      "Make real commits and push work to GitHub so project history becomes visible.",
+      "Learn the basic HTML document shape: elements, tags, and boilerplate.",
+      "Connect Git habits to future teamwork: small commits make code easier to review and teach."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("html + start portfolio"))return {
+    essence:"HTML text, lists, links, images, commit messages, and starting a personal portfolio page",
+    bullets:[
+      "Use semantic HTML pieces for text, lists, links, images, and page structure.",
+      "Start the portfolio as a plain HTML artifact before worrying about visual polish.",
+      "Practice commit messages that describe the work clearly enough for future-you to follow."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("css foundations"))return {
+    essence:"CSS selectors, the cascade, browser DevTools, and inspecting why styles appear",
+    bullets:[
+      "Use selectors to target elements and the cascade to understand which style wins.",
+      "Inspect HTML and CSS in DevTools so layout and styling stop being invisible.",
+      "Start thinking of CSS as a system of rules, inheritance, specificity, and evidence."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("css (part 2)"))return {
+    essence:"the box model, block and inline behavior, and the Recipes project as layout practice",
+    bullets:[
+      "Learn how content, padding, border, and margin create the actual space an element occupies.",
+      "Compare block and inline elements so page flow makes more sense.",
+      "Use the Recipes project to practice multi-page HTML and early CSS structure."
+    ]
+  };
+  if(tags.includes("BUILD")&&title.includes("ship the portfolio"))return {
+    essence:"applying CSS to the portfolio, deploying with GitHub Pages, and sharing the first live URL",
+    bullets:[
+      "Style the portfolio with the CSS foundations you just learned.",
+      "Deploy to GitHub Pages so the project exists on the public internet.",
+      "Share the link with one person and turn private practice into public proof."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("landing page"))return {
+    essence:"building a full landing page from a design spec with layout, spacing, sections, and visual hierarchy",
+    bullets:[
+      "Translate a static design file into real HTML and CSS sections.",
+      "Use Flexbox, spacing, typography, and alignment to match an intentional layout.",
+      "Practice client-style work: follow the spec, then check the result against the reference."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("javascript begins"))return {
+    essence:"JavaScript variables, numbers, strings, operators, and the first calculator-style console script",
+    bullets:[
+      "Learn the basic value types and operators JavaScript uses for simple logic.",
+      "Build a tip calculator as a console program before adding DOM complexity.",
+      "Compare JavaScript syntax against C so old concepts start transferring across languages."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("rock paper scissors"))return {
+    essence:"Rock Paper Scissors game logic, user choices, random computer choices, and a first DOM-powered calculator UI",
+    bullets:[
+      "Build the Rock Paper Scissors rules as console logic before adding UI.",
+      "Upgrade the tip calculator with HTML inputs, a button, and DOM updates.",
+      "See the bridge from pure logic to a page a human can click."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("js fundamentals 2"))return {
+    essence:"JavaScript data types, conditionals, and Developer Tools for inspecting browser behavior",
+    bullets:[
+      "Use data types and conditionals to make JavaScript programs choose paths.",
+      "Open JavaScript Developer Tools and treat the console as a learning instrument.",
+      "Practice reading browser feedback instead of guessing what the code did."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("arrays, loops"))return {
+    essence:"JavaScript arrays, loops, DOM manipulation, and events",
+    bullets:[
+      "Use arrays and loops to work with collections of values.",
+      "Select and update DOM elements so JavaScript can change the page.",
+      "Attach events so user actions trigger visible behavior."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("rps ui"))return {
+    essence:"turning Rock Paper Scissors into a button-driven UI and starting Etch-a-Sketch",
+    bullets:[
+      "Move Rock Paper Scissors from console prompts into buttons and visible score state.",
+      "Use DOM events to update the interface after each user action.",
+      "Start Etch-a-Sketch as repeated practice with grids, events, and interactive state."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("objects"))return {
+    essence:"JavaScript objects, object methods, grouping related data, and finishing Etch-a-Sketch",
+    bullets:[
+      "Use objects to group related values and behaviors under meaningful names.",
+      "Practice object methods as functions that belong to a specific data shape.",
+      "Finish Etch-a-Sketch with cleaner state now that object thinking is available."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("calculator"))return {
+    essence:"the Odin Foundations calculator boss fight: UI, operations, chained calculations, decimals, clear, and edge cases",
+    bullets:[
+      "Build a calculator interface that accepts input and shows results clearly.",
+      "Handle operations, chaining, decimals, clear behavior, and divide-by-zero safely.",
+      "Prove the solo-foundations muscle before Phase 2 introduces regular AI drafting."
+    ]
+  };
+  if(tags.includes("BUILD")&&title.includes("to-do list"))return {
+    essence:"DOM CRUD, localStorage persistence, and a Phase 1 exam where Derrick explains real JavaScript line by line",
+    bullets:[
+      "Build add, complete, delete, and persist behavior for a tiny to-do app.",
+      "Use localStorage so data survives a page refresh without a backend.",
+      "Pass the Phase 1 exam by explaining a real JavaScript file in plain English."
     ]
   };
   if(tags.includes("ODIN")&&details.includes("command line"))return {
@@ -1091,7 +1219,8 @@ function lessonProfile(day, ctx){
     essence:cs50pEssence(title),
     bullets:cs50pBullets(title, day)
   };
-  if(tags.includes("AGENTS"))return {
+  if(ctx.phase===3)return phase3Profile(day, ctx);
+  if(tags.includes("AGENTS")&&ctx.phase!==4)return {
     essence:"agent loops, tools, memory, frameworks, and when an agent is better than a simple prompt",
     bullets:[
       "Learn the think-act-observe loop that lets agents decide, use tools, and continue.",
@@ -1147,6 +1276,22 @@ function lessonProfile(day, ctx){
       "Save the eval pattern as future proof that LectronicArt systems can be measured."
     ]
   };
+  if(tags.includes("CODEX")&&title.includes("build your first mcp"))return {
+    essence:"building a minimal MCP server that exposes tools through a reusable protocol",
+    bullets:[
+      "Create a small MCP server with one clear tool and a testable request path.",
+      "Understand transports, messages, tool definitions, and model connection points.",
+      "Document the server like a future lesson: what it exposes and why it matters."
+    ]
+  };
+  if(tags.includes("CODEX")&&title.includes("mcp server for your workflow"))return {
+    essence:"designing an MCP server around Derrick's real notes, media, or creative workflow",
+    bullets:[
+      "Choose a personal workflow worth wrapping as tools: notes, ffmpeg, search, or file operations.",
+      "Define safe inputs, outputs, and boundaries before connecting it to a model.",
+      "Build the server as reusable infrastructure for future creative automation."
+    ]
+  };
   if(tags.includes("CODEX")&&(title.includes("mcp")||details.includes("mcp")))return {
     essence:"MCP architecture: clients, servers, tools, transports, and reusable AI integrations",
     bullets:[
@@ -1161,6 +1306,159 @@ function lessonProfile(day, ctx){
       "Learn how specialized agents can handle research, review, testing, or implementation slices.",
       "Define agent boundaries so delegation does not turn into confusion.",
       "Save the project-scoped pattern as a future way to teach AI-assisted building."
+    ]
+  };
+  if(ctx.phase===4)return phase4Profile(day, ctx);
+  if(tags.includes("CODEX")&&title.includes("level up your codex"))return {
+    essence:"Codex best practices, AGENTS.md project instructions, tutor boundaries, and the Phase 2 review habit",
+    bullets:[
+      "Read the Codex and AGENTS.md guides as workflow tools, not abstract documentation.",
+      "Set project instructions that keep AI assistance aligned with Derrick's learning rules.",
+      "Practice the Phase 2 habit: ask better questions, review every line, and rebuild what is unclear."
+    ]
+  };
+  if(title.includes("habit tracker"))return {
+    essence:"streak logic, data shape design, one Codex-drafted function, and the explain-then-rebuild loop",
+    bullets:[
+      "Sketch the habit data model before asking Codex for any implementation help.",
+      "Let Codex draft one small function, then inspect the logic line by line.",
+      "Delete and rebuild the function so the AI-assisted version becomes Derrick's understanding."
+    ]
+  };
+  if(title.includes("weather app: design"))return {
+    essence:"weather app architecture: Open-Meteo API, component boundaries, loading states, and UI planning before code",
+    bullets:[
+      "Sketch the weather UI and decide which pieces should become components.",
+      "Identify the API data the app needs before touching fetch code.",
+      "Use Plan Mode to pressure-test the architecture while Derrick owns the design."
+    ]
+  };
+  if(title.includes("weather app: build"))return {
+    essence:"fetching current weather data, rendering API results, and reviewing improvement suggestions without outsourcing the core",
+    bullets:[
+      "Write the fetch call and current-weather display yourself.",
+      "Trace request, response, parsing, state, and render so the API path is explainable.",
+      "Use Codex as a reviewer for improvements, not as the author of the main logic."
+    ]
+  };
+  if(title.includes("weather app: forecast"))return {
+    essence:"five-day forecast data, loading state, error state, and making an API demo feel like a usable product",
+    bullets:[
+      "Add forecast data while keeping the request and render flow understandable.",
+      "Show loading and error states so the interface communicates what is happening.",
+      "Test a realistic failure path instead of only checking the happy path."
+    ]
+  };
+  if(title.includes("weather app: ship"))return {
+    essence:"deploying the weather app, polishing the final flow, and rebuilding the main data-fetching component from memory",
+    bullets:[
+      "Deploy the weather app so the project has a real public URL.",
+      "Polish the path from search/input to forecast display.",
+      "Delete and rebuild the main data-fetching component from memory to prove the concept stuck."
+    ]
+  };
+  if(title.includes("notes app: design"))return {
+    essence:"notes app data modeling, CRUD scope, component tree, and planning before implementation",
+    bullets:[
+      "Define what a note is: title, body, created time, edited state, and identifier.",
+      "Sketch the component tree before generating code.",
+      "Use Plan Mode to narrow CRUD scope so Create, Read, Update, and Delete each stay inspectable."
+    ]
+  };
+  if(title.includes("notes app: create"))return {
+    essence:"creating notes, rendering a notes list, and keeping first CRUD state clear",
+    bullets:[
+      "Build the form path that turns user input into a saved note object.",
+      "Render a readable notes list from the current state.",
+      "Review any AI-drafted line until the data flow from input to list is explainable."
+    ]
+  };
+  if(title.includes("notes app: update"))return {
+    essence:"editing notes, deleting notes, empty states, and finishing the core CRUD loop",
+    bullets:[
+      "Add edit behavior without losing track of which note is being changed.",
+      "Add delete behavior and confirm the list updates correctly.",
+      "Design an empty state so the app still feels intentional with no notes."
+    ]
+  };
+  if(title.includes("notes app: markdown"))return {
+    essence:"live markdown preview, localStorage persistence, and making notes survive a refresh",
+    bullets:[
+      "Add markdown preview so writing and rendering stay connected.",
+      "Persist notes in localStorage and reload them when the app opens.",
+      "Compare local browser storage against the real backend you will build next."
+    ]
+  };
+  if(title.includes("notes app: polish"))return {
+    essence:"deployment polish, checkpoint review, and proving React state, props, effects, and CRUD are understood",
+    bullets:[
+      "Polish and deploy the notes app as a finished Phase 2 artifact.",
+      "Quiz the concepts behind the build: state, props, effects, CRUD, and persistence.",
+      "Turn weak quiz answers into review slots instead of rushing ahead."
+    ]
+  };
+  if(title.includes("notes app v2: real backend"))return {
+    essence:"replacing localStorage with an Express/database backend and reviewing a multi-file Plan Mode change carefully",
+    bullets:[
+      "Plan the backend data model and API routes before changing files.",
+      "Move persistence out of the browser and into a real server/database path.",
+      "Review the multi-file diff slowly because backend changes affect the whole app."
+    ]
+  };
+  if(title.includes("notes app v2: full-stack"))return {
+    essence:"tracing the full-stack save path from click to frontend state, API request, backend route, and database write",
+    bullets:[
+      "Finish wiring the React frontend to the backend API.",
+      "Trace one Save action from click through request, route, database, response, and UI update.",
+      "Explain the full-stack path out loud until every handoff is clear."
+    ]
+  };
+  if(title.includes("pick your clone"))return {
+    essence:"mini-SaaS scope selection, spec writing, milestone planning, and cutting features before building",
+    bullets:[
+      "Choose one small product clone with a core feature that can be finished this week.",
+      "Write the spec, milestones, and data needs before implementation.",
+      "Cut scope twice so the project teaches shipping, not endless planning."
+    ]
+  };
+  if(title.includes("build day 1"))return {
+    essence:"implementing the mini-SaaS core feature with Derrick designing and AI assisting under review",
+    bullets:[
+      "Build the one behavior the mini-product exists to provide.",
+      "Keep the first version narrow enough to test immediately.",
+      "Review AI-assisted code line by line before accepting the core logic."
+    ]
+  };
+  if(title.includes("build day 2"))return {
+    essence:"adding persistence and edge-case handling to make the mini-SaaS behave like a real app",
+    bullets:[
+      "Save the product data somewhere durable enough for the chosen scope.",
+      "Handle bad input, duplicates, empty states, and other realistic edge cases.",
+      "Make the product recover gracefully instead of only working once."
+    ]
+  };
+  if(title.includes("build day 3"))return {
+    essence:"UI polish, spacing, typography, feedback states, and turning a functional mini-app into an intentional product",
+    bullets:[
+      "Improve spacing, typography, visual hierarchy, and state feedback.",
+      "Check empty, success, and error states so the app communicates clearly.",
+      "Polish only what supports the core feature and user understanding."
+    ]
+  };
+  if(title.includes("deploy + readme"))return {
+    essence:"deployment, README product storytelling, screenshots, and explaining who the mini-SaaS is for",
+    bullets:[
+      "Deploy the mini-SaaS so it can be opened outside your machine.",
+      "Write the README like a tiny product page: what it does, who it helps, and how to try it.",
+      "Add screenshots or proof so the project can teach future-you what shipped."
+    ]
+  };
+  if(title.includes("phase 2 retro"))return {
+    essence:"reviewing FSO Parts 0-3, identifying weak spots, and naming what Derrick can build after 12 weeks",
+    bullets:[
+      "Quiz the Phase 2 concepts: React, state, effects, CRUD, APIs, backend, and deployment.",
+      "Turn the two weakest topics into planned review sessions.",
+      "Write what you can now build that was impossible twelve weeks earlier."
     ]
   };
   if(tags.includes("CODEX")&&details.includes("plan mode"))return {
@@ -1201,6 +1499,978 @@ function lessonProfile(day, ctx){
       cleanLessonBullet(day.d[0]||day.t),
       cleanLessonBullet(day.d[1]||"Write the plain-language takeaway before moving on."),
       "End with one saved note that future-you can use when teaching this lesson."
+    ]
+  };
+}
+
+function phase4Profile(day, ctx){
+  const title=day.t.toLowerCase();
+  if(title.includes("creative brief generator"))return {
+    essence:"shipping a first AI utility that turns OpenAI API basics into a creator-facing brief generator",
+    bullets:[
+      "Wrap the first API patterns in a small tool a creative person can understand.",
+      "Define the inputs, output format, and quality bar for a useful creative brief.",
+      "Ship the generator as proof that AI docs can become a reusable creative workflow."
+    ]
+  };
+  if(title.includes("creator prompt templates"))return {
+    essence:"prompt templates for creators, reusable inputs, expected outputs, and plain-language usage notes",
+    bullets:[
+      "Turn repeated creative tasks into templates with clear slots and examples.",
+      "Explain when each prompt should be used and what good output looks like.",
+      "Save templates as assets future LectronicArt members could actually reuse."
+    ]
+  };
+  if(title.includes("prompt chains"))return {
+    essence:"multi-step prompting, handoffs between outputs, and building a repeatable creative workflow",
+    bullets:[
+      "Chain prompts so one output becomes the input for the next step.",
+      "Name each step's job, expected format, and failure point.",
+      "Test the chain on more than one creative input so it is not a one-off trick."
+    ]
+  };
+  if(title.includes("prompt system"))return {
+    essence:"packaging prompt templates into a documented first digital product prototype",
+    bullets:[
+      "Assemble the strongest prompts into one organized pack.",
+      "Add a plain-language usage guide so another creator can run the system without you.",
+      "Treat the pack as an early LectronicArt product artifact, not just notes."
+    ]
+  };
+  if(title.includes("give it away"))return {
+    essence:"free distribution, measurement links, feedback capture, and learning what creators actually value",
+    bullets:[
+      "Share the prompt system where real creators can download or use it.",
+      "Track responses, saves, questions, and confusion as product evidence.",
+      "Use the feedback to decide what deserves improvement or teaching."
+    ]
+  };
+  if(title.includes("build your first mcp"))return {
+    essence:"building a minimal MCP server that exposes tools through a reusable protocol",
+    bullets:[
+      "Create a small MCP server with one clear tool and a testable request path.",
+      "Understand transports, messages, tool definitions, and model connection points.",
+      "Document the server like a future lesson: what it exposes and why it matters."
+    ]
+  };
+  if(title.includes("mcp server for your workflow"))return {
+    essence:"designing an MCP server around Derrick's real notes, media, or creative workflow",
+    bullets:[
+      "Choose a personal workflow worth wrapping as tools: notes, ffmpeg, search, or file operations.",
+      "Define safe inputs, outputs, and boundaries before connecting it to a model.",
+      "Build the server as reusable infrastructure for future creative automation."
+    ]
+  };
+  if(title.includes("finish + connect"))return {
+    essence:"connecting the MCP workflow across tools and making the integration usable beyond one demo",
+    bullets:[
+      "Finish the working MCP path and connect it where it will actually be used.",
+      "Check setup steps, tool names, failures, and expected outputs from a cold-start view.",
+      "Save notes that make the integration teachable later."
+    ]
+  };
+  if(title.includes("harden"))return {
+    essence:"hardening an MCP/tool project, documenting it, and open-sourcing it with clear setup instructions",
+    bullets:[
+      "Handle obvious errors and confusing setup steps before sharing.",
+      "Write a README that explains what the tool does and how to run it.",
+      "Open-source it as public proof of an AI workflow Derrick understands."
+    ]
+  };
+  if(title==="teach it")return {
+    essence:"turning a built tool into a tutorial, demo, or lesson that another creator can follow",
+    bullets:[
+      "Explain the workflow in plain language from problem to working result.",
+      "Show the tool running instead of only describing architecture.",
+      "Capture questions or confusion as material for the next teaching pass."
+    ]
+  };
+  if(title.includes("agent fundamentals"))return {
+    essence:"agent basics: goals, tools, memory, the think-act-observe loop, and when agents beat simple prompts",
+    bullets:[
+      "Learn the think-act-observe loop that lets an agent plan, act, observe, and continue.",
+      "Compare agent behavior with a simple one-shot prompt.",
+      "Write down when agent complexity is useful and when it is unnecessary."
+    ]
+  };
+  if(title.includes("frameworks tour"))return {
+    essence:"agent framework patterns: loops, tools, state, memory, and how frameworks organize orchestration",
+    bullets:[
+      "Compare how agent frameworks structure actions, observations, and tool calls.",
+      "Notice which framework pieces are convenience and which are core concepts.",
+      "Translate framework vocabulary back into plain-language teaching notes."
+    ]
+  };
+  if(title.includes("idea-research agent"))return {
+    essence:"building a first useful agent that researches ideas and returns structured creative or product insight",
+    bullets:[
+      "Define the research question and what a useful answer must include.",
+      "Give the agent tools, constraints, and an output structure.",
+      "Compare agent output against what a simpler prompt would have produced."
+    ]
+  };
+  if(title.includes("holiday hack"))return {
+    essence:"optional low-pressure experimentation that keeps curiosity alive without breaking recovery",
+    bullets:[
+      "Choose one tiny playful AI or creative automation experiment.",
+      "Keep the scope small enough to finish without turning rest into pressure.",
+      "Save the idea if it teaches something worth revisiting."
+    ]
+  };
+  if(title.includes("agent memory"))return {
+    essence:"agent memory, tool use, persistent context, and connecting agent ideas to Derrick's Obsidian-style memory",
+    bullets:[
+      "Learn how memory changes what an agent can remember across steps or sessions.",
+      "Connect persistent context to tools, notes, and retrieval workflows.",
+      "Decide what memory should store, what should stay private, and what can be rebuilt."
+    ]
+  };
+  if(title.includes("content engine agent"))return {
+    essence:"building a content engine agent that turns ideas into structured posts or creative assets",
+    bullets:[
+      "Define the content engine's inputs, voice rules, output formats, and review path.",
+      "Build the smallest agent loop that can draft one useful content asset.",
+      "Save examples for future teaching on AI-assisted publishing systems."
+    ]
+  };
+  if(title.includes("add a critic"))return {
+    essence:"adding a critic pass, quality criteria, and before/after comparison to improve AI output",
+    bullets:[
+      "Define the voice and quality rules the critic should enforce.",
+      "Run output through a second review pass and compare with the original.",
+      "Save before/after examples as proof that review systems improve creative workflows."
+    ]
+  };
+  if(title.includes("2026 retro"))return {
+    essence:"year-end reflection, thesis drafting, and turning the learning journey into LectronicArt strategy",
+    bullets:[
+      "Compare June Derrick with December Derrick using real artifacts and skills.",
+      "Draft the LectronicArt 2027 thesis: audience, transformation, proof, and offer direction.",
+      "Turn the retro into founder clarity instead of vague motivation."
+    ]
+  };
+  if(title.includes("ship content engine"))return {
+    essence:"shipping the content engine as a usable system and capturing proof that it works",
+    bullets:[
+      "Run the content engine on real inputs and collect usable outputs.",
+      "Package the workflow so it can be repeated later.",
+      "Share or save proof that the engine turns ideas into publishable assets."
+    ]
+  };
+  if(title.includes("comfyui setup"))return {
+    essence:"ComfyUI setup, first render, node-based image workflow, and saving reproducible creative settings",
+    bullets:[
+      "Install and open ComfyUI, then generate one successful first render.",
+      "Notice nodes as a visual system for inputs, models, settings, and outputs.",
+      "Save settings and outputs so the render can become a reproducible lesson."
+    ]
+  };
+  if(title.includes("node literacy"))return {
+    essence:"ComfyUI node literacy: checkpoints, samplers, CFG, latent space, VAE, and teaching vocabulary",
+    bullets:[
+      "Learn what the core ComfyUI nodes do in the generation process.",
+      "Translate technical node names into plain creator language.",
+      "Create a mini glossary future students can use when the graph feels intimidating."
+    ]
+  };
+  if(title.includes("style consistency"))return {
+    essence:"consistent AI art style through prompts, settings, seeds, references, and repeatable comparisons",
+    bullets:[
+      "Create multiple outputs that intentionally belong to the same visual family.",
+      "Track prompts, settings, seeds, and references that affect style consistency.",
+      "Compare results and save what makes the workflow reproducible."
+    ]
+  };
+  if(title.includes("comfyui as an api"))return {
+    essence:"running ComfyUI through an API-style workflow so image generation can be automated",
+    bullets:[
+      "Trigger a ComfyUI workflow from code or an API-like request.",
+      "Name the inputs the automation can safely change.",
+      "Connect visual generation to the broader creative automation stack."
+    ]
+  };
+  if(title.includes("batch generation"))return {
+    essence:"batch image generation, variation control, output naming, and repeatable creative production",
+    bullets:[
+      "Generate multiple outputs from structured prompt or setting variations.",
+      "Organize files so good results and failed attempts can be reviewed later.",
+      "Treat batch generation as a production workflow, not random image hunting."
+    ]
+  };
+  if(title.includes("ai art workflow"))return {
+    essence:"packaging an AI art workflow with inputs, outputs, install steps, and a creator-facing guide",
+    bullets:[
+      "Export the workflow and explain how another creator can run it.",
+      "Document setup, inputs, outputs, and the quality bar for a good result.",
+      "Ship the workflow as a free proof artifact for LectronicArt."
+    ]
+  };
+  if(title.includes("video stack"))return {
+    essence:"video automation stack survey, ffmpeg basics, codecs, trimming, conversion, and command-line media work",
+    bullets:[
+      "Learn the role of ffmpeg in manipulating video and audio files.",
+      "Run basic trim, convert, or inspect commands so media automation becomes concrete.",
+      "Choose which video tasks are worth automating in the LectronicArt stack."
+    ]
+  };
+  if(title.includes("script → voiceover"))return {
+    essence:"turning a script into voiceover and first video assembly",
+    bullets:[
+      "Create a script-to-voiceover-to-video path with clear file inputs and outputs.",
+      "Keep the first video workflow simple enough to debug.",
+      "Document every handoff so the pipeline can be repeated."
+    ]
+  };
+  if(title.includes("auto-captions"))return {
+    essence:"automatic captions, timing, readability, and making generated video easier to consume",
+    bullets:[
+      "Generate captions from voiceover or transcript text.",
+      "Check timing, line length, and readability on the finished video.",
+      "Treat captions as accessibility, retention, and polish, not decoration."
+    ]
+  };
+  if(title.includes("b-roll"))return {
+    essence:"generated b-roll, image-to-video inserts, and matching visuals to script moments",
+    bullets:[
+      "Identify script moments that need visual support.",
+      "Generate or insert b-roll that clarifies the idea instead of distracting from it.",
+      "Save inputs and outputs so the video workflow is repeatable."
+    ]
+  };
+  if(title.includes("finished video"))return {
+    essence:"one-prompt video pipeline: script, voice, captions, b-roll, assembly, and final export",
+    bullets:[
+      "Run the full video pipeline from one starting prompt or brief.",
+      "Check every stage: script, voiceover, captions, visuals, assembly, and export.",
+      "Save the finished video and the workflow notes as teaching proof."
+    ]
+  };
+  if(title.includes("meta-video"))return {
+    essence:"publishing a video about the video automation workflow and teaching the system through proof",
+    bullets:[
+      "Explain what the video pipeline does and why it matters for creators.",
+      "Show enough process that viewers trust the workflow is real.",
+      "Publish the meta-video as proof-of-work for LectronicArt."
+    ]
+  };
+  if(title.includes("content os"))return {
+    essence:"designing the LectronicArt content operating system: inputs, pipeline, review, publishing, and measurement",
+    bullets:[
+      "Map how raw ideas become posts, videos, assets, and follow-ups.",
+      "Define the roles of AI, Derrick, automation, review, and publishing.",
+      "Design the system before wiring tools so the machine serves the strategy."
+    ]
+  };
+  if(title.includes("wire the machine"))return {
+    essence:"connecting the content OS pieces into one working automation path",
+    bullets:[
+      "Connect idea capture, generation, review, scheduling, and measurement pieces.",
+      "Run one item through the machine from input to output.",
+      "Document the failure points so the system can be improved instead of trusted blindly."
+    ]
+  };
+  if(title.includes("n8n"))return {
+    essence:"n8n as the no-code mirror of the same automation logic",
+    bullets:[
+      "Build or sketch the workflow in n8n to understand visual automation.",
+      "Compare code-based automation with no-code nodes and triggers.",
+      "Learn which parts creators could manage without writing code."
+    ]
+  };
+  if(title.includes("publishing + measurement"))return {
+    essence:"publishing automation, measurement loops, and connecting output to response",
+    bullets:[
+      "Add or define the publishing step for the content OS.",
+      "Track which outputs get attention, replies, saves, or conversions.",
+      "Use measurement to decide the next creative system improvement."
+    ]
+  };
+  if(title.includes("run it for real"))return {
+    essence:"running the content OS on real LectronicArt material instead of demo inputs",
+    bullets:[
+      "Feed the system a real idea, proof artifact, or lesson.",
+      "Publish or save the output where it can be judged honestly.",
+      "Record what broke, what worked, and what should be automated next."
+    ]
+  };
+  if(title.includes("queue a full week"))return {
+    essence:"batching a full week of content while preserving quality, review, and measurement",
+    bullets:[
+      "Generate and review enough assets for a full week of publishing.",
+      "Check that the queue has variety, clarity, and a visible content arc.",
+      "Use the batch as evidence that the content OS can save real time."
+    ]
+  };
+  if(title.includes("audit your arsenal"))return {
+    essence:"auditing every built workflow, prompt, script, template, and proof artifact for product potential",
+    bullets:[
+      "List the assets built during the journey and what each one does.",
+      "Identify which assets are useful, teachable, repeatable, or productizable.",
+      "Choose what belongs in the first public starter kit."
+    ]
+  };
+  if(title.includes("templates #1"))return templateProfile("templates #1-2");
+  if(title.includes("templates #3"))return templateProfile("templates #3-4");
+  if(title.includes("creator os"))return {
+    essence:"organizing templates and workflows into a Creator OS that helps a creative builder operate repeatedly",
+    bullets:[
+      "Group workflows into an operating system instead of scattered files.",
+      "Define inputs, outputs, review habits, and naming conventions.",
+      "Make the system understandable for a creator who wants leverage, not complexity."
+    ]
+  };
+  if(title.includes("starter kit"))return {
+    essence:"packaging the Creator OS into a starter kit with docs, demo proof, and a clear first win",
+    bullets:[
+      "Choose the smallest kit that can give a new creator a visible result.",
+      "Write setup and use instructions in plain language.",
+      "Ship the kit with demo proof so value is visible before anyone studies the docs."
+    ]
+  };
+  if(title.includes("beta test"))return {
+    essence:"testing the starter kit with real creators and learning where setup, value, or language breaks",
+    bullets:[
+      "Give the kit to beta testers and watch where they get stuck.",
+      "Capture questions, failed setup steps, and missing context.",
+      "Turn beta feedback into improvements before the bigger launch."
+    ]
+  };
+  if(title.includes("study the winners"))return {
+    essence:"studying successful Skool communities to understand positioning, offers, onboarding, and engagement loops",
+    bullets:[
+      "Analyze what strong communities promise and how they create first wins.",
+      "Look for patterns in onboarding, content cadence, accountability, and offer structure.",
+      "Extract lessons without copying another community's identity."
+    ]
+  };
+  if(title.includes("define lectronicart"))return {
+    essence:"writing the LectronicArt one-pager: audience, transformation, proof, promise, and positioning",
+    bullets:[
+      "Define who LectronicArt serves and what transformation it helps them achieve.",
+      "Use proof from the journey instead of vague AI hype.",
+      "Write positioning that creative builders can recognize themselves inside."
+    ]
+  };
+  if(title.includes("curriculum from your archive"))return {
+    essence:"turning nine months of artifacts into a teachable curriculum outline",
+    bullets:[
+      "Map built artifacts into modules, lessons, and student outcomes.",
+      "Choose proof examples that show the journey from foundations to AI systems.",
+      "Turn personal notes into curriculum structure future members can follow."
+    ]
+  };
+  if(title.includes("flagship lead magnet"))return {
+    essence:"polishing the 252-Day Builder Calendar into a lead magnet that teaches the journey and attracts the right creators",
+    bullets:[
+      "Improve this calendar as the public artifact that explains the transformation.",
+      "Make the roadmap clear enough for strangers to trust and use.",
+      "Connect the lead magnet to the LectronicArt community path."
+    ]
+  };
+  if(title.includes("set up shop"))return {
+    essence:"setting up the Skool/community shop, offer page, waitlist, and payment/onboarding basics",
+    bullets:[
+      "Set up the public home for the community or founding cohort.",
+      "Connect the offer, waitlist, payment, or contact path clearly.",
+      "Check the first visitor journey before inviting anyone in."
+    ]
+  };
+  if(title.includes("founding 30"))return {
+    essence:"building a founding-member outreach list from real names, real fit, and specific reasons",
+    bullets:[
+      "List thirty people who could genuinely benefit from LectronicArt.",
+      "Write why each person fits the transformation instead of blasting strangers.",
+      "Use the list as relationship-based launch preparation."
+    ]
+  };
+  if(title.includes("module 1"))return moduleProfile("Module 1", "fundamentals and Creator OS setup");
+  if(title.includes("module 2"))return moduleProfile("Module 2", "prompt systems and AI workflow fundamentals");
+  if(title.includes("accountability engine"))return {
+    essence:"designing accountability loops that help members keep building after the first burst of motivation",
+    bullets:[
+      "Create a rhythm for check-ins, progress proof, and peer visibility.",
+      "Define what members should share when they are stuck or shipping.",
+      "Make accountability feel useful, not like school homework."
+    ]
+  };
+  if(title.includes("founding offer"))return {
+    essence:"founding offer design, pricing experiment, risk reversal, and deciding what evidence will prove demand",
+    bullets:[
+      "Write the founding offer with transformation, scope, price, and expectations.",
+      "Design the experiment so the result teaches something either way.",
+      "Name what will count as enough signal to open the cohort."
+    ]
+  };
+  if(title.includes("launch assets"))return {
+    essence:"building launch assets: offer page, posts, screenshots, proof, FAQs, and onboarding messages",
+    bullets:[
+      "Prepare the assets people need to understand and trust the founding cohort.",
+      "Use proof from the journey instead of empty promises.",
+      "Make each asset point to one clear next action."
+    ]
+  };
+  if(title==="dry run")return {
+    essence:"running the entire cohort purchase/onboarding path before real members arrive",
+    bullets:[
+      "Walk through the path from offer page to payment or signup.",
+      "Check welcome messages, first-win instructions, and support contact points.",
+      "Fix anything that would make a founding member feel lost."
+    ]
+  };
+  if(title.includes("doors open"))return {
+    essence:"opening the founding cohort through personal outreach and public announcement",
+    bullets:[
+      "Invite the founding list with individual messages, not blasts.",
+      "Announce publicly using story, proof, transformation, and a clear ask.",
+      "Reply to everything so launch day becomes conversation, not broadcast."
+    ]
+  };
+  if(title.includes("public launch push"))return {
+    essence:"launching across channels with story, offer, proof, and follow-up content",
+    bullets:[
+      "Publish the launch story across the channels where you've built trust.",
+      "Lead with the journey and proof, then explain the founding offer.",
+      "Queue follow-up content so the launch has momentum beyond one post."
+    ]
+  };
+  if(title.includes("white-glove"))return {
+    essence:"personally onboarding founding members and getting each one to a 48-hour first win",
+    bullets:[
+      "Welcome each member personally and ask what they want to build first.",
+      "Guide them toward a fast, visible first win.",
+      "Capture repeated onboarding questions as curriculum and community improvements."
+    ]
+  };
+  if(title.includes("first live workshop"))return {
+    essence:"hosting the first live workshop by building, debugging, and teaching in public",
+    bullets:[
+      "Run a live session that shows real building, not polished theory.",
+      "Let mistakes and fixes become part of the teaching style.",
+      "Turn member questions into the next lesson, template, or support asset."
+    ]
+  };
+  if(title.includes("same-day shipping"))return {
+    essence:"shipping the most-requested member improvement during launch week",
+    bullets:[
+      "Choose the most repeated request or stuck point from founding members.",
+      "Ship one useful improvement the same day if it is safe and small.",
+      "Tell members what changed so they feel heard and invested."
+    ]
+  };
+  if(title.includes("day 252"))return {
+    essence:"final retro: counting the full 36-week transformation, proof, members, lessons, and the Q2 2027 decision",
+    bullets:[
+      "Count the receipts: skills learned, systems built, members helped, and artifacts shipped.",
+      "Write the honest story from beginner to founder-teacher.",
+      "Choose the next LectronicArt move from proof, not from fantasy."
+    ]
+  };
+  return {
+    essence:"turning a LectronicArt system, creative workflow, or launch move into proof and teaching material",
+    bullets:[
+      cleanLessonBullet(day.d[0]||day.t),
+      cleanLessonBullet(day.d[1]||"Document the system, proof, or member signal this block creates."),
+      "Save the artifact so a future creator can understand, reuse, or learn from it."
+    ]
+  };
+}
+
+function templateProfile(name){
+  return {
+    essence:"building "+name+" as reusable creative-builder assets with clear inputs, outputs, and use cases",
+    bullets:[
+      "Choose templates that solve repeated creative or business workflow problems.",
+      "Document inputs, outputs, setup steps, and example results.",
+      "Package each template so another creator can use it without Derrick explaining live."
+    ]
+  };
+}
+
+function moduleProfile(name, focus){
+  return {
+    essence:"recording "+name+" around "+focus+" with screen recordings, written guide, and a clear student outcome",
+    bullets:[
+      "Turn the archived proof into a teachable module with a visible outcome.",
+      "Record the lesson imperfectly but clearly enough for a founding member to follow.",
+      "Save the written guide beside the video so the curriculum can improve later."
+    ]
+  };
+}
+
+function phase3Profile(day, ctx){
+  const title=day.t.toLowerCase();
+  const theme=ctx.theme.toLowerCase();
+  if(title.includes("list 10 real problems"))return {
+    essence:"problem discovery: separating real pains from imagined product ideas",
+    bullets:[
+      "List problems from your own life and communities before naming solutions.",
+      "Look for repeated pain, current workarounds, and emotional weight.",
+      "Treat the list as raw evidence for the product journey, not a pitch deck."
+    ]
+  };
+  if(title.includes("talk to 3 humans"))return {
+    essence:"customer discovery conversations, listening without pitching, and collecting exact words",
+    bullets:[
+      "Interview three potential users about their version of the problem.",
+      "Ask about current behavior and workarounds instead of selling your idea.",
+      "Save exact quotes because future product copy should come from real language."
+    ]
+  };
+  if(title.includes("score & commit"))return {
+    essence:"idea scoring, MVP feasibility, user evidence, and committing to one problem statement",
+    bullets:[
+      "Score each idea by personal pain, buildability, infrastructure risk, and user potential.",
+      "Choose one winner instead of keeping every possibility alive.",
+      "Write a one-page problem statement that names who hurts, how, and what they do today."
+    ]
+  };
+  if(title.includes("sketch the mvp"))return {
+    essence:"paper prototyping, ruthless scope cuts, and turning a problem into the smallest usable flow",
+    bullets:[
+      "Sketch every important screen before creating files.",
+      "Cut features until the MVP has one clear path to value.",
+      "Use the sketch to make future Codex plans easier to challenge."
+    ]
+  };
+  if(title.includes("define done"))return {
+    essence:"MVP boundaries, user stories, README clarity, and protecting the product from scope creep",
+    bullets:[
+      "Write no more than three user stories that define the whole MVP.",
+      "Move extra ideas into later.md so they do not silently become commitments.",
+      "Make done visible enough that future decisions can be judged against it."
+    ]
+  };
+  if(title.includes("scaffold the stack"))return {
+    essence:"creating the real product repo, connecting the 2026 stack, and setting up deploy-on-push",
+    bullets:[
+      "Create the Next.js, TypeScript, and Tailwind foundation for the real MVP.",
+      "Push to GitHub and connect Vercel so every change has a deployment path.",
+      "Treat the scaffold as product infrastructure, not another practice exercise."
+    ]
+  };
+  if(title.includes("supabase: data model"))return {
+    essence:"database schema design, table relationships, and challenging the data model before users depend on it",
+    bullets:[
+      "Plan the Supabase tables around actual user actions and product objects.",
+      "Challenge fields, relationships, and ownership rules before creating the schema.",
+      "Use Plan Mode to surface data-shape risks while Derrick makes the final call."
+    ]
+  };
+  if(title.includes("supabase: auth"))return {
+    essence:"email authentication, protected routes, sessions, and the first real account system",
+    bullets:[
+      "Wire sign up, log in, log out, and protected pages end to end.",
+      "Check what the app shows for signed-out and signed-in users.",
+      "Understand auth as product trust, not just a login form."
+    ]
+  };
+  if(title.includes("app shell"))return {
+    essence:"navigation, page structure, empty states, and building the core screen with fake data first",
+    bullets:[
+      "Create the layout and navigation that will hold the MVP.",
+      "Write honest empty states so blank screens still explain the product.",
+      "Use fake data to shape the core screen before wiring live data."
+    ]
+  };
+  if(title.includes("core screen (live)"))return {
+    essence:"connecting the core screen to Supabase and testing the first real data flow",
+    bullets:[
+      "Replace hardcoded data with real Supabase reads or writes.",
+      "Check the screen with a realistic record instead of a perfect demo value.",
+      "Show the half-working product to one person so real confusion enters the roadmap."
+    ]
+  };
+  if(title.includes("plan mode: spec feature #1"))return specProfile("feature #1", "the single most important product feature");
+  if(title.includes("plan mode: spec feature #2"))return specProfile("feature #2", "the second feature or data flow that connects the product journey");
+  if(title==="build"&&theme.includes("sprint 1"))return buildSprintProfile("feature #1", "happy path");
+  if(title==="build"&&theme.includes("sprint 2"))return buildSprintProfile("feature #2", "happy path");
+  if(title.includes("build + edge cases")&&theme.includes("sprint 1"))return edgeProfile("feature #1");
+  if(title.includes("build + edge cases")&&theme.includes("sprint 2"))return edgeProfile("feature #2");
+  if(title.includes("manual test"))return {
+    essence:"hostile manual testing, finding weak spots, and rebuilding one tricky AI-assisted function from scratch",
+    bullets:[
+      "Use the feature like an impatient stranger and record every rough edge.",
+      "Fix the highest-risk breakage before adding anything new.",
+      "Delete and rebuild the trickiest Codex-assisted function to prove the logic is yours."
+    ]
+  };
+  if(title.includes("connect + test"))return {
+    essence:"connecting two product features into one end-to-end user journey and testing the whole path",
+    bullets:[
+      "Make feature #1 and feature #2 work together instead of as isolated pieces.",
+      "Trace one full user journey from start to finish.",
+      "Run hostile-stranger testing on the connected path and fix the most important break."
+    ]
+  };
+  if(title.includes("demo + journal"))return {
+    essence:"showing a build to another person, noticing fear, and turning reactions into product learning",
+    bullets:[
+      "Demo the feature to someone instead of judging it alone.",
+      "Watch where they understand, hesitate, or misunderstand the flow.",
+      "Journal what you learned and what scared you so the next sprint has emotional evidence too."
+    ]
+  };
+  if(title.includes("first-minute experience"))return {
+    essence:"designing the first 60 seconds of a new user's journey",
+    bullets:[
+      "Map what a brand-new user sees before they trust the product.",
+      "Define the first success moment and remove steps that delay it.",
+      "Use Plan Mode to challenge onboarding friction before implementing it."
+    ]
+  };
+  if(title.includes("build onboarding"))return {
+    essence:"signup-to-first-success onboarding, self-serve value, and reducing the need for explanation",
+    bullets:[
+      "Build the path from signup to first meaningful result.",
+      "Make the next step obvious without Derrick standing beside the user.",
+      "Test whether the app teaches the user what to do through the interface itself."
+    ]
+  };
+  if(title.includes("ux + copy"))return {
+    essence:"plain-language interface copy, feedback states, errors, empty states, and reducing confusion",
+    bullets:[
+      "Rewrite buttons, errors, and empty states in human language.",
+      "Add feedback for important actions so users are not left guessing.",
+      "Treat words as part of the product experience, not decoration."
+    ]
+  };
+  if(title.includes("mobile pass"))return {
+    essence:"using the whole product on a phone and fixing cramped or broken mobile workflows",
+    bullets:[
+      "Walk the full app on a real phone-sized viewport.",
+      "Fix touch targets, cramped layouts, overflow, and hidden content.",
+      "Keep mobile behavior focused on the core user journey, not desktop assumptions."
+    ]
+  };
+  if(title.includes("self-serve test"))return {
+    essence:"watching a zero-context user try onboarding without help",
+    bullets:[
+      "Hand the app to someone without explaining the goal.",
+      "Stay quiet and note every stumble, hesitation, and question.",
+      "Turn the biggest stumble into one onboarding fix or copy change."
+    ]
+  };
+  if(title.includes("error states"))return {
+    essence:"loading, error, and empty states for every fetch path",
+    bullets:[
+      "Audit every data request for loading, success, empty, and error states.",
+      "Replace silent failure with clear user-facing feedback.",
+      "Make the app feel trustworthy when the network or data path is imperfect."
+    ]
+  };
+  if(title.includes("data integrity"))return {
+    essence:"Supabase row-level security, ownership boundaries, and preventing user data leaks",
+    bullets:[
+      "Check whether user A can ever see or change user B's data.",
+      "Use Plan Mode because security changes deserve careful review.",
+      "Treat data boundaries as part of the product promise."
+    ]
+  };
+  if(title.includes("performance pass"))return {
+    essence:"finding the slowest screen, understanding why it is slow, and proving the fix works",
+    bullets:[
+      "Identify the slowest interaction or screen before optimizing blindly.",
+      "Ask Codex to explain the bottleneck and the tradeoff of the fix.",
+      "Verify that the user-visible behavior is faster after the change."
+    ]
+  };
+  if(title.includes("seed data"))return {
+    essence:"realistic demo data, demo accounts, and preventing the product from looking empty",
+    bullets:[
+      "Create believable seed data that shows the product's intended value.",
+      "Add a demo flow so new visitors do not stare at a blank app.",
+      "Use seed data as a teaching artifact for what good product state looks like."
+    ]
+  };
+  if(title.includes("bug sweep"))return {
+    essence:"working through the bug list, declaring feature freeze, and protecting launch stability",
+    bullets:[
+      "Fix the highest-priority bugs before considering any new feature.",
+      "Declare feature freeze so launch prep does not become scope creep.",
+      "Write the moment down: the MVP now exists as a real artifact."
+    ]
+  };
+  if(title.includes("production deploy"))return {
+    essence:"production deployment, custom domain, and checking the product across real devices",
+    bullets:[
+      "Deploy the production build and connect the domain.",
+      "Check the app on laptop, phone, and one borrowed device.",
+      "Treat deployment as the beginning of real product feedback, not the finish line."
+    ]
+  };
+  if(title.includes("friend test"))return friendTestProfile(title);
+  if(title.includes("fix round"))return {
+    essence:"turning observed user confusion into same-week product fixes",
+    bullets:[
+      "Review the top confusions from the previous user test.",
+      "Fix only the highest-leverage issues instead of redesigning everything.",
+      "Test again quickly so the product learns from real behavior in loops."
+    ]
+  };
+  if(title.includes("landing page: the headline"))return {
+    essence:"positioning the product by naming the pain instead of bragging about the technology",
+    bullets:[
+      "Write a headline that speaks to the user's problem in plain language.",
+      "Avoid feature-first or AI-first copy unless it helps the pain feel understood.",
+      "Use words from real user conversations whenever possible."
+    ]
+  };
+  if(title.includes("landing page: build"))return {
+    essence:"landing page structure, benefits, screenshots, demo media, and a clear call to action",
+    bullets:[
+      "Build the landing page around headline, benefits, screenshots, and one CTA.",
+      "Record a short demo GIF or video so the product is visible quickly.",
+      "Add a feedback or contact path so interested people can respond."
+    ]
+  };
+  if(title.includes("friend-test cleanup"))return {
+    essence:"clearing remaining user-test issues before broader launch",
+    bullets:[
+      "Review the unresolved issues from friend testing.",
+      "Fix the problems that block comprehension or first success.",
+      "Leave smaller polish ideas in the backlog if they do not affect launch confidence."
+    ]
+  };
+  if(title.includes("lighthouse"))return {
+    essence:"accessibility, performance, image size, contrast, alt text, and focus-state quick wins",
+    bullets:[
+      "Run Lighthouse and identify the cheap high-impact fixes.",
+      "Improve contrast, alt text, focus states, and obvious performance issues.",
+      "Treat accessibility as part of making the product usable by strangers."
+    ]
+  };
+  if(title.includes("soft launch"))return {
+    essence:"sharing the product in one trusted community and asking for feedback instead of applause",
+    bullets:[
+      "Choose one community where you already have trust.",
+      "Share the product with a clear request for feedback.",
+      "Collect response quality, not just likes or compliments."
+    ]
+  };
+  if(title.includes("pricing"))return {
+    essence:"pricing decision, Stripe test mode, checkout planning, and payment-risk review",
+    bullets:[
+      "Decide whether to charge now or capture a paid-tier waitlist, and write the reason.",
+      "Use Plan Mode because payments touch trust, data, and edge cases.",
+      "Wire Stripe Checkout in test mode before exposing anything live."
+    ]
+  };
+  if(title.includes("stripe: live"))return {
+    essence:"live Stripe checkout, webhook events, and responding to real payment state changes",
+    bullets:[
+      "Move from test checkout to live payment handling carefully.",
+      "Handle the webhook events that matter for the product's user experience.",
+      "Verify what happens after checkout completes or a subscription changes."
+    ]
+  };
+  if(title.includes("analytics"))return {
+    essence:"product analytics, event definition, and measuring whether users reach value",
+    bullets:[
+      "Choose the three events that reveal whether the product is working.",
+      "Instrument signup, first success action, and return behavior clearly.",
+      "Use analytics to ask better questions, not to collect noise."
+    ]
+  };
+  if(title.includes("email capture"))return {
+    essence:"email capture, welcome message, and continuing the relationship after first interest",
+    bullets:[
+      "Add an email capture point that makes sense in the user journey.",
+      "Write a simple welcome email that sets expectations and invites reply.",
+      "Treat the list as a relationship with future users, not just a metric."
+    ]
+  };
+  if(title.includes("full dry run"))return {
+    essence:"testing the full customer path from landing page to signup, success, and payment",
+    bullets:[
+      "Walk the entire journey exactly like a stranger would.",
+      "Check landing, signup, first success, payment, and follow-up states.",
+      "Fix every snag that interrupts trust before launch week."
+    ]
+  };
+  if(title.includes("launch posts"))return {
+    essence:"launch storytelling, Product Hunt/Indie Hackers copy, and recruiting day-one users",
+    bullets:[
+      "Draft launch posts around the pain, story, and proof instead of only features.",
+      "Prepare channel-specific copy before launch pressure arrives.",
+      "Line up five people who will try it and say something publicly."
+    ]
+  };
+  if(title.includes("demo video"))return {
+    essence:"recording a tight product demo that shows value quickly",
+    bullets:[
+      "Record a 60-second walkthrough of the product's core value.",
+      "Show the problem, the action, and the result without overexplaining.",
+      "Ship the imperfect demo rather than delaying launch for polish."
+    ]
+  };
+  if(title.includes("bug bash"))return {
+    essence:"trying to break the app through weird inputs, fast clicks, and navigation abuse",
+    bullets:[
+      "Actively attack the app with odd inputs and impatient behavior.",
+      "Check back-button, double-click, refresh, and failure paths.",
+      "Fix the worst launch-risk bugs first."
+    ]
+  };
+  if(title.includes("final checks"))return {
+    essence:"last launch checks, error monitoring, alerts, and avoiding blind launch-day failures",
+    bullets:[
+      "Verify the core journey still works after the final fixes.",
+      "Confirm monitoring or alerts will tell you when something breaks.",
+      "Avoid adding new scope during the final check block."
+    ]
+  };
+  if(title.includes("schedule it"))return {
+    essence:"choosing launch timing, preparing drafts, and deliberately resting before launch",
+    bullets:[
+      "Pick the launch day and time instead of leaving it vague.",
+      "Stage the drafts and assets so launch morning is execution, not invention.",
+      "Close the laptop after prep so your brain has fuel for response day."
+    ]
+  };
+  if(title.includes("launch: x"))return launchChannelProfile("X and Indie Hackers");
+  if(title.includes("product hunt")||title.includes("show hn"))return launchChannelProfile("Product Hunt or Show HN");
+  if(title.includes("onboard every signup"))return {
+    essence:"personal onboarding, first wins, and learning from every new signup",
+    bullets:[
+      "Message or guide each signup toward their first successful action.",
+      "Capture repeated questions and friction as product evidence.",
+      "Balance helping people now with improving the path for the next signup."
+    ]
+  };
+  if(title.includes("same-day shipping"))return {
+    essence:"turning launch-day feedback into one fast visible product improvement",
+    bullets:[
+      "Choose one request or bug that will visibly improve the product today.",
+      "Ship the fix with the smallest safe scope.",
+      "Tell the users who asked so they learn the product is alive."
+    ]
+  };
+  if(title.includes("what i learned"))return {
+    essence:"turning launch numbers, surprises, and honest lessons into public founder content",
+    bullets:[
+      "Write the follow-up with real numbers, surprises, mistakes, and lessons.",
+      "Teach from the process instead of pretending the launch was cleaner than it was.",
+      "Use honest builder content as the seed of future community trust."
+    ]
+  };
+  if(title.includes("count + connect"))return {
+    essence:"counting launch evidence, thanking supporters, and strengthening the early network",
+    bullets:[
+      "Count signups, comments, replies, bugs, asks, and useful silence.",
+      "Follow up with people who helped, tested, or gave signal.",
+      "Turn launch week into relationships, not just a scoreboard."
+    ]
+  };
+  if(title.includes("unblock users"))return {
+    essence:"helping users 6-10 reach value and learning where the product still blocks people",
+    bullets:[
+      "Find the next users who are stuck before they churn quietly.",
+      "Help each one reach the product's promised first win.",
+      "Turn repeated blockers into fixes, docs, or onboarding changes."
+    ]
+  };
+  if(title.includes("growth experiment"))return {
+    essence:"running one small growth experiment with a clear hypothesis and result",
+    bullets:[
+      "Choose one channel, message, or offer experiment instead of many guesses.",
+      "Write the hypothesis and the result you expect before publishing.",
+      "Judge the experiment by signal quality, not just vanity numbers."
+    ]
+  };
+  if(title.includes("power-user interview"))return {
+    essence:"learning from the most engaged user and finding what they value enough to repeat",
+    bullets:[
+      "Interview the user who got the most value or showed the most intent.",
+      "Ask what they did, why it mattered, and what they wanted next.",
+      "Use their language to sharpen the roadmap and future offer."
+    ]
+  };
+  if(title.includes("ship their #1 request"))return {
+    essence:"shipping the highest-value user request and proving the product responds to real demand",
+    bullets:[
+      "Choose the request with the strongest evidence from real users.",
+      "Ship the smallest version that solves the real pain.",
+      "Tell the requester and observe whether the fix changes behavior."
+    ]
+  };
+  if(title.includes("six-month retro"))return {
+    essence:"reviewing the six-month arc from learner to launcher and extracting honest product lessons",
+    bullets:[
+      "Review what changed in skill, confidence, product sense, and user evidence.",
+      "Name the decisions that worked and the assumptions that broke.",
+      "Turn the story into teaching material for the future LectronicArt community."
+    ]
+  };
+  if(title.includes("next chapter"))return {
+    essence:"choosing the next product, learning, or community direction from evidence instead of excitement",
+    bullets:[
+      "Use launch evidence, user conversations, and weak spots to pick the next chapter.",
+      "Decide what deserves more building, what needs teaching, and what should stop.",
+      "Write the next phase as a founder decision, not a vague aspiration."
+    ]
+  };
+  return {
+    essence:"moving the real product forward with a specific artifact, user signal, or launch decision",
+    bullets:[
+      cleanLessonBullet(day.d[0]||day.t),
+      cleanLessonBullet(day.d[1]||"Capture what this block teaches about the product or market."),
+      "End with saved evidence: a quote, decision, bug, commit, metric, or next action."
+    ]
+  };
+}
+
+function specProfile(label, purpose){
+  return {
+    essence:"Plan Mode scoping for "+label+": user outcome, risks, data shape, and testable boundaries",
+    bullets:[
+      "Define the user outcome before asking Codex to help with implementation.",
+      "Challenge scope, data shape, edge cases, and failure modes in Plan Mode.",
+      "End with a checklist small enough to build and review line by line."
+    ]
+  };
+}
+
+function buildSprintProfile(label, path){
+  return {
+    essence:"building the "+path+" of "+label+" so the product can do one valuable thing",
+    bullets:[
+      "Implement the smallest path that proves "+label+" works.",
+      "Keep state, data, and UI feedback simple enough to inspect.",
+      "Run the path immediately and note what a user would notice."
+    ]
+  };
+}
+
+function edgeProfile(label){
+  return {
+    essence:"unhappy paths for "+label+": bad inputs, missing data, double-clicks, slow network, and recovery",
+    bullets:[
+      "List the realistic ways "+label+" can fail for a user.",
+      "Handle the most important bad input, missing data, or slow-response state.",
+      "Test the fix as a user, not only as the person who wrote it."
+    ]
+  };
+}
+
+function friendTestProfile(title){
+  const number=title.includes("#3")?"friend #3":title.includes("#2")?"friend #2":"friend #1";
+  return {
+    essence:"silent observation with "+number+", exact-note capture, and learning from confusion without rescuing the user",
+    bullets:[
+      "Watch "+number+" use the product without coaching them through the path.",
+      "Write exact moments of confusion, hesitation, questions, and workarounds.",
+      "Let observed behavior decide the next fix instead of defending the design."
+    ]
+  };
+}
+
+function launchChannelProfile(channel){
+  return {
+    essence:"publishing the launch on "+channel+", replying to feedback, and collecting market signal in real time",
+    bullets:[
+      "Publish the prepared launch message with the pain, story, proof, and clear ask.",
+      "Stay present for replies, questions, objections, bugs, and surprise interest.",
+      "Record the signal while it is fresh so the product can respond quickly."
     ]
   };
 }
