@@ -121,6 +121,9 @@ function linkListHtml(links){
 function guideSection(title, body){
   return '<div class="guide-section"><h3>'+esc(title)+'</h3><p>'+esc(body)+'</p></div>';
 }
+function guideBulletList(items){
+  return '<ul class="lesson-focus">'+items.map(item=>'<li>'+esc(item)+'</li>').join("")+'</ul>';
+}
 function renderGuide(info){
   const tabs=document.getElementById("pTabs");
   const guideWrap=document.getElementById("pGuide");
@@ -145,12 +148,14 @@ function renderGuide(info){
 
   const chips=info.g.map(t=>'<span class="chip '+t+'">'+t+"</span>").join("");
   const sources=linkListHtml(info.l);
+  const lessonFocus=Array.isArray(guide.lessonFocus)&&guide.lessonFocus.length?guide.lessonFocus:[guide.summary].filter(Boolean);
   document.getElementById("panelOverview").innerHTML=
     guideSection("Goal", guide.goal)
     +guideSection("Why It Matters", guide.why)
     +'<div class="guide-section guide-facts"><h3>Session</h3>'
     +'<div class="fact-row"><span>Planned</span><b>'+esc(info.h)+'</b></div>'
     +'<div class="fact-row"><span>Tags</span><span class="guide-chips">'+chips+'</span></div>'
+    +(lessonFocus.length?'<div class="focus-row"><span>Lesson</span>'+guideBulletList(lessonFocus)+'</div>':'')
     +(sources?'<div class="links guide-links">'+sources+'</div>':'')
     +'</div>'
     +guideSection("AI Rule", guide.rule);

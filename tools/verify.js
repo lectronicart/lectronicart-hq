@@ -41,6 +41,12 @@ function checkGuide(day, label) {
   }
   if (guide.rule !== undefined) checkText(guide.rule, `${label} guide.rule`, 55, 260);
   if (guide.summary !== undefined) checkText(guide.summary, `${label} guide.summary`, 15, 360);
+  if (!Array.isArray(guide.lessonFocus)) fail(`${label} guide.lessonFocus must be an array`);
+  else {
+    if (guide.lessonFocus.length < 2 || guide.lessonFocus.length > 4)
+      fail(`${label} guide.lessonFocus has ${guide.lessonFocus.length} bullets (expected 2-4)`);
+    guide.lessonFocus.forEach((item, i) => checkText(item, `${label} guide.lessonFocus[${i}]`, 35, 240));
+  }
 }
 
 function scanForbiddenProviders() {

@@ -772,6 +772,51 @@ h1{
   text-transform:uppercase;
 }
 .fact-row b{font-family:var(--mono);font-size:13px}
+.focus-row{
+  display:grid;
+  grid-template-columns:96px 1fr;
+  gap:12px;
+  align-items:start;
+  padding:8px 0 4px;
+  font-size:14px;
+  line-height:1.5;
+}
+.focus-row > span{
+  padding-top:2px;
+  color:var(--ink-soft);
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.lesson-focus{
+  display:grid;
+  gap:7px;
+  margin:0;
+  list-style:none;
+}
+.panel .lesson-focus li{
+  position:relative;
+  padding:0 0 0 18px;
+  color:var(--ink);
+  font-size:14px;
+  line-height:1.45;
+  border-bottom:none;
+}
+.panel .lesson-focus li::before{
+  content:"";
+  position:absolute;
+  left:2px;
+  top:.62em;
+  width:6px;
+  height:6px;
+  background:var(--p1);
+  border-radius:50%;
+}
+.panel.p2 .lesson-focus li::before{background:var(--p2)}
+.panel.p3 .lesson-focus li::before{background:var(--p3)}
+.panel.p4 .lesson-focus li::before{background:var(--p4)}
 .guide-chips{display:flex;flex-wrap:wrap;gap:5px}
 .guide-links{margin:10px 0 0}
 .panel .guide-steps{
@@ -1044,7 +1089,8 @@ h1{
   }
   .panel h2{font-size:24px}
   .guide-tabs button{font-size:11px;padding:10px 6px}
-  .fact-row{grid-template-columns:1fr;gap:2px}
+  .fact-row,
+  .focus-row{grid-template-columns:1fr;gap:2px}
   .panel .guide-steps li{grid-template-columns:31px 1fr;gap:9px}
   .step-num{width:27px;height:27px}
   .badge-grid{grid-template-columns:1fr 1fr}

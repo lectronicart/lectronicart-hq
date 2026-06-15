@@ -753,24 +753,553 @@ function buildSteps(day, ctx){
   return steps.slice(0,5);
 }
 
+function lessonProfile(day, ctx){
+  const title=day.t.toLowerCase();
+  const details=day.d.join(" ").toLowerCase();
+  const tags=day.g;
+  if(day.rest)return {
+    essence:"recovery, catch-up judgment, and protecting the long-term streak",
+    bullets:[
+      "Decide whether today is real rest or one small catch-up block.",
+      "Let unfinished work consolidate instead of turning every Sunday into another full study day.",
+      "Write the first move for tomorrow so the next block starts cleanly."
+    ]
+  };
+  if(tags.includes("CODEX")&&details.includes("sdks and cli"))return {
+    essence:"official SDK setup, API keys, CLI basics, and making the first model request safely",
+    bullets:[
+      "Install the official SDK or CLI and understand where the API key lives.",
+      "Make one minimal request and inspect the response shape instead of treating it as magic.",
+      "Write down the boundary between app code, secret configuration, and model output."
+    ]
+  };
+  if(tags.includes("SETUP"))return {
+    essence:"setting up the learning environment, tutor boundaries, accounts, and the notes habit",
+    bullets:[
+      "Install the core tools and create the folder where learning projects will live.",
+      "Set the AGENTS.md tutor rules so AI explains, quizzes, and hints without writing the learning code.",
+      "Create the journal habit that will turn this course into future teaching material."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("introduction"))return {
+    essence:"how the Odin course works, what web development is, the mindset for learning, computer basics, and the first VS Code setup",
+    bullets:[
+      "Understand the shape of the Odin Foundations path and how project-based learning works.",
+      "Connect browser, server, files, and tools into a first mental model of web development.",
+      "Finish prerequisite setup so the next Odin block starts with learning instead of tool friction."
+    ]
+  };
+  if(title.includes("cs50 lecture 0"))return {
+    essence:"computational thinking: algorithms, abstraction, loops, conditions, events, and variables in Scratch",
+    bullets:[
+      "Turn a fuzzy goal into precise step-by-step instructions a computer can follow.",
+      "Recognize the first programming building blocks: events, loops, conditions, variables, and functions.",
+      "Use Scratch as a visual sandbox for concepts that later show up in C, JavaScript, and Python."
+    ]
+  };
+  if(title.includes("cs50 lecture 1")&&title.includes("part 1"))return {
+    essence:"how C programs become machine instructions, plus types, variables, and conditionals",
+    bullets:[
+      "Understand source code, machine code, compilers, and why C is closer to the computer.",
+      "Practice the basic shape of C: types, variables, operators, conditionals, and simple program flow.",
+      "Retype examples so syntax, compiling, running, and reading errors become less mysterious."
+    ]
+  };
+  if(title.includes("cs50 lecture 1"))return {
+    essence:"loops, operators, integer overflow, floating-point imprecision, and the limits of computers",
+    bullets:[
+      "Use loops and operators to repeat work without writing the same instruction over and over.",
+      "See why computers have limits through integer overflow and floating-point imprecision.",
+      "Connect small C examples to the deeper habit of asking what the machine is really storing."
+    ]
+  };
+  if(title.includes("cs50 lecture 2"))return {
+    essence:"arrays, strings, command-line arguments, and how text lives in memory",
+    bullets:[
+      "Learn arrays as ordered slots of data and strings as arrays of characters.",
+      "Practice reading command-line arguments and reasoning about input before the program runs.",
+      "See how simple cryptography exercises depend on indexing, characters, and careful loops."
+    ]
+  };
+  if(title.includes("cs50 lecture 3"))return {
+    essence:"searching, sorting, Big O notation, recursion, and comparing algorithm tradeoffs",
+    bullets:[
+      "Compare searching and sorting strategies by what they cost as input grows.",
+      "Use Big O as a plain-language way to talk about speed, scale, and tradeoffs.",
+      "Meet recursion as a function solving a problem by calling itself on a smaller version."
+    ]
+  };
+  if(title.includes("cs50 lecture 4"))return {
+    essence:"memory, pointers, addresses, allocation, hexadecimal, and what data looks like under the hood",
+    bullets:[
+      "Understand pointers as variables that hold addresses instead of ordinary values.",
+      "Connect malloc, memory layout, and hexadecimal to what programs are doing below the surface.",
+      "Build patience with the hardest mental model in early CS because it explains many later bugs."
+    ]
+  };
+  if(title.includes("cs50 lecture 5"))return {
+    essence:"data structures: linked lists, stacks, queues, trees, hash tables, and tries",
+    bullets:[
+      "Learn that data structure choice changes how fast a program can search, insert, and organize.",
+      "Compare arrays with linked lists, stacks, queues, trees, hash tables, and tries.",
+      "Connect structure to product thinking: the shape of stored data affects what the app can do easily."
+    ]
+  };
+  if(tags.includes("CS50")&&title.includes("mario"))return {
+    essence:"using loops and conditionals to turn numeric input into a precise text pattern",
+    bullets:[
+      "Read a problem specification and translate it into inputs, outputs, and constraints.",
+      "Use nested loops to build rows, spaces, and blocks in the exact order required.",
+      "Practice debugging by comparing expected output against what your program actually prints."
+    ]
+  };
+  if(tags.includes("CS50")&&(title.includes("cash")||title.includes("credit")))return {
+    essence:"numeric logic, loops, validation, and turning real-world rules into code",
+    bullets:[
+      "Break a money or card problem into small decisions the program can check.",
+      "Use loops and conditionals to repeat a calculation until the answer is complete.",
+      "Practice asking for hints about logic instead of asking AI for a finished solution."
+    ]
+  };
+  if(tags.includes("CS50")&&(title.includes("scrabble")||title.includes("readability")))return {
+    essence:"arrays, strings, scoring, and turning text into measurable data",
+    bullets:[
+      "Loop through characters and convert text into counts, scores, or readability signals.",
+      "Practice indexing arrays and strings without losing track of positions.",
+      "Explain the scoring rule before coding so the program mirrors the actual problem."
+    ]
+  };
+  if(tags.includes("CS50")&&title.includes("caesar"))return {
+    essence:"command-line arguments, ASCII, modulo arithmetic, and shifting letters safely",
+    bullets:[
+      "Accept input from the command line and reject invalid arguments cleanly.",
+      "Use ASCII values and modulo arithmetic to wrap letters around the alphabet.",
+      "Keep uppercase, lowercase, and non-letter characters straight while transforming text."
+    ]
+  };
+  if(tags.includes("CS50")&&(title.includes("plurality")||title.includes("runoff")))return {
+    essence:"arrays, structs, votes, and implementing a small election algorithm",
+    bullets:[
+      "Model candidates, votes, and counts as data instead of loose variables.",
+      "Turn election rules into steps the computer can repeat and verify.",
+      "Practice reading a longer starter codebase without losing the thread."
+    ]
+  };
+  if(tags.includes("CS50")&&(title.includes("filter")||title.includes("volume")))return {
+    essence:"bytes, pixels, samples, and how code changes media data directly",
+    bullets:[
+      "Treat images and audio as structured data the program can inspect and change.",
+      "Use loops to visit pixels or samples and apply a repeatable transformation.",
+      "Connect low-level data changes to creative tools that manipulate visuals and sound."
+    ]
+  };
+  if(tags.includes("CS50")&&title.includes("recover"))return {
+    essence:"file I/O, signatures, buffers, and recovering JPEG data from raw bytes",
+    bullets:[
+      "Read binary data in chunks and look for file signatures that mark JPEG boundaries.",
+      "Write recovered output files carefully while tracking when one file ends and another begins.",
+      "See how low-level file work explains why deleted data can sometimes be restored."
+    ]
+  };
+  if(tags.includes("CS50")&&title.includes("speller"))return {
+    essence:"hash tables, linked lists, dictionary loading, lookup speed, and memory cleanup",
+    bullets:[
+      "Choose a hash function and store dictionary words for fast lookup.",
+      "Use linked lists or buckets to handle collisions when words land in the same place.",
+      "Balance correctness, speed, and memory cleanup in one larger C program."
+    ]
+  };
+  if(tags.includes("ODIN")&&details.includes("command line"))return {
+    essence:"terminal navigation, file creation, Git setup, GitHub, and SSH",
+    bullets:[
+      "Practice moving through folders and creating files from the command line.",
+      "Set up Git and GitHub so your work can be saved, shared, and reviewed.",
+      "Build the comfort with developer tools that makes later projects calmer."
+    ]
+  };
+  if(tags.includes("ODIN")&&details.includes("html"))return {
+    essence:"HTML structure, text, lists, links, images, boilerplate, and clear commits",
+    bullets:[
+      "Use HTML elements to give a page meaningful structure before styling it.",
+      "Practice links, images, lists, text hierarchy, and boilerplate by building real pages.",
+      "Commit small checkpoints so the history of the project stays understandable."
+    ]
+  };
+  if(tags.includes("ODIN")&&details.includes("css"))return {
+    essence:"CSS selectors, the cascade, DevTools, the box model, and page layout fundamentals",
+    bullets:[
+      "Use selectors and the cascade to understand why one style wins over another.",
+      "Inspect layout in browser DevTools instead of guessing.",
+      "Practice the box model so spacing, borders, and sizing stop feeling random."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("flexbox"))return {
+    essence:"Flexbox axes, alignment, growing, shrinking, and responsive layout habits",
+    bullets:[
+      "Understand main axis, cross axis, alignment, and spacing inside flexible layouts.",
+      "Practice grow and shrink rules so components respond instead of breaking.",
+      "Connect layout choices to real client-style spec work."
+    ]
+  };
+  if(tags.includes("ODIN")&&title.includes("functions"))return {
+    essence:"JavaScript functions, problem solving, understanding errors, and debugging vocabulary",
+    bullets:[
+      "Use functions to name a reusable chunk of logic and reduce repetition.",
+      "Learn a problem-solving routine: understand the problem, plan, code, test, then debug.",
+      "Read error messages as clues instead of treating them like a wall."
+    ]
+  };
+  if(tags.includes("ODIN")&&(details.includes("dom")||title.includes("rps ui")||title.includes("etch"))){
+    return {
+      essence:"DOM manipulation, browser events, UI state, and turning console logic into interactive pages",
+      bullets:[
+        "Select page elements and change what the user sees with JavaScript.",
+        "Handle clicks and other events so the page responds to human action.",
+        "Turn earlier console logic into visible UI with state, feedback, and repeated interaction."
+      ]
+    };
+  }
+  if(tags.includes("ODIN")&&details.includes("fundamentals"))return {
+    essence:"JavaScript fundamentals: variables, numbers, strings, operators, data types, and conditionals",
+    bullets:[
+      "Practice the basic vocabulary JavaScript uses to store and transform values.",
+      "Use conditionals to make programs choose different paths.",
+      "Compare new JavaScript ideas against what CS50 already taught in C."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("3a"))return {
+    essence:"Node.js, Express, routes, and building the first REST API",
+    bullets:[
+      "Create a backend server that responds to HTTP requests.",
+      "Define routes and handlers for basic API behavior.",
+      "Connect frontend thinking to the server code that supplies data."
+    ]
+  };
+  if(tags.includes("FSO")&&(title.includes("part 0")||title.includes("ai assistance unlocked")))return {
+    essence:"how web apps work: browser, server, HTTP requests, forms, sequence diagrams, and safe Plan Mode habits",
+    bullets:[
+      "Learn the browser-server conversation behind ordinary web pages and single-page apps.",
+      "Practice describing app behavior with sequence diagrams before jumping into code.",
+      "Pair the FSO web-app mental model with the new Phase 2 rule: design first, let Codex assist second."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("3b"))return {
+    essence:"deploying a backend, connecting frontend and server, and making the app reachable online",
+    bullets:[
+      "Move a backend from local development to an internet-accessible deployment.",
+      "Connect frontend requests to the deployed server instead of a local-only URL.",
+      "Learn the difference between code that works locally and code that survives online."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("3c"))return {
+    essence:"MongoDB, Mongoose models, schemas, and saving data beyond the browser",
+    bullets:[
+      "Store app data in a real database instead of temporary memory or localStorage.",
+      "Use models and schemas to describe the shape of saved data.",
+      "Trace how a request becomes a database read or write."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("3d"))return {
+    essence:"validation, linting, error handling, and making backend code stricter",
+    bullets:[
+      "Validate incoming data so bad inputs do not silently enter the database.",
+      "Use linting as a tool for consistency and catching avoidable mistakes.",
+      "Improve backend error paths instead of only testing the happy path."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("2a"))return {
+    essence:"rendering collections, modules, key props, and breaking React code into pieces",
+    bullets:[
+      "Render arrays of data as visible lists of components.",
+      "Use key props so React can track items safely across updates.",
+      "Split code into modules so the project stays readable as it grows."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("2b"))return {
+    essence:"forms, controlled inputs, submit handlers, and user-entered data",
+    bullets:[
+      "Connect form inputs to React state so the UI and data stay in sync.",
+      "Handle submit events without losing or refreshing the page unexpectedly.",
+      "Practice turning user input into app state you can validate and save."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("2c"))return {
+    essence:"fetching server data, effects, async state, and loading real information into React",
+    bullets:[
+      "Use effects to request data after a component renders.",
+      "Track async states so loading, success, and failure are visible.",
+      "Connect API calls to the weather app and later full-stack products."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("2d"))return {
+    essence:"POST, PUT, DELETE, CRUD, and changing data through HTTP",
+    bullets:[
+      "Send data to a server instead of only reading from it.",
+      "Use HTTP methods to create, update, and delete records intentionally.",
+      "Start thinking like a product builder: every button may need a request, response, and error state."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("2e"))return {
+    essence:"styling React apps and finishing the Part 2 client-side data flow",
+    bullets:[
+      "Apply styling without hiding the underlying component and state logic.",
+      "Finish the Part 2 exercises so collections, forms, effects, and requests connect.",
+      "Notice the difference between a working exercise and a readable app."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("1a"))return {
+    essence:"React components, JSX, props, and rendering small UI pieces",
+    bullets:[
+      "Learn components as reusable UI functions.",
+      "Use JSX to describe markup inside JavaScript.",
+      "Pass information through props so one component can configure another."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("1b"))return {
+    essence:"modern JavaScript review: arrays, objects, functions, destructuring, and methods React depends on",
+    bullets:[
+      "Review JavaScript features that React code uses constantly.",
+      "Practice array and object operations before they appear inside components.",
+      "Spot which older fundamentals now matter because the framework leans on them."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("1c"))return {
+    essence:"component state, event handlers, hooks, and making React respond to clicks",
+    bullets:[
+      "Use state to remember values that change while the app runs.",
+      "Attach event handlers so user actions update the interface.",
+      "Meet hooks as the standard way functional components manage behavior."
+    ]
+  };
+  if(tags.includes("FSO")&&title.includes("1d"))return {
+    essence:"complex state, debugging React apps, and understanding updates instead of guessing",
+    bullets:[
+      "Handle state that has more than one value or nested shape.",
+      "Use debugging tools and deliberate logging to see what changed.",
+      "Explain props and state before asking Codex to tidy the code."
+    ]
+  };
+  if(tags.includes("FSO"))return {
+    essence:"full-stack web fundamentals: browser behavior, components, requests, state, and server data",
+    bullets:[
+      "Connect what the browser shows to the code and data flow underneath.",
+      "Do the exercises in the editor so the concept becomes behavior on screen.",
+      "Trace one path out loud: user action, state change, request, response, or render."
+    ]
+  };
+  if(tags.includes("CS50P"))return {
+    essence:cs50pEssence(title),
+    bullets:cs50pBullets(title, day)
+  };
+  if(tags.includes("AGENTS"))return {
+    essence:"agent loops, tools, memory, frameworks, and when an agent is better than a simple prompt",
+    bullets:[
+      "Learn the think-act-observe loop that lets agents decide, use tools, and continue.",
+      "Compare agent frameworks by how they organize tools, memory, state, and control flow.",
+      "Save teaching notes that explain when agent complexity is worth it and when a simpler prompt is better."
+    ]
+  };
+  if(tags.includes("CODEX")&&details.includes("streaming responses"))return {
+    essence:"streaming responses, durable instructions, multi-turn state, and making AI output feel responsive",
+    bullets:[
+      "Understand why streaming improves perceived speed and how partial output reaches the UI.",
+      "Separate instructions, user input, and state so conversations remain predictable.",
+      "Build or sketch the smallest loop that proves the response can arrive incrementally."
+    ]
+  };
+  if(tags.includes("CODEX")&&details.includes("tools and function calling"))return {
+    essence:"tool schemas, function calling, the tool-call loop, and returning results to the model",
+    bullets:[
+      "Describe a tool with a schema the model can understand and call safely.",
+      "Trace the loop: model asks for a tool, app runs it, app returns results, model continues.",
+      "Name what the app owns versus what the model is allowed to decide."
+    ]
+  };
+  if(tags.includes("CODEX")&&details.includes("multiple tools"))return {
+    essence:"multiple tools, tool choice, error handling, and owning the orchestration loop in app code",
+    bullets:[
+      "Decide when the model may choose a tool and when the app should force a specific path.",
+      "Handle tool errors as normal states instead of surprise failures.",
+      "Keep orchestration readable so future creative automations can be debugged and taught."
+    ]
+  };
+  if(tags.includes("CODEX")&&details.includes("prompt caching"))return {
+    essence:"production AI patterns: prompt caching, retries, rate limits, batching, and reasoning-effort tradeoffs",
+    bullets:[
+      "Learn the reliability and cost patterns that matter once an AI feature has users.",
+      "Compare retries, batching, caching, and rate-limit handling as product-engineering decisions.",
+      "Write down which production pattern belongs in your first real AI workflow."
+    ]
+  };
+  if(tags.includes("CODEX")&&title.includes("prompt engineering"))return {
+    essence:"instructions, examples, structured outputs, evaluation, and prompt iteration as an engineering process",
+    bullets:[
+      "Treat prompts as testable instructions rather than one-off magic sentences.",
+      "Use examples and structured outputs to make model behavior easier to inspect.",
+      "Connect prompt iteration to evals so quality can improve with evidence."
+    ]
+  };
+  if(tags.includes("CODEX")&&title.includes("evals"))return {
+    essence:"building a tiny evaluation harness to test prompts against examples and scoring criteria",
+    bullets:[
+      "Create a small test set of inputs that represent the prompt's real job.",
+      "Score outputs against explicit criteria instead of trusting vibes.",
+      "Save the eval pattern as future proof that LectronicArt systems can be measured."
+    ]
+  };
+  if(tags.includes("CODEX")&&(title.includes("mcp")||details.includes("mcp")))return {
+    essence:"MCP architecture: clients, servers, tools, transports, and reusable AI integrations",
+    bullets:[
+      "Understand why a protocol is stronger than one-off tool integrations.",
+      "Map clients, servers, tools, message passing, and transports in plain language.",
+      "Connect MCP to real creative workflows like notes, media processing, or content systems."
+    ]
+  };
+  if(tags.includes("CODEX")&&title.includes("subagents"))return {
+    essence:"Codex subagents, project-scoped roles, delegated review, and reusable team-like workflows",
+    bullets:[
+      "Learn how specialized agents can handle research, review, testing, or implementation slices.",
+      "Define agent boundaries so delegation does not turn into confusion.",
+      "Save the project-scoped pattern as a future way to teach AI-assisted building."
+    ]
+  };
+  if(tags.includes("CODEX")&&details.includes("plan mode"))return {
+    essence:"using Codex as a planning and review partner while Derrick keeps ownership of design decisions",
+    bullets:[
+      "Write the intended shape of the feature before any code is drafted.",
+      "Use Codex to challenge scope, risks, and tradeoffs instead of blindly accepting output.",
+      "Read every changed line so assistance becomes understanding, not dependency."
+    ]
+  };
+  if(tags.includes("CODEX")||tags.includes("AGENTS"))return {
+    essence:"AI workflow design: instructions, review habits, tool boundaries, and reusable prompts",
+    bullets:[
+      "Define what the AI helper is allowed to do and what Derrick still owns.",
+      "Turn prompts, rules, or docs into a repeatable workflow.",
+      "Save the habit or example so it can become future LectronicArt teaching material."
+    ]
+  };
+  if(tags.includes("SHIP"))return {
+    essence:"audience-facing proof, feedback, launch decisions, and evidence from real humans",
+    bullets:[
+      "Put work in front of someone instead of keeping it private.",
+      "Capture the response as evidence: quote, metric, objection, confusion, or silence.",
+      "Use the signal to decide the next product, content, or community move."
+    ]
+  };
+  if(tags.includes("BUILD"))return {
+    essence:"turning the lesson into a working artifact with one clear happy path and one checked edge case",
+    bullets:[
+      "Name the smallest version that can work before adding extras.",
+      "Build the happy path first, then test one realistic failure or edge case.",
+      "Save the artifact, commit, or note so it can become proof of the learning."
+    ]
+  };
+  return {
+    essence:"turning today's roadmap instruction into a concrete note, decision, artifact, or next action",
+    bullets:[
+      cleanLessonBullet(day.d[0]||day.t),
+      cleanLessonBullet(day.d[1]||"Write the plain-language takeaway before moving on."),
+      "End with one saved note that future-you can use when teaching this lesson."
+    ]
+  };
+}
+
+function cs50pEssence(title){
+  if(title.includes("0+1"))return "Python functions, variables, conditionals, indentation, input(), and f-strings";
+  if(title.includes(" 2 ")||title.includes("loops"))return "Python loops, lists, dictionaries, and comprehensions";
+  if(title.includes(" 3 ")||title.includes("exceptions"))return "exceptions, try/except, raising errors, and handling bad input safely";
+  if(title.includes(" 4 ")||title.includes("libraries"))return "libraries, modules, pip, random/statistics, and making API requests in Python";
+  if(title.includes(" 5 ")||title.includes("unit tests"))return "pytest, assert, and proving small functions work";
+  if(title.includes(" 6 ")||title.includes("file i/o"))return "file I/O, CSV files, images, and scripts that read or write real files";
+  if(title.includes(" 7 ")||title.includes("regular expressions"))return "regular expressions, pattern matching, and validating structured text";
+  if(title.includes(" 8 ")||title.includes("object-oriented"))return "classes, methods, properties, and modeling product concepts as objects";
+  if(title.includes(" 9 ")||title.includes("et cetera"))return "sets, type hints, docstrings, unpacking, and Python polish";
+  if(title.includes("capstone"))return "shipping a useful Python automation connected to the launch";
+  return "Python syntax, problem solving, and automation leverage for the product journey";
+}
+
+function cs50pBullets(title, day){
+  if(title.includes("capstone"))return [
+    "Build a small Python automation that serves the actual launch.",
+    "Choose a script with clear inputs, outputs, and proof that it saved time.",
+    "Treat the capstone as the bridge from course exercises to useful AI-builder tooling."
+  ];
+  if(title.includes("0+1"))return [
+    "Learn Python's basic program shape: functions, variables, conditionals, indentation, input(), and f-strings.",
+    "Compare Python syntax against the C and JavaScript concepts you already met.",
+    "Solve a few beginner problems so Python becomes a usable tool, not just another course."
+  ];
+  if(title.includes(" 2 ")||title.includes("loops"))return [
+    "Use Python loops with lists, dictionaries, and comprehensions.",
+    "Notice how Python can express common data transformations with less ceremony than C-style loops.",
+    "Save one data-cleanup or automation idea that could help your product."
+  ];
+  if(title.includes(" 3 ")||title.includes("exceptions"))return [
+    "Use try, except, and raise to handle bad input and expected failure paths.",
+    "Connect exception handling to the same edge-case thinking your product needs.",
+    "Write one tiny example that fails safely instead of crashing mysteriously."
+  ];
+  if(title.includes(" 4 ")||title.includes("libraries"))return [
+    "Use modules, pip-installed packages, and standard-library helpers.",
+    "Practice requests or another library as a bridge from Python to APIs.",
+    "Write down when a library saves time and when it hides too much."
+  ];
+  if(title.includes(" 5 ")||title.includes("unit tests"))return [
+    "Use pytest and assert to prove small Python functions work.",
+    "Port or model a tiny product logic function and write tests around it.",
+    "Treat tests as proof and documentation, not just homework."
+  ];
+  if(title.includes(" 6 ")||title.includes("file i/o"))return [
+    "Read and write files with Python, including CSV data and image files.",
+    "Connect file I/O to product operations like seed data, exports, or launch dashboards.",
+    "Save one script idea that would reduce manual work later."
+  ];
+  if(title.includes(" 7 ")||title.includes("regular expressions"))return [
+    "Use regular expressions to match, validate, and transform structured text.",
+    "Connect pattern matching to real product inputs like emails, URLs, and imported data.",
+    "Write one regex slowly enough that you can explain each piece."
+  ];
+  if(title.includes(" 8 ")||title.includes("object-oriented"))return [
+    "Model product concepts with classes, methods, and properties.",
+    "Compare object-oriented structure with plain functions and dictionaries.",
+    "Name which objects your own product might eventually need."
+  ];
+  if(title.includes(" 9 ")||title.includes("et cetera"))return [
+    "Polish Python fluency with sets, type hints, docstrings, unpacking, and idiomatic patterns.",
+    "Identify which final topics make code easier to read, test, or teach.",
+    "Use the wrap-up quiz to find weak spots before the AI Engineer track."
+  ];
+  return [
+    cleanLessonBullet(day.d[0]||"Work through the assigned CS50P unit."),
+    "Compare the Python idea to how you would solve it in C or JavaScript.",
+    "Save one snippet, note, or automation idea that can help the product or launch later."
+  ];
+}
+
+function cleanLessonBullet(text){
+  return String(text||"").replace(/\s+/g," ").replace(/^Work through:\s*/i,"").trim();
+}
+
 function whyFor(day, ctx, track){
   if(day.rest)return "Rest days are part of the system. They protect consistency, absorb overflow, and keep the streak from becoming a grind.";
   const title=day.t.toLowerCase();
+  const lesson=lessonProfile(day, ctx).essence;
   if(ctx.phase===1){
     const phaseTrack=day.g.includes("BUILD")?"building":track;
-    return "Phase 1 is about earning the mental map, not rushing. Inside "+ctx.theme+", "+phaseTrack+" gives you one controlled rep in reading instructions, naming errors, and explaining each step before AI helps. "+watchFor(day, ctx.phase);
+    return "Today is specifically about "+lesson+". Phase 1 is about earning the mental map, not rushing. "+phaseTrack+" gives you one controlled rep in reading instructions, naming errors, and explaining each step before AI helps. "+watchFor(day, ctx.phase);
   }
   if(ctx.phase===2){
     const phaseTrack=title.includes("retro")?"reflection":day.g.includes("FSO")?"Full Stack Open":day.g.includes("ODIN")?"Odin Foundations":day.g.includes("SHIP")?"shipping":day.g.includes("BUILD")?"building":track;
-    return "Phase 2 is the apprenticeship layer: you still own the design, but Codex can now help plan, draft, and review small changes. Inside "+ctx.theme+", "+phaseTrack+" should leave behind something you can explain back: a solo build, diff, component, request, deployment, or decision. "+watchFor(day, ctx.phase);
+    return "Today is specifically about "+lesson+". Phase 2 is the apprenticeship layer: you still own the design, while "+phaseTrack+" should leave behind something you can explain back: a solo build, diff, component, request, deployment, or decision. "+watchFor(day, ctx.phase);
   }
   if(ctx.phase===3){
     const phaseTrack=day.g.includes("CS50P")?"Python leverage":ctx.theme.toLowerCase().includes("find the pain")||isProblemDiscoveryTitle(title)?"problem discovery":title.includes("pricing")||title.includes("stripe")||title.includes("analytics")||title.includes("email")?"money and measurement":title.includes("launch")?"launch execution":title.includes("retro")||title.includes("next chapter")?"reflection":isUserLearningTitle(title)?"user evidence":day.g.includes("SHIP")&&day.g.includes("BUILD")?"shipping a product fix":day.g.includes("SHIP")?"market evidence":day.g.includes("BUILD")?"product building":track;
-    return "Phase 3 is founder mode: every block should move a real product, real user conversation, or real launch decision forward. Inside "+ctx.theme+", the focus is "+phaseTrack+": turning learning into evidence Derrick can build from later. "+watchFor(day, ctx.phase, ctx);
+    return "Today is specifically about "+lesson+". Phase 3 is founder mode: every block should move a real product, real user conversation, or real launch decision forward. The focus is "+phaseTrack+": turning learning into evidence Derrick can build from later. "+watchFor(day, ctx.phase, ctx);
   }
   if(ctx.phase===4){
     const phaseTrack=phase4Track(day, ctx);
-    return "Phase 4 is LectronicArt production mode: each block should turn a system into proof, a workflow into a reusable asset, or a launch action into member signal. Inside "+ctx.theme+", the focus is "+phaseTrack+". "+watchFor(day, ctx.phase, ctx);
+    return "Today is specifically about "+lesson+". Phase 4 is LectronicArt production mode: each block should turn a system into proof, a workflow into a reusable asset, or a launch action into member signal. The focus is "+phaseTrack+". "+watchFor(day, ctx.phase, ctx);
   }
   return "This day sits inside "+ctx.theme+" and connects "+track+" to the larger builder arc. "+watchFor(day, ctx.phase, ctx);
 }
@@ -800,6 +1329,7 @@ function buildGuide(day, ctx){
   const track=sourceTrack(day);
   const outcome=outcomeFor(day, ctx.week, ctx.phase);
   const summary=day.d[0]||day.t;
+  const lesson=lessonProfile(day, ctx);
   return {
     goal:"By the end of this block, "+outcome+".",
     why:whyFor(day, ctx, track),
@@ -808,6 +1338,7 @@ function buildGuide(day, ctx){
     coach:coachFor(day, ctx.phase, ctx),
     reflect:reflectFor(day, ctx.phase),
     summary:summary,
+    lessonFocus:lesson.bullets,
     rule:phaseRule(ctx.phase)
   };
 }
