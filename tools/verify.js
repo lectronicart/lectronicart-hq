@@ -47,6 +47,18 @@ function checkGuide(day, label) {
       fail(`${label} guide.lessonFocus has ${guide.lessonFocus.length} bullets (expected 2-4)`);
     guide.lessonFocus.forEach((item, i) => checkText(item, `${label} guide.lessonFocus[${i}]`, 35, 240));
   }
+  if (day.lesson !== undefined) {
+    if (!day.lesson || typeof day.lesson !== "object") fail(`${label} lesson must be an object`);
+    else {
+      checkText(day.lesson.essence, `${label} lesson.essence`, 55, 260);
+      if (!Array.isArray(day.lesson.bullets)) fail(`${label} lesson.bullets must be an array`);
+      else {
+        if (day.lesson.bullets.length < 2 || day.lesson.bullets.length > 4)
+          fail(`${label} lesson.bullets has ${day.lesson.bullets.length} bullets (expected 2-4)`);
+        day.lesson.bullets.forEach((item, i) => checkText(item, `${label} lesson.bullets[${i}]`, 35, 240));
+      }
+    }
+  }
 }
 
 function scanForbiddenProviders() {

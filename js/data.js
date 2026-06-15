@@ -21,7 +21,7 @@ const WEEKS=[
 // ---------- PHASE 1 ----------
 {p:1,theme:"Setup & First Programs — CS50 Week 0 · Odin Intro",days:[
  {t:"Mission setup",d:["Install Codex and create a 'learning-code' folder with an AGENTS.md tutor file (the 6 rules from your roadmap: explain before writing, simpler over clever, comment non-obvious steps, ask my approach first, name every library, stop me before bad practice).","Enroll in CS50x 2026 (free) and create your edX account.","Start your notes.md learning journal — entry #1: why you're doing this."],g:["SETUP","CODEX"],h:"2 hrs",l:[["CS50x",CS50],["Codex AGENTS.md",CODEX_AGENTS]]},
- {t:"CS50 Lecture 0 — Scratch",d:["Watch Lecture 0 in full (computational thinking, algorithms, abstraction). Take notes by hand or in notes.md.","Don't skip it because it 'feels basic' — Malan is building the mental model everything else sits on."],g:["CS50"],h:"2.5 hrs",l:[["Week 0",CS50+"weeks/0/"]]},
+ {t:"CS50 Lecture 0 — Scratch",d:["Watch Lecture 0 in full (computational thinking, algorithms, abstraction). Take notes by hand or in notes.md.","Don't skip it because it 'feels basic' — Malan is building the mental model everything else sits on."],g:["CS50"],h:"2.5 hrs",l:[["Week 0",CS50+"weeks/0/"]],lesson:{essence:"CS50 Week 0's source-backed foundation: representation, abstraction, algorithms, pseudocode, and Scratch's core blocks",bullets:["Learn how computers represent information and why abstraction lets you build without holding every detail at once.","Translate a problem into an algorithm, then into pseudocode, before worrying about a programming language.","Use Scratch blocks to practice functions, variables, conditionals, loops, events, and parallel threads visually."]}},
  {t:"CS50 Problem Set 0",d:["Build your Scratch project (a game, animation, or interactive toy — your choice).","Notice how you naturally use loops, conditions, and events. You're already programming."],g:["CS50"],h:"2.5 hrs"},
  {t:"Odin: Introduction + Prerequisites",d:["Odin Foundations: Introduction section (How this course works, Intro to web dev, Motivation & mindset).","Prerequisites: Computer Basics, How Does the Web Work?, Installation Overview + install VS Code."],g:["ODIN"],h:"2 hrs",l:[["Foundations",ODIN]]},
  {t:"Odin: Command line + Git setup",d:["Odin: Text Editors, Command Line Basics — practice cd, ls, mkdir, touch until they're reflex.","Odin: Setting Up Git — install Git, create your GitHub account, configure SSH."],g:["ODIN"],h:"2 hrs"},
@@ -754,6 +754,7 @@ function buildSteps(day, ctx){
 }
 
 function lessonProfile(day, ctx){
+  if(day.lesson)return manualLessonProfile(day);
   const title=day.t.toLowerCase();
   const details=day.d.join(" ").toLowerCase();
   const tags=day.g;
@@ -1500,6 +1501,13 @@ function lessonProfile(day, ctx){
       cleanLessonBullet(day.d[1]||"Write the plain-language takeaway before moving on."),
       "End with one saved note that future-you can use when teaching this lesson."
     ]
+  };
+}
+
+function manualLessonProfile(day){
+  return {
+    essence:day.lesson.essence,
+    bullets:day.lesson.bullets
   };
 }
 
