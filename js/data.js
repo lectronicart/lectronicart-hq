@@ -130,12 +130,12 @@ const WEEKS=[
 ]},
 // ---------- PHASE 3 ----------
 {p:3,theme:"Find the Pain — problem discovery · Python begins",days:[
- {t:"List 10 real problems",d:["Write 10 problems you, your girlfriend, friends, or your communities actually have. Your community-helping business idea lives somewhere in this list.","No solutions yet. Just pain."],g:["SHIP"],h:"2 hrs"},
- {t:"Talk to 3 humans",d:["Interview 3 potential users about their version of these problems. Only listen and take notes — don't pitch anything."],g:["SHIP"],h:"2 hrs"},
- {t:"Score & commit",d:["Score each idea: Do I personally feel this pain? MVP buildable in 4–6 weeks? No heavy infra (no realtime video/blockchain/heavy ML)? Can I imagine 100 users?","Pick the winner. Write a one-page problem statement: who has the pain, how bad it is, what they do about it today."],g:["SHIP"],h:"2.5 hrs"},
- {t:"Python begins — CS50P 0+1",d:["New weekly thread: one CS50P unit per week from now through week 22, so Python is fluent before the AI Engineer track needs it.","Install Python. Watch Lectures 0 (Functions, Variables) and 1 (Conditionals) at speed — you know these ideas from C and JS; focus on what's different: indentation instead of braces, input(), f-strings.","Do the 2–3 most interesting problems from each problem set."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]]},
- {t:"Sketch the MVP",d:["Sketch every screen on paper. Then cut features until it hurts. The MVP is what's left."],g:["SHIP"],h:"2 hrs"},
- {t:"Define done",d:["Write a maximum of 3 user stories in your repo README. That's the whole MVP. Anything else goes in a 'later.md' file."],g:["SHIP"],h:"2 hrs"},
+ {t:"List 10 real problems",d:["Write 10 problems you, your girlfriend, friends, or your communities actually have. Your community-helping business idea lives somewhere in this list.","No solutions yet. Just pain."],g:["SHIP"],h:"2 hrs",lesson:{essence:"Phase 3 problem discovery: listing real pains from your life and communities before jumping into solutions, features, or branding",bullets:["Write problems from lived experience, not imaginary startup ideas.","Separate pain from solution by describing who struggles, what happens, and why it costs time, money, or energy.","Look for problems close enough that you can reach real people this week."]}},
+ {t:"Talk to 3 humans",d:["Interview 3 potential users about their version of these problems. Only listen and take notes — don't pitch anything."],g:["SHIP"],h:"2 hrs",lesson:{essence:"customer discovery interviews: listening to three real people, gathering stories, avoiding pitches, and noticing repeated pain patterns",bullets:["Ask about the last time the problem happened instead of asking whether your idea sounds good.","Listen for current workarounds, emotional language, frequency, stakes, and exact phrases people repeat.","Take notes without defending a solution so the evidence can challenge your assumptions."]}},
+ {t:"Score & commit",d:["Score each idea: Do I personally feel this pain? MVP buildable in 4–6 weeks? No heavy infra (no realtime video/blockchain/heavy ML)? Can I imagine 100 users?","Pick the winner. Write a one-page problem statement: who has the pain, how bad it is, what they do about it today."],g:["SHIP"],h:"2.5 hrs",lesson:{essence:"idea selection discipline: scoring each pain by personal connection, buildability, infrastructure risk, audience size, and evidence from interviews",bullets:["Score every candidate with the same questions so excitement does not hide weak evidence.","Choose a problem that can become a 4-6 week MVP without heavy infrastructure or unclear users.","Write a one-page problem statement naming the user, the pain, current alternatives, and why now."]}},
+ {t:"Python begins — CS50P 0+1",d:["New weekly thread: one CS50P unit per week from now through week 22, so Python is fluent before the AI Engineer track needs it.","Install Python. Watch Lectures 0 (Functions, Variables) and 1 (Conditionals) at speed — you know these ideas from C and JS; focus on what's different: indentation instead of braces, input(), f-strings.","Do the 2–3 most interesting problems from each problem set."],g:["CS50P"],h:"2.5 hrs",l:[["CS50P",PYL]],lesson:{essence:"CS50P Lectures 0 and 1: Python functions, variables, input, strings, f-strings, indentation, conditionals, booleans, and comparison logic",bullets:["Install Python and compare its syntax with the C and JavaScript concepts you already know.","Practice functions, variables, input(), string methods, f-strings, if/elif/else, and boolean expressions.","Solve a few problem-set exercises to make Python feel like a working tool, not just another language video."]}},
+ {t:"Sketch the MVP",d:["Sketch every screen on paper. Then cut features until it hurts. The MVP is what's left."],g:["SHIP"],h:"2 hrs",lesson:{essence:"MVP sketching: turning the chosen problem into screens, user flow, core action, ruthless feature cuts, and the smallest testable product",bullets:["Sketch every screen by hand so the user journey is visible before code exists.","Find the core action the MVP must perform and remove anything that does not support it.","Cut features until the product can be built, tested, and explained within the next sprint."]}},
+ {t:"Define done",d:["Write a maximum of 3 user stories in your repo README. That's the whole MVP. Anything else goes in a 'later.md' file."],g:["SHIP"],h:"2 hrs",lesson:{essence:"MVP definition of done: writing three user stories, acceptance boundaries, README scope, and a later.md list for everything outside the first version",bullets:["Limit the MVP to three user stories so scope stays concrete enough to finish.","Write done criteria in the README that a future tester can verify without guessing.","Move extra ideas into later.md so ambition is captured without hijacking the build."]}},
  REST()
 ]},
 {p:3,theme:"Foundation Pour — the 2026 builder stack",days:[
@@ -375,6 +375,10 @@ function outcomeFor(day, week, phase){
     return "turn the assigned material into notes, working examples, and questions you can answer without rereading";
   if(title.includes("pset")||title.includes("problem set")||title.includes("exercises"))
     return "make real progress on the assignment by reading the spec, writing code, testing, and explaining the result";
+  if(phase===3&&isCustomerDiscoveryTitle(title))
+    return "turn real conversations into evidence about pain, current workarounds, stakes, and the next product question";
+  if(phase===3&&title.includes("define done"))
+    return "turn the MVP into three testable user stories, clear acceptance boundaries, and a later list";
   if(phase===3&&isProblemDiscoveryTitle(title))
     return "turn a fuzzy product idea into written evidence, sharper scope, and the next user-learning question";
   if(title.includes("plan")||title.includes("design")||title.includes("spec")||title.includes("define"))
@@ -395,6 +399,12 @@ function isUserLearningTitle(title){
     || title.includes("user")
     || title.includes("onboard every signup")
     || title.includes("self-serve test");
+}
+
+function isCustomerDiscoveryTitle(title){
+  return title.includes("interview")
+    || title.includes("humans")
+    || title.includes("talk to");
 }
 
 function isProblemDiscoveryTitle(title){
@@ -451,6 +461,7 @@ function watchFor(day, phase, ctx){
   if(phase===2&&day.g.includes("CODEX"))return "Keep a reviewer mindset: ask for tradeoffs, reject vague plans, and turn every accepted suggestion into something you understand.";
   if(phase===3&&(title.includes("retro")||title.includes("next chapter")))return "This is evidence-based strategy work. Let shipped code, user conversations, and real numbers decide what the next chapter deserves.";
   if(phase===3&&title.includes("launch"))return "Launch days are response days. Publish, reply, measure, and keep notes while the market is still talking back.";
+  if(phase===3&&isCustomerDiscoveryTitle(title))return "Do not pitch a solution yet. Ask for the last real example, write the exact words, and let the pattern teach you.";
   if(phase===3&&isUserTest)return "Do not explain the product while someone uses it. Watch the stumble, write the exact words, then fix the pattern, not your feelings.";
   if(phase===3&&day.g.includes("CS50P"))return "Python is no longer separate homework. Tie each unit to automation, testing, data cleanup, or launch leverage you can reuse.";
   if(phase===3&&isPlanMode)return "Plan Mode now protects real users and real data. Ask Codex to challenge scope, failure modes, privacy, and what evidence would prove the plan worked.";
@@ -522,10 +533,12 @@ function buildSteps(day, ctx){
   const details=day.d.join(" ").toLowerCase();
   const phase2Plan=ctx.phase===2&&day.g.includes("CODEX")&&(title.includes("plan")||title.includes("design")||title.includes("spec")||details.includes("plan mode"));
   const phase3Plan=ctx.phase===3&&day.g.includes("CODEX")&&(title.includes("plan")||title.includes("design")||title.includes("spec")||details.includes("plan mode"));
+  const phase3Interview=ctx.phase===3&&isCustomerDiscoveryTitle(title);
   const phase3UserTest=ctx.phase===3&&isUserLearningTitle(title);
   const phase3Launch=ctx.phase===3&&(title.includes("launch")||title.includes("product hunt")||title.includes("show hn"));
   const phase3Retro=ctx.phase===3&&(title.includes("retro")||title.includes("next chapter"));
   const phase3Discovery=ctx.phase===3&&(ctx.theme.toLowerCase().includes("find the pain")||isProblemDiscoveryTitle(title));
+  const phase3DefineDone=ctx.phase===3&&title.includes("define done");
   const phase4=ctx.phase===4?phase4Kind(day, ctx):"";
   const steps=[];
   if(day.rest){
@@ -617,6 +630,12 @@ function buildSteps(day, ctx){
     steps.push("Stay present for replies, questions, objections, and broken-path reports.");
     steps.push("Record the useful signal: signups, comments, confusion, objections, or requests.");
     steps.push("End with one same-day follow-up: reply, fix, note, or draft for tomorrow.");
+  }else if(phase3Interview){
+    steps.push(base[0]||"Prepare the customer-discovery conversation before touching code.");
+    steps.push("Write the one pain pattern you are trying to understand, then ask for the person's last real example.");
+    if(base[1])steps.push(base[1]);
+    steps.push("Capture exact words, current workarounds, frequency, stakes, and surprises without pitching a solution.");
+    steps.push("Turn the conversation into one evidence note and one sharper follow-up question.");
   }else if(phase3UserTest){
     steps.push(base[0]||"Prepare the user-learning session before touching code.");
     steps.push("Write the one behavior you are trying to observe, then stay quiet while the person tries it.");
@@ -643,11 +662,18 @@ function buildSteps(day, ctx){
     steps.push("Record what changed in the product and what evidence you expect to see next.");
   }else if(ctx.phase===3&&day.g.includes("SHIP")){
     if(phase3Discovery){
-      steps.push(base[0]||"Write the product-discovery note this block needs.");
-      steps.push("Stay with the pain before solutions: who has it, how often, what they do today, and why it matters.");
-      if(base[1])steps.push(base[1]);
-      steps.push("Turn the work into evidence: problem, current workaround, severity, uncertainty, and what still needs a real human check.");
-      steps.push("Write the next product move or user-learning question this evidence supports.");
+      if(phase3DefineDone){
+        steps.push(base[0]||"Write the MVP definition of done.");
+        steps.push("Limit the scope to three user stories a tester could verify.");
+        steps.push("Name the acceptance boundary for each story: what counts as done and what does not.");
+        steps.push("Move every extra idea into later.md so the MVP stays buildable.");
+      }else{
+        steps.push(base[0]||"Write the product-discovery note this block needs.");
+        steps.push("Stay with the pain before solutions: who has it, how often, what they do today, and why it matters.");
+        if(base[1])steps.push(base[1]);
+        steps.push("Turn the work into evidence: problem, current workaround, severity, uncertainty, and what still needs a real human check.");
+        steps.push("Write the next product move or user-learning question this evidence supports.");
+      }
     }else{
       steps.push(base[0]||"Define the audience-facing outcome before opening the tools.");
       steps.push("Put the work where another human can see it, use it, answer it, or react to it.");
