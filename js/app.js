@@ -91,6 +91,7 @@ function renderTerm(){
   const filled=Math.round(pct/100*24);
   document.getElementById("termbar").textContent="▓".repeat(filled)+"░".repeat(24-filled);
   document.getElementById("termpct").textContent=" "+n+"/"+TOTAL_DAYS+" days ("+pct+"%)"+(memoryOnly?" · saving off — progress won't persist":"");
+  document.getElementById("saveState").textContent=memoryOnly?"saving off":"local save active";
 }
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function escAttr(s){return esc(s).replace(/"/g,"&quot;");}
@@ -243,10 +244,16 @@ document.getElementById("todayBtn").addEventListener("click",()=>{
   if(DAYMAP[todayISO()])openDay(todayISO());
 });
 document.querySelectorAll(".phase").forEach(el=>{
+  el.tabIndex=0;
+  el.setAttribute("role","button");
+  el.setAttribute("aria-label",el.querySelector("h3").textContent);
   el.addEventListener("click",()=>{
     const d=new Date(el.dataset.goto+"T12:00:00");
     const mi=MONTHS.findIndex(mm=>mm[0]===d.getFullYear()&&mm[1]===d.getMonth());
     if(mi>=0){viewIdx=mi;render();}
+  });
+  el.addEventListener("keydown",e=>{
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click();}
   });
 });
 loadProgress();

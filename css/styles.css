@@ -435,7 +435,7 @@ h1{
   color:#919A94;
 }
 .cell.out .dnum::after{
-  content:"Not started";
+  content:"Outside track";
   display:block;
   margin-top:12px;
   color:#9CA59E;
