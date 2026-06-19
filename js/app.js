@@ -248,6 +248,13 @@ document.getElementById("todayBtn").addEventListener("click",()=>{
   viewIdx=mi;render();
   if(DAYMAP[todayISO()])openDay(todayISO());
 });
+document.getElementById("journalBtn").addEventListener("click",()=>{
+  const targetKey=openKey&&DAYMAP[openKey]?openKey:(DAYMAP[todayISO()]?todayISO():iso(START));
+  if(typeof Journal!=="undefined")Journal.open(targetKey);
+  else alert("The journal could not load. Check that js/journal.js is next to the calendar files.");
+});
+document.getElementById("exportBtn").addEventListener("click",exportProgress);
+document.getElementById("importBtn").addEventListener("click",importProgress);
 document.querySelectorAll(".phase").forEach(el=>{
   el.tabIndex=0;
   el.setAttribute("role","button");
@@ -262,3 +269,64 @@ document.querySelectorAll(".phase").forEach(el=>{
   });
 });
 loadProgress();
+
+// ===== Backup & Restore Progress =====
+
+// Save progress to a file on your computer
+function exportProgress() {
+  const data = {
+    version: 1,
+    progress: Array.from(done),
+    activity: typeof Game !== 'undefined' ? Game.activity : {},
+    game: typeof Game !== 'undefined' ? Game.state : {}
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `builder-calendar-progress-${iso(new Date())}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Load progress from a saved file on your computer
+function importProgress() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = evt => {
+      try {
+        const data = JSON.parse(evt.target.result);
+        if (!data || !Array.isArray(data.progress)) {
+          alert('Could not find progress data in this file. Please make sure it is a valid calendar save file.');
+          return;
+        }
+        if (confirm('Are you sure you want to load this save file? It will replace all your current progress and streak stats.')) {
+          localStorage.setItem(KEY, JSON.stringify(data.progress));
+          if (data.activity && typeof Game !== 'undefined') {
+            localStorage.setItem(Game.AKEY, JSON.stringify(data.activity));
+          }
+          if (data.game && typeof Game !== 'undefined') {
+            localStorage.setItem(Game.SKEY, JSON.stringify(data.game));
+          }
+
+          if (typeof Game !== 'undefined') {
+            Game.load();
+          }
+          loadProgress();
+          alert('Progress loaded successfully!');
+        }
+      } catch (err) {
+        alert('Could not read the file: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}

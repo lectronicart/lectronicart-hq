@@ -61,8 +61,11 @@
     <button id="nextM" aria-label="Next month">→</button>
   </div>
   <div class="right-controls">
+    <button class="btn-journal" id="journalBtn" aria-label="Open journal window">Journal</button>
     <button class="btn-trophy" id="trophyBtn" aria-label="Open trophy case">🏆 <span id="trophyLvl">lvl 1</span></button>
     <button class="btn-today" id="todayBtn">Jump to today</button>
+    <button id="exportBtn" class="btn-control" aria-label="Export progress to JSON file">Export Save</button>
+    <button id="importBtn" class="btn-control" aria-label="Import progress from JSON file">Import Save</button>
   </div>
 </div>
 <div class="week-banner" id="weekBanner"></div>
@@ -72,7 +75,7 @@
   <div class="grid" id="grid"></div>
 </div>
 
-<p class="footnote"><b>How to use this:</b> sit down at the same time daily, open today's card, do the tasks in order, then write 2–3 sentences in your <span class="journal-file">notes.md</span> journal. If a day takes longer, finish it before opening the next one — Sundays exist to absorb overflow. Falling a few days behind is normal; shift the whole calendar in your head and protect the streak instead of the dates. Progress saves automatically on this device.</p>
+<p class="footnote"><b>How to use this:</b> sit down at the same time daily, open today's card, do the tasks in order, then write 2–3 sentences in the <span class="journal-file">Journal</span>. Export dated Markdown files into <span class="journal-file">docs/journal</span> when you want a plain-file archive. If a day takes longer, finish it before opening the next one — Sundays exist to absorb overflow. Falling a few days behind is normal; shift the whole calendar in your head and protect the streak instead of the dates. Progress saves automatically on this device.</p>
 </div>
 
 <div id="toasts" aria-live="polite"></div>
@@ -118,6 +121,7 @@
 <script src="js/data.js"></script>
 <script src="js/game-data.js"></script>
 <script src="js/game.js"></script>
+<script src="js/journal.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
